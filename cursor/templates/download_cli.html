@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Line Interface - CipherStation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-primary: #30363d;
+            --border-secondary: #21262d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --success: #238636;
+            --warning: #d29922;
+            --error: #f85149;
+            --green: #00623a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: var(--bg-secondary) !important;
+            border-bottom: 1px solid var(--border-primary);
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            color: var(--green) !important;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+        }
+
+        .main-container {
+            padding: 2rem 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-primary);
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .btn {
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5e9179;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-primary {
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .text-primary {
+            color: var(--accent-primary) !important;
+        }
+
+        .text-success {
+            color: var(--success) !important;
+        }
+
+        .text-info {
+            color: var(--accent-secondary) !important;
+        }
+
+        .text-warning {
+            color: var(--warning) !important;
+        }
+
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+
+        .lead {
+            color: var(--text-secondary);
+        }
+
+        pre {
+            background: var(--bg-primary);
+            color: var(--accent-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        code {
+            background: var(--bg-primary);
+            color: var(--accent-primary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .table {
+            color: var(--text-primary);
+        }
+
+        .table th {
+            background: var(--bg-tertiary);
+            border-color: var(--border-primary);
+            color: var(--text-primary);
+        }
+
+        .table td {
+            border-color: var(--border-primary);
+        }
+
+        .small {
+            font-size: 0.875rem;
+        }
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt"></i> CipherStation
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/station">
+                            <i class="fas fa-broadcast-tower"></i> Message Station
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/selftest">
+                            <i class="fas fa-vial"></i> Self-Test
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/help">
+                            <i class="fas fa-question-circle"></i> Help
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/download-cli">
+                            <i class="fas fa-download"></i> CLI
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">
+                <i class="fas fa-download"></i> Command Line Interface
+            </h1>
+            <p class="hero-subtitle">Get the full-featured command-line version for advanced users</p>
+            <a href="/" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Web Interface
+            </a>
+        </div>
+
+        <!-- CLI Features -->
+        <div class="row mb-5">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon text-primary">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <h5>No File Size Limits</h5>
+                        <p class="text-muted">Encrypt files of any size - from small documents to large videos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon text-success">
+                            <i class="fas fa-signature"></i>
+                        </div>
+                        <h5>Digital Signatures</h5>
+                        <p class="text-muted">Sign and verify files with Ed25519 for authenticity</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon text-info">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <h5>Batch Operations</h5>
+                        <p class="text-muted">Encrypt entire directories with progress tracking</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon text-warning">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h5>Hybrid Encryption</h5>
+                        <p class="text-muted">X25519 key exchange with HKDF and AEAD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Installation Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-code-branch"></i> Installation Instructions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fab fa-github text-dark"></i> From GitHub</h6>
+                        <p>Clone the repository and install dependencies:</p>
+                        <pre><code>git clone https://github.com/dokabi-recon67/cipherstation.git
+cd cipherstation
+pip install -r requirements.txt</code></pre>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-download text-primary"></i> Direct Download</h6>
+                        <p>Download the single-file version:</p>
+                        <a href="#" class="btn btn-primary mb-2 w-100">
+                            <i class="fas fa-download"></i> Download cipherstationv0.py
+                        </a>
+                        <small class="text-muted">Single file, no dependencies to install</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-rocket"></i> Usage Examples
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Generate Keys</h6>
+                        <pre><code># Generate AES key
+python cipherstationv0.py keygen aes256 --out mykey.key
+
+# Generate Ed25519 keypair
+python cipherstationv0.py keygen ed25519 --priv private.key --pub public.key</code></pre>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Encrypt/Decrypt</h6>
+                        <pre><code># Encrypt file
+python cipherstationv0.py encrypt --key mykey.key --infile secret.txt --out encrypted.json
+
+# Decrypt file
+python cipherstationv0.py decrypt --key mykey.key --infile encrypted.json --out decrypted.txt</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-star"></i> Advanced Features
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <h6><i class="fas fa-lock"></i> Password-Based</h6>
+                        <pre class="small"><code>python cipherstationv0.py derive --out key.key</code></pre>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h6><i class="fas fa-signature"></i> Sign Files</h6>
+                        <pre class="small"><code>python cipherstationv0.py sign --priv private.key --infile doc.txt --sig signature.json</code></pre>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h6><i class="fas fa-folder"></i> Batch Encrypt</h6>
+                        <pre class="small"><code>python cipherstationv0.py encrypt-dir --key key.key --in-dir docs --out-dir encrypted</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Links -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-download"></i> Download Links
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="btn btn-primary w-100">
+                            <i class="fas fa-file-code"></i> cipherstationv0.py
+                        </a>
+                        <small class="text-muted d-block mt-1">Single file version</small>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="https://github.com/dokabi-recon67/cipherstation" class="btn btn-outline-primary w-100">
+                            <i class="fab fa-github"></i> GitHub Repository
+                        </a>
+                        <small class="text-muted d-block mt-1">Full source code</small>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-book"></i> Documentation
+                        </a>
+                        <small class="text-muted d-block mt-1">Complete guide</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-balance-scale"></i> Web vs CLI Comparison
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th class="text-center">Web (CipherStation)</th>
+                                <th class="text-center">CLI (CipherStation)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>File Size Limit</td>
+                                <td class="text-center">20MB</td>
+                                <td class="text-center">Unlimited</td>
+                            </tr>
+                            <tr>
+                                <td>Installation</td>
+                                <td class="text-center">None required</td>
+                                <td class="text-center">Python + dependencies</td>
+                            </tr>
+                            <tr>
+                                <td>Message Relay</td>
+                                <td class="text-center">✅ Available</td>
+                                <td class="text-center">❌ Not available</td>
+                            </tr>
+                            <tr>
+                                <td>Digital Signatures</td>
+                                <td class="text-center">❌ Not available</td>
+                                <td class="text-center">✅ Available</td>
+                            </tr>
+                            <tr>
+                                <td>Batch Operations</td>
+                                <td class="text-center">❌ Not available</td>
+                                <td class="text-center">✅ Available</td>
+                            </tr>
+                            <tr>
+                                <td>Hybrid Encryption</td>
+                                <td class="text-center">❌ Not available</td>
+                                <td class="text-center">✅ Available</td>
+                            </tr>
+                            <tr>
+                                <td>Ease of Use</td>
+                                <td class="text-center">Very Easy</td>
+                                <td class="text-center">Advanced</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
