@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Instructions - CipherStation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-primary: #30363d;
+            --border-secondary: #21262d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --success: #238636;
+            --warning: #d29922;
+            --error: #f85149;
+            --green: #00623a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: var(--bg-secondary) !important;
+            border-bottom: 1px solid var(--border-primary);
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand {
+            color: var(--green) !important;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+        }
+
+        .main-container {
+            padding: 2rem 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-primary);
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .btn {
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5e9179;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-primary {
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .accordion-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+        }
+
+        .accordion-button {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--bg-tertiary);
+            color: var(--accent-primary);
+        }
+
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 122, 204, 0.25);
+        }
+
+        .accordion-body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .text-primary {
+            color: var(--accent-primary) !important;
+        }
+
+        .text-success {
+            color: var(--success) !important;
+        }
+
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+
+        .lead {
+            color: var(--text-secondary);
+        }
+
+        code {
+            background: var(--bg-primary);
+            color: var(--accent-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-primary);
+        }
+
+        ul, ol {
+            color: var(--text-primary);
+        }
+
+        strong {
+            color: var(--text-primary);
+        }
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt"></i> CipherStation
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/station">
+                            <i class="fas fa-broadcast-tower"></i> Message Station
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/selftest">
+                            <i class="fas fa-vial"></i> Self-Test
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/help">
+                            <i class="fas fa-question-circle"></i> Help
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">
+                <i class="fas fa-question-circle"></i> Help & Instructions
+            </h1>
+            <p class="hero-subtitle">Learn how to use CipherStation for secure encryption and message relay</p>
+            <a href="/" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+
+        <!-- Usage Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-rocket"></i> Usage Guide
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-lock text-primary"></i> Encrypting a File</h6>
+                        <ol>
+                            <li>Click "Choose File" in the Encrypt section</li>
+                            <li>Select your file (max 20MB)</li>
+                            <li>Optionally upload a key file (or let us generate one)</li>
+                            <li>Choose your encryption algorithm</li>
+                            <li>Add an optional description</li>
+                            <li>Click "Encrypt File"</li>
+                            <li>Download your encrypted file</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-unlock text-success"></i> Decrypting a File</h6>
+                        <ol>
+                            <li>Click "Choose File" in the Decrypt section</li>
+                            <li>Select your encrypted file (.enc.json)</li>
+                            <li>Upload the key file used for encryption</li>
+                            <li>Click "Decrypt File"</li>
+                            <li>Download your decrypted file</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Encryption Usage -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-comment-dots"></i> Message Encryption Usage
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-edit text-primary"></i> Quick Message Encryption</h6>
+                        <ol>
+                            <li>Enter your message in the left text box</li>
+                            <li>Provide an encryption key</li>
+                            <li>Select your preferred algorithm</li>
+                            <li>Click "Encrypt" to encrypt locally</li>
+                            <li>Or click "Send to Station" to store encrypted message</li>
+                            <li>Use the copy button to copy encrypted text</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-broadcast-tower text-success"></i> Message Station</h6>
+                        <ol>
+                            <li>Send encrypted messages to the station</li>
+                            <li>Receive a ticket number for each message</li>
+                            <li>Share the ticket number with recipients</li>
+                            <li>Recipients can search by ticket number</li>
+                            <li>Use the decryption form to decrypt messages</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-question"></i> Frequently Asked Questions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                What encryption algorithms are supported?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <strong>AES-GCM:</strong> AES-128-GCM, AES-192-GCM, AES-256-GCM<br>
+                                <strong>ChaCha20-Poly1305:</strong> High-performance authenticated encryption<br>
+                                All algorithms provide both confidentiality and authenticity.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                What file types can I encrypt?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You can encrypt any file type: documents, images, videos, etc. The web interface accepts:
+                                <code>.txt</code>, <code>.json</code>, <code>.key</code>, <code>.bin</code>, <code>.enc</code>, <code>.dec</code>
+                                <br><br>
+                                <strong>Note:</strong> Maximum file size is 20MB for web interface. For larger files, use the CLI version.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                What if I don't provide a key file?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                If you don't provide a key file, CipherStation will generate a secure random key for you. The key will be displayed in the browser (base64 encoded) - make sure to save it! You'll need this key to decrypt your file later.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                                How secure is this?
+                            </button>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <strong>Very secure!</strong> CipherStation uses:
+                                <ul>
+                                    <li>Military-grade AES-256-GCM encryption</li>
+                                    <li>Authenticated encryption (prevents tampering)</li>
+                                    <li>Cryptographically secure random number generation</li>
+                                    <li>Files are processed in temporary memory and deleted immediately</li>
+                                    <li>No files are stored on our servers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5">
+                                What's the difference between web and CLI versions?
+                            </button>
+                        </h2>
+                        <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <strong>Web Version (CipherStation):</strong>
+                                <ul>
+                                    <li>Easy to use, no installation</li>
+                                    <li>20MB file size limit</li>
+                                    <li>Message relay station</li>
+                                    <li>Perfect for occasional use</li>
+                                </ul>
+                                <strong>CLI Version (CipherStation):</strong>
+                                <ul>
+                                    <li>No file size limits</li>
+                                    <li>Advanced features (signing, hybrid encryption, batch operations)</li>
+                                    <li>Command Line Interface</li>
+                                    <li>Perfect for power users and automation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq6">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6">
+                                I lost my key! Can I recover my encrypted file?
+                            </button>
+                        </h2>
+                        <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <strong>No, and this is by design.</strong> If you lose your encryption key, the encrypted file cannot be recovered. This is a fundamental security principle - even we cannot decrypt your files without the key. Always keep your keys safe and secure!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-shield-alt"></i> Security Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <h6>Cryptographic Standards</h6>
+                <ul>
+                    <li><strong>AES-GCM:</strong> NIST-approved authenticated encryption</li>
+                    <li><strong>ChaCha20-Poly1305:</strong> RFC 8439 standard</li>
+                    <li><strong>Key Derivation:</strong> Argon2id for password-based keys</li>
+                    <li><strong>Random Generation:</strong> Cryptographically secure RNG</li>
+                </ul>
+                
+                <h6>Privacy & Data Handling</h6>
+                <ul>
+                    <li>Files are processed in temporary memory only</li>
+                    <li>No files or keys are stored on servers</li>
+                    <li>All processing happens in your browser</li>
+                    <li>Message station stores only encrypted data</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Command Line Interface -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-terminal"></i> Command Line Interface
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>For advanced users, CipherStation provides a full-featured CLI with additional capabilities:</p>
+                <ul>
+                    <li><strong>File Operations:</strong> Encrypt/decrypt files of any size</li>
+                    <li><strong>Digital Signing:</strong> Ed25519 signature generation and verification</li>
+                    <li><strong>Hybrid Encryption:</strong> X25519 key exchange with AES-GCM</li>
+                    <li><strong>Batch Processing:</strong> Encrypt multiple files at once</li>
+                    <li><strong>Key Management:</strong> Generate and manage key pairs</li>
+                </ul>
+                <a href="/download-cli" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download CLI
+                </a>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="fas fa-envelope"></i> Contact Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>Need More Help?</p>
+                <p>If you need additional help or have questions not covered here:</p>
+                <ul>
+                    <li>Check the <a href="/selftest" class="text-primary">Self-Test</a> page to verify your system</li>
+                    <li>Download the <a href="/download-cli" class="text-primary">CLI version</a> for advanced features</li>
+                    <li>Review the <a href="/station" class="text-primary">Message Station</a> for secure message relay</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
