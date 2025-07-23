@@ -1,1 +1,1 @@
-gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT cursor.app:app
+gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT relaystation.app:app
