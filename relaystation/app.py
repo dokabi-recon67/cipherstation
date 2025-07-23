@@ -352,6 +352,39 @@ class AdvancedCracker:
 # Initialize advanced cracker
 advanced_cracker = AdvancedCracker()
 
+# --- Background Cleanup Thread for 24hr Message Retention ---
+def cleanup_station_messages():
+    while True:
+        now = time.time()
+        cutoff = now - 24*3600  # 24 hours ago
+        removed = 0
+        to_delete = []
+        for ticket_id, message_data in list(station_messages.items()):
+            ts = message_data.get('timestamp')
+            if ts:
+                # Support both float and string timestamps
+                try:
+                    ts_val = float(ts)
+                except Exception:
+                    try:
+                        ts_val = time.mktime(datetime.strptime(ts, "%Y-%m-%d %H:%M:%S").timetuple())
+                    except Exception:
+                        continue
+                if ts_val < cutoff:
+                    to_delete.append(ticket_id)
+        for ticket_id in to_delete:
+            del station_messages[ticket_id]
+            removed += 1
+        if removed > 0:
+            print(f"[CLEANUP] Removed {removed} expired messages from station at {datetime.now().isoformat()}")
+        else:
+            print(f"[CLEANUP] No expired messages found at {datetime.now().isoformat()}")
+        time.sleep(3600)  # Run every hour
+
+# Start the cleanup thread when the app starts
+cleanup_thread = threading.Thread(target=cleanup_station_messages, daemon=True)
+cleanup_thread.start()
+
 @app.route('/')
 def index():
     """Homepage with advanced features"""
