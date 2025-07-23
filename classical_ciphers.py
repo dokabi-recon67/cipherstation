@@ -1247,7 +1247,7 @@ class Cryptanalyzer:
         candidates.sort(key=lambda x: x['confidence'], reverse=True)
         return candidates[:5]
 
-    def analyze(self, text: str, auto_detect: bool = True, progress: bool = False, test_mode: bool = False, progress_callback=None) -> Dict[str, any]:
+    def analyze(self, text: str, auto_detect: bool = True, progress: bool = False, test_mode: bool = False, progress_callback=None, custom_words: List[str] = None) -> Dict[str, any]:
         print(f"[analyze] Starting analysis: auto_detect={auto_detect}, progress={progress}, test_mode={test_mode}")
         start_time = time.time()
         text = text.upper()
@@ -1298,7 +1298,7 @@ class Cryptanalyzer:
         vigenere = VigenereCipher()
         try:
             vigenere_progress = (lambda msg: progress_callback(f"[Vigenère] {msg}")) if progress_callback else None
-            vigenere_results = vigenere.cryptanalyze(text, progress_callback=vigenere_progress, test_mode=test_mode)
+            vigenere_results = vigenere.cryptanalyze(text, custom_words=custom_words, progress_callback=vigenere_progress, test_mode=test_mode)
             for key, decoded, conf in vigenere_results[:5]:
                 all_results.append({
                     'cipher': 'vigenere',
@@ -1418,11 +1418,11 @@ def decode_text(text: str, cipher_type: str, **kwargs) -> str:
     else:
         raise ValueError(f"Unknown cipher type: {cipher_type}")
 
-def cryptanalyze_text(text: str, progress: bool = False, test_mode: bool = False, progress_callback=None) -> Dict[str, any]:
+def cryptanalyze_text(text: str, progress: bool = False, test_mode: bool = False, progress_callback=None, custom_words: List[str] = None) -> Dict[str, any]:
     print(f"[cryptanalyze_text] Starting analysis: test_mode={test_mode}")
     analyzer = Cryptanalyzer()
     try:
-        result = analyzer.analyze(text, auto_detect=True, progress=progress, test_mode=test_mode, progress_callback=progress_callback)
+        result = analyzer.analyze(text, auto_detect=True, progress=progress, test_mode=test_mode, progress_callback=progress_callback, custom_words=custom_words)
         print(f"[cryptanalyze_text] Analysis complete.")
         return result
     except TimeoutError:
