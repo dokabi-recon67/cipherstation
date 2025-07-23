@@ -1,4 +1,4 @@
-# �� CipherStation v0 - Comprehensive Cryptography Toolkit
+# CipherStation - Comprehensive Cryptography Toolkit V.0
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com/)
@@ -29,8 +29,6 @@ For a full-speed experience, especially for cracking and analysis, it's strongly
 - [🚀 Getting Started](#-getting-started)
 - [📈 Performance Benchmarks](#-performance-benchmarks)
 - [🔒 Security Considerations](#-security-considerations)
-- [🤝 Contributing](#-contributing)
-- [🙏 Acknowledgments](#-acknowledgments)
 - [📞 Support](#-support)
 
 ## 🎓 For CS50x Reviewers
@@ -66,7 +64,7 @@ The CipherStation Message Relay Station acts as a secure, privacy-first "dead dr
 - **Atbash Cipher**: Reverse alphabet transformation
 - **Substitution Cipher**: Custom character mapping with frequency analysis
 
-### 🧠 AI-Powered Analysis
+### 🧠  Analysis
 - **Multi-Dimensional Confidence Scoring**: Advanced algorithms with optimized weights
 - **Frequency Analysis**: Chi-square statistics for letter distribution analysis
 - **Pattern Recognition**: Vowel-consonant patterns and double letter detection
@@ -518,32 +516,6 @@ Warning: Classical ciphers module not found
 - Close other applications to free up system resources
 - Use appropriate Argon2id parameters for your hardware
 
-## 🤝 Contributing
-
-We welcome contributions! Please feel free to submit a Pull Request.
-
-### Development Setup
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes
-4. Test thoroughly: `python cipherstationv0.py selftest`
-5. Commit your changes: `git commit -m 'Add amazing feature'`
-6. Push to the branch: `git push origin feature/amazing-feature`
-7. Open a Pull Request
-
-### Development Guidelines
-- **Code Style**: Follow PEP 8 guidelines
-- **Documentation**: Add comments for complex algorithms
-- **Testing**: Include tests for new features
-- **Security**: Follow cryptographic best practices
-- **Performance**: Consider performance implications
-
-### Areas for Enhancement
-- **Additional Algorithms**: Support for more cryptographic primitives
-- **Machine Learning**: Integration of ML-based pattern recognition
-- **Performance Optimization**: Further optimization of algorithms
-- **User Interface**: Enhanced web interface with additional features
-- **API Development**: RESTful API for integration with other tools
 
 ## 📋 Changelog
 
@@ -569,7 +541,7 @@ This project is made by Saadi Agha as a CS50x final project with the help of Cur
 - **Cryptography Community**: For inspiration and educational resources
 - **Open Source Projects**: For various libraries and tools used
 - **Research Community**: For academic papers and cryptographic research
-- **CS50**: For the educational foundation
+- **CS50**: For the educational foundation and introduction to flask.
 
 ## 📞 Support
 
