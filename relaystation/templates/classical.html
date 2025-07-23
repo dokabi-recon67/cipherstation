@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classical Ciphers - CipherStation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-primary: #30363d;
+            --border-secondary: #21262d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --success: #238636;
+            --warning: #d29922;
+            --error: #f85149;
+            --green: #00623a;
+            --purple: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: #88fb8a;
+        }
+
+        #logo-text {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ensure encrypted text in animation is also green */
+        #logo-text.encrypted {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .github-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .github-btn:hover {
+            background: var(--border-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Cipher Sections */
+        .cipher-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        #encode-output, #decode-output {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #encode-output .alert-success {
+            background: rgba(128, 0, 128, 0.2);
+            border: 1px solid rgba(128, 0, 128, 0.3);
+            color: #dda0dd;
+        }
+
+        #decode-output .alert-info {
+            background: rgba(0, 123, 255, 0.2);
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            color: #17a2b8;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-control, .form-select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: var(--bg-tertiary);
+            border-color: var(--green);
+            color: var(--text-primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 98, 58, 0.25);
+        }
+
+        .btn-primary {
+            background: var(--green);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-primary);
+            color: var(--text-primary);
+        }
+
+        .result-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #88fb8a, var(--green));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Results Section */
+        .results-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .result-item {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #88fb8a;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .result-type {
+            font-weight: bold;
+            color: #88fb8a;
+            font-size: 1.1rem;
+        }
+
+        .confidence-badge {
+            background: var(--green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .result-key {
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-text {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .result-algorithm {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Analysis Section */
+        .analysis-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #88fb8a;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-success {
+            background: rgba(35, 134, 54, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .alert-error {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        .alert-warning {
+            background: rgba(210, 153, 34, 0.1);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+        }
+
+        .alert-purple {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple);
+            color: var(--purple);
+        }
+
+        .bg-purple {
+            background: var(--purple) !important;
+            color: white !important;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-primary);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .footer-link:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: #5e9179;
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-eye"></i>
+                    <span id="logo-text">CipherStation</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/station" class="nav-link"><i class="fas fa-broadcast-tower"></i> Relay Station</a>
+                    <a href="/classical" class="nav-link active"><i class="fas fa-unlock-alt"></i> Classical Ciphers</a>
+                    <a href="/documentation" class="nav-link">Documentation</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="page-title">
+                    <i class="fas fa-unlock-alt"></i> Advanced Classical Ciphers
+                </h1>
+                <p class="page-subtitle">
+                    AI-powered cryptanalysis with real-time progress tracking
+                </p>
+            </div>
+
+            <!-- Advanced Cracking Section -->
+            <div class="cipher-section">
+                <h2 class="section-title">
+                    <i class="fas fa-brain"></i> Cipher Cracking
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Our advanced system uses AI-powered pattern recognition and multi-dimensional analysis 
+                    to crack classical ciphers with unprecedented accuracy.
+                </p>
+                
+                <div class="mb-3">
+                    <label for="crack-text" class="form-label">Encrypted Text to Crack:</label>
+                    <textarea class="form-control" id="crack-text" rows="4" placeholder="Enter the encrypted text you want to crack..." oninput="this.value=sanitizeInput(this.value)" onblur="this.value=sanitizeInput(this.value)"></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="custom-words" class="form-label">
+                        <i class="fas fa-plus-circle"></i> Custom Word List (Optional):
+                    </label>
+                    <textarea class="form-control" id="custom-words" rows="3" 
+                              placeholder="Enter additional words to try (comma-separated or one per line). If empty, we'll use our enhanced 500+ word dictionary including military/intelligence terms." oninput="this.value=sanitizeInput(this.value)" onblur="this.value=sanitizeInput(this.value)"></textarea>
+                    <small class="form-text text-white">
+                        💡 Add custom words to enhance dictionary attack. Our system will combine your words with our built-in 500+ word dictionary for maximum success.
+                    </small>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="wordlist-file" class="form-label">
+                        <i class="fas fa-upload"></i> Or Upload Word List File:
+                    </label>
+                    <input type="file" class="form-control" id="wordlist-file" 
+                           accept=".txt,.csv,.xlsx,.xls" 
+                           onchange="handleFileUpload(event)" oninput="this.value=sanitizeInput(this.value)" onblur="this.value=sanitizeInput(this.value)">
+                    <small class="form-text text-white">
+                        📁 Supported formats: TXT (one word per line), CSV, Excel (XLSX/XLS). File will be processed client-side for privacy.
+                    </small>
+                </div>
+
+                <!-- Advanced Options Section -->
+                <div class="mb-3">
+                    <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#advancedOptions" aria-expanded="false" aria-controls="advancedOptions">
+                        <i class="fas fa-cogs"></i> Advanced Options
+                    </button>
+                    
+                    <div class="collapse mt-3" id="advancedOptions">
+                        <div class="card card-body" style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <h5 class="text-white mb-3"><i class="fas fa-sliders-h"></i> Cracking Configuration</h5>
+                            
+                            <!-- Cipher Selection -->
+                            <div class="mb-3">
+                                <label class="form-label text-white">Enabled Cipher Types:</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enable-caesar" checked>
+                                            <label class="form-check-label text-white" for="enable-caesar">Caesar Cipher</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enable-vigenere" checked>
+                                            <label class="form-check-label text-white" for="enable-vigenere">Vigenère Cipher</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enable-xor" checked>
+                                            <label class="form-check-label text-white" for="enable-xor">XOR Cipher</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enable-atbash" checked>
+                                            <label class="form-check-label text-white" for="enable-atbash">Atbash Cipher</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enable-substitution" checked>
+                                            <label class="form-check-label text-white" for="enable-substitution">Substitution Cipher</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Performance Options -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="max-timeout" class="form-label text-white">Maximum Timeout (seconds):</label>
+                                    <input type="number" class="form-control" id="max-timeout" value="300" min="30" max="3600">
+                                    <small class="form-text text-white">How long to spend cracking (30-3600 seconds)</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="test-mode" class="form-label text-white">Test Mode:</label>
+                                    <select class="form-select" id="test-mode">
+                                        <option value="false">Full Analysis</option>
+                                        <option value="true">Fast Test Mode</option>
+                                    </select>
+                                    <small class="form-text text-white">Fast mode for quick testing</small>
+                                </div>
+                            </div>
+
+                            <!-- Cipher-Specific Options -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="vigenere-iterations" class="form-label text-white">Vigenère Max Iterations:</label>
+                                    <input type="number" class="form-control" id="vigenere-iterations" value="" placeholder="Unlimited">
+                                    <small class="form-text text-white">Limit Vigenère iterations (empty = unlimited)</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="vigenere-key-length" class="form-label text-white">Vigenère Max Key Length:</label>
+                                    <input type="number" class="form-control" id="vigenere-key-length" value="5" min="1" max="20">
+                                    <small class="form-text text-white">Maximum key length to try (1-20 characters)</small>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="substitution-restarts" class="form-label text-white">Substitution Restarts:</label>
+                                    <input type="number" class="form-control" id="substitution-restarts" value="100" min="10" max="1000">
+                                    <small class="form-text text-white">Number of restart attempts (10-1000)</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="substitution-iterations" class="form-label text-white">Substitution Iterations:</label>
+                                    <input type="number" class="form-control" id="substitution-iterations" value="5000" min="1000" max="50000">
+                                    <small class="form-text text-white">Iterations per restart (1000-50000)</small>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="confidence-threshold" class="form-label text-white">Confidence Threshold:</label>
+                                    <input type="number" class="form-control" id="confidence-threshold" value="0.1" min="0" max="1" step="0.1">
+                                    <small class="form-text text-white">Minimum confidence to show results (0-1)</small>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="substitution-iterations" class="form-label text-white">Substitution Iterations:</label>
+                                    <input type="number" class="form-control" id="substitution-iterations" value="5000" min="1000" max="50000">
+                                    <small class="form-text text-white">Iterations per restart (1000-50000)</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="confidence-threshold" class="form-label text-white">Confidence Threshold:</label>
+                                    <input type="number" class="form-control" id="confidence-threshold" value="0.1" min="0" max="1" step="0.1">
+                                    <small class="form-text text-white">Minimum confidence to show results (0-1)</small>
+                                </div>
+                            </div>
+
+                            <!-- Preset Configurations -->
+                            <div class="mb-3">
+                                <label class="form-label text-white">Quick Presets:</label>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-sm btn-outline-light" onclick="loadPreset('quick')" style="border-color: #dda0dd; color: #dda0dd;">Quick Scan</button>
+                                    <button type="button" class="btn btn-sm btn-outline-light" onclick="loadPreset('standard')" style="border-color: #dda0dd; color: #dda0dd;">Standard</button>
+                                    <button type="button" class="btn btn-sm btn-outline-light" onclick="loadPreset('thorough')" style="border-color: #dda0dd; color: #dda0dd;">Thorough</button>
+                                    <button type="button" class="btn btn-sm btn-outline-light" onclick="loadPreset('exhaustive')" style="border-color: #dda0dd; color: #dda0dd;">Exhaustive</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex gap-2 flex-wrap">
+                    <button class="btn btn-primary" onclick="startCracking()">
+                        <i class="fas fa-search"></i> Start Advanced Cracking
+                    </button>
+                    <button class="btn btn-secondary" onclick="analyzeText()">
+                        <i class="fas fa-chart-bar"></i> Analyze Text
+                    </button>
+                    <button class="btn btn-secondary" onclick="runBenchmark()">
+                        <i class="fas fa-tachometer-alt"></i> Run Benchmark
+                    </button>
+                </div>
+
+                <!-- Progress Section (moved inside AI-Powered Cracking box) -->
+                <div class="progress-container" id="progress-container">
+                    <h3 style="color: #88fb8a; margin-bottom: 1rem;">
+                        <i class="fas fa-cogs"></i> Cracking Progress
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">Initializing...</div>
+                    <div class="progress-func" id="progress-func" style="color:#88fb8a; font-family:monospace; margin-top:0.5rem;"></div>
+                </div>
+            </div>
+
+            <!-- Analysis Section (moved up) -->
+            <div class="analysis-section" id="analysis-section">
+                <h2 class="section-title">
+                    <i class="fas fa-microscope"></i> Text Analysis
+                </h2>
+                <div class="stats-grid" id="stats-grid"></div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="results-section">
+                <h2 class="section-title">
+                    <i class="fas fa-trophy"></i> Best Cracking Result
+                </h2>
+                <div id="results-container"></div>
+            </div>
+
+            <!-- Encode Section -->
+            <div class="cipher-section">
+                <h2 class="section-title">
+                    <i class="fas fa-lock"></i> Encode Text
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Encode your text using classical ciphers. Choose from Caesar, Vigenère, XOR, Atbash, or Substitution ciphers.
+                </p>
+                
+                <div class="mb-3">
+                    <label for="encode-text" class="form-label">Text to Encode:</label>
+                    <textarea class="form-control" id="encode-text" rows="4" placeholder="Enter the text you want to encode..." oninput="this.value=sanitizeInput(this.value)" onblur="this.value=sanitizeInput(this.value)"></textarea>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="encode-cipher" class="form-label">Cipher Type:</label>
+                        <select class="form-select" id="encode-cipher">
+                            <option value="caesar">Caesar Cipher</option>
+                            <option value="vigenere">Vigenère Cipher</option>
+                            <option value="xor">XOR Cipher</option>
+                            <option value="atbash">Atbash Cipher</option>
+                            <option value="substitution">Substitution Cipher</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="encode-key" class="form-label">Key:</label>
+                        <input type="text" class="form-control" id="encode-key" placeholder="Enter the key..." oninput="this.value=sanitizeInput(this.value)" onblur="this.value=sanitizeInput(this.value)">
+                        <small class="form-text text-white">
+                            Caesar: shift value (0-25), Vigenère: keyword, XOR: key, Atbash: none needed, Substitution: 26-letter key
+                        </small>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="encodeText()">
+                    <i class="fas fa-lock"></i> Encode Text
+                </button>
+                
+                <!-- Dynamic Output for Encode -->
+                <div id="encode-output" class="mt-3" style="display: none;">
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-check-circle"></i> Encoded Result:</h5>
+                        <div class="mb-2">
+                            <textarea class="form-control" id="encode-result" rows="3" readonly></textarea>
+                        </div>
+                        <button class="btn btn-sm btn-outline-light" onclick="copyEncodeResult()">
+                            <i class="fas fa-copy"></i> Copy Result
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decode Section -->
+            <div class="cipher-section">
+                <h2 class="section-title">
+                    <i class="fas fa-unlock"></i> Decode Text
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Decode text that was encoded using classical ciphers. Make sure to use the same cipher type and key that was used for encoding.
+                </p>
+                
+                <div class="mb-3">
+                    <label for="decode-text" class="form-label">Text to Decode:</label>
+                    <textarea class="form-control" id="decode-text" rows="4" placeholder="Enter the text you want to decode..." oninput="this.value=sanitizeInput(this.value)" onblur="this.value=sanitizeInput(this.value)"></textarea>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="decode-cipher" class="form-label">Cipher Type:</label>
+                        <select class="form-select" id="decode-cipher">
+                            <option value="caesar">Caesar Cipher</option>
+                            <option value="vigenere">Vigenère Cipher</option>
+                            <option value="xor">XOR Cipher</option>
+                            <option value="atbash">Atbash Cipher</option>
+                            <option value="substitution">Substitution Cipher</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="decode-key" class="form-label">Key:</label>
+                        <input type="text" class="form-control" id="decode-key" placeholder="Enter the key..." oninput="this.value=sanitizeInput(this.value)" onblur="this.value=sanitizeInput(this.value)">
+                        <small class="form-text text-white">
+                            Caesar: shift value (0-25), Vigenère: keyword, XOR: key, Atbash: none needed, Substitution: 26-letter key
+                        </small>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="decodeText()">
+                    <i class="fas fa-unlock"></i> Decode Text
+                </button>
+                
+                <!-- Dynamic Output for Decode -->
+                <div id="decode-output" class="mt-3" style="display: none;">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-check-circle"></i> Decoded Result:</h5>
+                        <div class="mb-2">
+                            <textarea class="form-control" id="decode-result" rows="3" readonly></textarea>
+                        </div>
+                        <button class="btn btn-sm btn-outline-light" onclick="copyDecodeResult()">
+                            <i class="fas fa-copy"></i> Copy Result
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">CipherStation</h3>
+                <p class="footer-description">
+                    Enterprise-grade encryption platform built for professionals who demand the highest security standards. 
+                    Secure your data with military-grade algorithms.
+                </p>
+                <div class="footer-links">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/station" class="footer-link">Relay Station</a>
+                    <a href="/documentation" class="footer-link">Documentation</a>
+                    <a href="/selftest" class="footer-link">Test</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="footer-link" target="_blank">GitHub</a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CipherStation. A CS50x Final Project by Saadi Agha.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function sanitizeInput(value) {
+            // Remove <, >, and script tags
+            return value.replace(/<.*?>/g, '').replace(/</g, '').replace(/>/g, '').replace(/script/gi, '');
+        }
+
+        let currentTaskId = null;
+        let progressInterval = null;
+
+        // Advanced Cracking Functions
+        async function startCracking() {
+            const text = document.getElementById('crack-text').value.trim();
+            const customWords = document.getElementById('custom-words').value.trim();
+            
+            if (!text) {
+                showAlert('Please enter text to crack', 'error');
+                return;
+            }
+
+            // Get advanced options
+            const enabledCiphers = [];
+            if (document.getElementById('enable-caesar').checked) enabledCiphers.push('caesar');
+            if (document.getElementById('enable-vigenere').checked) enabledCiphers.push('vigenere');
+            if (document.getElementById('enable-xor').checked) enabledCiphers.push('xor');
+            if (document.getElementById('enable-atbash').checked) enabledCiphers.push('atbash');
+            if (document.getElementById('enable-substitution').checked) enabledCiphers.push('substitution');
+
+            if (enabledCiphers.length === 0) {
+                showAlert('Please select at least one cipher type to crack', 'error');
+                return;
+            }
+
+            const maxTimeout = parseInt(document.getElementById('max-timeout').value) || 300;
+            const testMode = document.getElementById('test-mode').value === 'true';
+            const vigenereIterations = document.getElementById('vigenere-iterations').value || null;
+            const vigenereKeyLength = parseInt(document.getElementById('vigenere-key-length').value) || 5;
+            const substitutionRestarts = parseInt(document.getElementById('substitution-restarts').value) || 100;
+            const substitutionIterations = parseInt(document.getElementById('substitution-iterations').value) || 5000;
+
+            try {
+                // Show progress container
+                document.getElementById('progress-container').style.display = 'block';
+                document.getElementById('results-section').style.display = 'none';
+                document.getElementById('analysis-section').style.display = 'block';
+
+                // Start cracking with full options
+                const response = await fetch('/api/crack', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        text: text,
+                        custom_words: customWords,
+                        max_time: maxTimeout,
+                        test_mode: testMode,
+                        timeout: maxTimeout,
+                        enabled_ciphers: enabledCiphers,
+                        vigenere_max_iterations: vigenereIterations ? parseInt(vigenereIterations) : null,
+                        vigenere_max_key_length: vigenereKeyLength,
+                        substitution_max_restarts: substitutionRestarts,
+                        substitution_max_iterations: substitutionIterations
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    currentTaskId = data.task_id;
+                    startProgressTracking();
+                } else {
+                    showAlert(data.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error starting cracking: ' + error.message, 'error');
+            }
+        }
+
+        function startProgressTracking() {
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
+            progressInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`/api/crack/progress/${currentTaskId}`);
+                    const data = await response.json();
+
+                    if (data.success) {
+                        updateProgress(data.progress);
+                        updateAnalysis(data.analysis); // Update analysis in real-time
+                        
+                        if (data.progress.status === 'completed') {
+                            clearInterval(progressInterval);
+                            showResults(currentTaskId);
+                        } else if (data.progress.status === 'error') {
+                            clearInterval(progressInterval);
+                            showAlert(data.progress.message, 'error');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Progress tracking error:', error);
+                }
+            }, 500);
+        }
+
+        function updateProgress(progress) {
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const progressFunc = document.getElementById('progress-func');
+            progressFill.style.width = progress.progress + '%';
+            progressText.textContent = progress.message;
+            // Show current function/algorithm if available
+            let funcMsg = '';
+            if (progress.status === 'cracking_caesar') funcMsg = 'Cracking Caesar Cipher...';
+            else if (progress.status === 'cracking_vigenere') funcMsg = 'Trying Vigenère Keys...';
+            else if (progress.status === 'cracking_xor') funcMsg = 'Trying XOR Keys...';
+            else if (progress.status === 'cracking_atbash') funcMsg = 'Trying Atbash...';
+            else if (progress.status === 'analyzing') funcMsg = 'Analyzing...';
+            else if (progress.status === 'completed') funcMsg = 'Analysis completed!';
+            else if (progress.status === 'starting') funcMsg = 'Initializing...';
+            else if (progress.status) funcMsg = progress.status.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + '...';
+            progressFunc.textContent = funcMsg;
+        }
+
+        async function showResults(taskId) {
+            try {
+                const response = await fetch(`/api/crack/results/${taskId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data.results);
+                    if (data.results.analysis) {
+                        updateAnalysis(data.results.analysis);
+                    }
+                }
+            } catch (error) {
+                showAlert('Error loading results: ' + error.message, 'error');
+            }
+        }
+
+        function displayResults(results) {
+            const container = document.getElementById('results-container');
+            const resultsSection = document.getElementById('results-section');
+            
+            // Add custom words info if available
+            let customWordsInfo = '';
+            if (results.custom_words_used && results.custom_words_used > 0) {
+                customWordsInfo = `
+                    <div class="alert alert-success" style="margin-bottom: 1rem;">
+                        <i class="fas fa-plus-circle"></i>
+                        <strong>Enhanced Dictionary Attack:</strong> Used ${results.custom_words_used} custom words combined with our built-in 500+ word dictionary for maximum success!
+                    </div>
+                `;
+            }
+            // Add crack time info if available
+            let crackTimeInfo = '';
+            if (results.crack_time !== undefined && results.crack_time !== null) {
+                crackTimeInfo = `
+                    <div class="alert alert-info" style="margin-bottom: 1rem;">
+                        <i class="fas fa-stopwatch"></i>
+                        <strong>Time to Crack:</strong> ${results.crack_time.toFixed(3)} seconds
+                    </div>
+                `;
+            }
+            
+            // Add detected ciphers info if available
+            let detectedCiphersInfo = '';
+            if (results.detected_ciphers && results.detected_ciphers.length > 0) {
+                const detectedList = results.detected_ciphers.map(detection => {
+                    const confidencePercent = Math.round(detection[1] * 100);
+                    return `<span class="badge bg-purple" style="margin-right: 0.5rem;">${detection[0].toUpperCase()} (${confidencePercent}%)</span>`;
+                }).join('');
+                detectedCiphersInfo = `
+                    <div class="alert alert-purple" style="margin-bottom: 1rem; background: rgba(128, 0, 128, 0.1); border-color: var(--purple);">
+                        <i class="fas fa-search"></i>
+                        <strong>Auto-Detected Ciphers:</strong> ${detectedList}
+                    </div>
+                `;
+            }
+            // Use analysis.best_results if available, otherwise fall back to results.results
+            const bestResults = results.analysis && results.analysis.best_results ? results.analysis.best_results : results.results;
+            
+            if (!bestResults || bestResults.length === 0) {
+                container.innerHTML = customWordsInfo + crackTimeInfo + detectedCiphersInfo + `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        No successful cracks found. The text might be using a different cipher type or be heavily encrypted.
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = customWordsInfo + crackTimeInfo + detectedCiphersInfo;
+            
+            // Only show the top (best) result
+            const topResult = bestResults[0];
+            const confidencePercent = Math.round(topResult.confidence * 100);
+            const confidenceBar = '█'.repeat(Math.floor(confidencePercent / 5)) + '░'.repeat(20 - Math.floor(confidencePercent / 5));
+            
+            // Handle different field names between analysis.best_results and results.results
+            const cipherType = topResult.cipher_type || topResult.cipher;
+            const key = topResult.key || topResult.key;
+            const decodedText = topResult.decoded_text || topResult.decoded;
+            const algorithm = topResult.algorithm || 'Advanced Analysis Algorithm';
+            
+            html += `
+                <div class="result-item">
+                    <div class="result-header">
+                        <span class="result-type">${cipherType.charAt(0).toUpperCase() + cipherType.slice(1)} Cipher</span>
+                        <span class="confidence-badge">${confidencePercent}%</span>
+                    </div>
+                    <div class="result-key">Key: <strong>${key}</strong></div>
+                    <div class="result-text">${decodedText}</div>
+                    <div class="result-algorithm">Algorithm: ${algorithm}</div>
+                    <div style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Confidence: [${confidenceBar}] ${confidencePercent}%
+                    </div>
+                    <button class="copy-btn" onclick="copyText('${decodedText.replace(/'/g, "\\'")}')">
+                        <i class="fas fa-copy"></i> Copy Decoded Text
+                    </button>
+                </div>
+            `;
+            container.innerHTML = html;
+            resultsSection.style.display = 'block';
+        }
+
+        function updateAnalysis(analysis) {
+            const analysisSection = document.getElementById('analysis-section');
+            const statsGrid = document.getElementById('stats-grid');
+            
+            if (analysis && analysis.statistics) {
+                const stats = analysis.statistics;
+                statsGrid.innerHTML = `
+                    <div class="stat-item">
+                        <div class="stat-value">${stats.entropy.toFixed(3)}</div>
+                        <div class="stat-label">Entropy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${stats.unique_chars}</div>
+                        <div class="stat-label">Unique Characters</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${(stats.alpha_ratio * 100).toFixed(1)}%</div>
+                        <div class="stat-label">Alpha Ratio</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${analysis.input_length}</div>
+                        <div class="stat-label">Text Length</div>
+                    </div>
+                `;
+                analysisSection.style.display = 'block';
+            }
+        }
+
+        async function analyzeText() {
+            const text = document.getElementById('crack-text').value.trim();
+            if (!text) {
+                showAlert('Please enter text to analyze', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: text })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    updateAnalysis(data.analysis);
+                    showAlert('Text analysis completed!', 'success');
+                } else {
+                    showAlert(data.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error analyzing text: ' + error.message, 'error');
+            }
+        }
+
+        async function runBenchmark() {
+            try {
+                const response = await fetch('/api/benchmark', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showAlert(`Benchmark completed! Success rate: ${(data.success_rate * 100).toFixed(1)}%, Average time: ${data.average_time.toFixed(3)}s`, 'success');
+                } else {
+                    showAlert(data.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error running benchmark: ' + error.message, 'error');
+            }
+        }
+
+        // Traditional Cipher Functions
+        async function encodeText() {
+            const text = document.getElementById('encode-text').value.trim();
+            const cipherType = document.getElementById('encode-cipher').value;
+            const key = document.getElementById('encode-key').value.trim();
+
+            if (!text) {
+                showAlert('Please enter text to encode', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/encode', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        cipher: cipherType,
+                        key: key
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    // Show dynamic output
+                    document.getElementById('encode-result').value = data.result;
+                    document.getElementById('encode-output').style.display = 'block';
+                    
+                    // Scroll to the result
+                    document.getElementById('encode-output').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
+                    
+                    showAlert('Text encoded successfully!', 'success');
+                } else {
+                    showAlert(data.error || 'Encoding failed', 'error');
+                }
+            } catch (error) {
+                showAlert('Error encoding text: ' + error.message, 'error');
+            }
+        }
+
+        async function decodeText() {
+            const text = document.getElementById('decode-text').value.trim();
+            const cipherType = document.getElementById('decode-cipher').value;
+            const key = document.getElementById('decode-key').value.trim();
+
+            if (!text) {
+                showAlert('Please enter text to decode', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/decode', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        cipher: cipherType,
+                        key: key
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    // Show dynamic output
+                    document.getElementById('decode-result').value = data.result;
+                    document.getElementById('decode-output').style.display = 'block';
+                    
+                    // Scroll to the result
+                    document.getElementById('decode-output').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest' 
+                    });
+                    
+                    showAlert('Text decoded successfully!', 'success');
+                } else {
+                    showAlert(data.error || 'Decoding failed', 'error');
+                }
+            } catch (error) {
+                showAlert('Error decoding text: ' + error.message, 'error');
+            }
+        }
+
+        // Utility Functions
+        function copyEncodeResult() {
+            const output = document.getElementById('encode-result');
+            if (output && output.value) {
+                // For readonly textareas, we need to select the text first
+                output.select();
+                output.setSelectionRange(0, 99999); // For mobile devices
+                
+                try {
+                    navigator.clipboard.writeText(output.value).then(() => {
+                        showAlert('Encoded text copied to clipboard!', 'success');
+                    }).catch(() => {
+                        // Fallback for older browsers
+                        document.execCommand('copy');
+                        showAlert('Encoded text copied to clipboard!', 'success');
+                    });
+                } catch (err) {
+                    // Fallback method
+                    output.select();
+                    document.execCommand('copy');
+                    showAlert('Encoded text copied to clipboard!', 'success');
+                }
+            } else {
+                showAlert('No encoded text to copy', 'error');
+            }
+        }
+
+        function copyDecodeResult() {
+            const output = document.getElementById('decode-result');
+            if (output && output.value) {
+                // For readonly textareas, we need to select the text first
+                output.select();
+                output.setSelectionRange(0, 99999); // For mobile devices
+                
+                try {
+                    navigator.clipboard.writeText(output.value).then(() => {
+                        showAlert('Decoded text copied to clipboard!', 'success');
+                    }).catch(() => {
+                        // Fallback for older browsers
+                        document.execCommand('copy');
+                        showAlert('Decoded text copied to clipboard!', 'success');
+                    });
+                } catch (err) {
+                    // Fallback method
+                    output.select();
+                    document.execCommand('copy');
+                    showAlert('Decoded text copied to clipboard!', 'success');
+                }
+            } else {
+                showAlert('No decoded text to copy', 'error');
+            }
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showAlert('Text copied to clipboard!', 'success');
+            }).catch(() => {
+                showAlert('Failed to copy text', 'error');
+            });
+        }
+
+        // Global error handling functions
+        function showError(message) {
+            const errorDiv = document.getElementById('globalError');
+            const errorMessage = document.getElementById('globalErrorMessage');
+            errorMessage.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                hideError();
+            }, 5000);
+        }
+
+        function hideError() {
+            const errorDiv = document.getElementById('globalError');
+            errorDiv.style.display = 'none';
+        }
+
+        function showAlert(message, type) {
+            if (type === 'error') {
+                showError(message);
+            } else {
+                // For success messages, show a green notification
+                showSuccess(message);
+            }
+        }
+
+        function showSuccess(message) {
+            // Create a temporary success notification
+            const successDiv = document.createElement('div');
+            successDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                max-width: 400px;
+                background: rgba(0, 98, 58, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(0, 255, 0, 0.3);
+                color: white;
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            `;
+            successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            
+            document.body.appendChild(successDiv);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                if (successDiv.parentNode) {
+                    successDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Cipher type change handler - removed as cipher-type element doesn't exist on this page
+
+        // File upload handler
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    let words = [];
+                    const content = e.target.result;
+                    
+                    if (file.name.endsWith('.csv')) {
+                        // Parse CSV
+                        const lines = content.split('\n');
+                        lines.forEach(line => {
+                            const columns = line.split(',').map(col => col.trim()).filter(col => col);
+                            words.push(...columns);
+                        });
+                    } else if (file.name.endsWith('.txt')) {
+                        // Parse TXT (one word per line)
+                        words = content.split('\n').map(word => word.trim()).filter(word => word);
+                    } else {
+                        // For other formats, try to extract words
+                        words = content.split(/[\s,\n]+/).map(word => word.trim()).filter(word => word);
+                    }
+                    
+                    // Update textarea with extracted words
+                    const customWordsTextarea = document.getElementById('custom-words');
+                    customWordsTextarea.value = words.join(', ');
+                    
+                    showAlert(`✅ File "${file.name}" processed. ${words.length} words extracted.`, 'success');
+                } catch (error) {
+                    showAlert(`❌ Error processing file: ${error.message}`, 'error');
+                }
+            };
+            
+            reader.onerror = function() {
+                showAlert('❌ Error reading file.', 'error');
+            };
+            
+            reader.readAsText(file);
+        }
+
+                // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded fired on classical page');
+            // Natural password cracking animation for logo
+            const logoTextElement = document.getElementById('logo-text');
+            console.log('Logo element found:', logoTextElement);
+            if (logoTextElement) {
+                const originalText = logoTextElement.textContent;
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\';
+                let animationPhase = 'encrypted';
+                let shuffleInterval;
+                let currentShuffleText = '';
+                let attempts = 0;
+                let maxAttempts = 0;
+
+                // Start with fully encrypted text
+                function startFullyEncrypted() {
+                    currentShuffleText = '';
+                    for (let i = 0; i < originalText.length; i++) {
+                        currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                    logoTextElement.textContent = currentShuffleText;
+                    logoTextElement.classList.add('encrypted');
+                    
+                    // Start cracking after 0.5 seconds
+                    setTimeout(startLogoCracking, 500);
+                }
+
+                // Simulate password cracking attempts
+                function startLogoCracking() {
+                    attempts = 0;
+                    maxAttempts = 40; // Reduced attempts for faster animation
+                    
+                    shuffleInterval = setInterval(() => {
+                        attempts++;
+                        
+                        // Simulate different cracking strategies
+                        if (attempts < 10) {
+                            // Early attempts: mostly random
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                            }
+                        } else if (attempts < 20) {
+                            // Middle attempts: some patterns emerge
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.3) {
+                                    // 30% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else if (attempts < 30) {
+                            // Later attempts: more correct characters
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.6) {
+                                    // 60% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else {
+                            // Final attempts: mostly correct with some errors
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.8) {
+                                    // 80% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        }
+                        
+                        logoTextElement.textContent = currentShuffleText;
+                        logoTextElement.classList.add('encrypted');
+                        
+                        if (attempts >= maxAttempts) {
+                            clearInterval(shuffleInterval);
+                            startFinalDecryption();
+                        }
+                    }, 80); // Faster for quicker animation
+                }
+
+                // Final decryption with realistic timing
+                function startFinalDecryption() {
+                    let remainingPositions = [];
+                    for (let i = 0; i < originalText.length; i++) {
+                        remainingPositions.push(i);
+                    }
+                    
+                    const decryptInterval = setInterval(() => {
+                        if (remainingPositions.length > 0) {
+                            // Pick a random position to decrypt (like finding the right character)
+                            const randomIndex = Math.floor(Math.random() * remainingPositions.length);
+                            const position = remainingPositions[randomIndex];
+                            remainingPositions.splice(randomIndex, 1);
+                            
+                            // Show a few wrong attempts before correct character
+                            let wrongAttempts = 0;
+                            const maxWrongAttempts = Math.floor(Math.random() * 2) + 1; // 1-2 wrong attempts (reduced)
+                            
+                            function showWrongAttempt() {
+                                if (wrongAttempts < maxWrongAttempts) {
+                                    const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + randomChar + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    wrongAttempts++;
+                                    setTimeout(showWrongAttempt, 40); // Faster wrong attempts
+                                } else {
+                                    // Show correct character
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + originalText[position] + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    
+                                    // Remove encrypted class when fully decrypted
+                                    if (remainingPositions.length === 0) {
+                                        logoTextElement.classList.remove('encrypted');
+                                    }
+                                }
+                            }
+                            
+                            showWrongAttempt();
+                        } else {
+                            clearInterval(decryptInterval);
+                            // Stay decrypted for 1.5 seconds, then start encrypting (reduced)
+                            setTimeout(startEncrypting, 1500);
+                        }
+                    }, 120); // Faster decryption
+                }
+
+                // Encrypt the text back (faster, like security kicking in)
+                function startEncrypting() {
+                    let currentIndex = 0;
+                    const encryptInterval = setInterval(() => {
+                        if (currentIndex < originalText.length) {
+                            const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                            const tempText = originalText.substring(0, currentIndex) + randomChar + originalText.substring(currentIndex + 1);
+                            logoTextElement.textContent = tempText;
+                            logoTextElement.classList.add('encrypted');
+                            currentIndex++;
+                        } else {
+                            clearInterval(encryptInterval);
+                            // Start the cycle again
+                            setTimeout(startFullyEncrypted, 600); // Reduced delay
+                        }
+                    }, 40); // Even faster encryption (security response)
+                }
+
+                // Start the animation cycle
+                console.log('Starting logo animation...');
+                startFullyEncrypted();
+            }
+        });
+
+        // Preset Configuration Functions
+        function loadPreset(preset) {
+            switch(preset) {
+                case 'quick':
+                    // Quick scan - fast but limited
+                    document.getElementById('max-timeout').value = '60';
+                    document.getElementById('test-mode').value = 'true';
+                    document.getElementById('vigenere-iterations').value = '1000';
+                    document.getElementById('vigenere-key-length').value = '3';
+                    document.getElementById('substitution-restarts').value = '20';
+                    document.getElementById('substitution-iterations').value = '1000';
+                    document.getElementById('confidence-threshold').value = '0.2';
+                    // Enable only fast ciphers
+                    document.getElementById('enable-caesar').checked = true;
+                    document.getElementById('enable-atbash').checked = true;
+                    document.getElementById('enable-vigenere').checked = false;
+                    document.getElementById('enable-xor').checked = false;
+                    document.getElementById('enable-substitution').checked = false;
+                    showAlert('Quick scan preset loaded - fast analysis with limited cipher types', 'success');
+                    break;
+                    
+                case 'standard':
+                    // Standard - balanced performance
+                    document.getElementById('max-timeout').value = '300';
+                    document.getElementById('test-mode').value = 'false';
+                    document.getElementById('vigenere-iterations').value = '';
+                    document.getElementById('vigenere-key-length').value = '5';
+                    document.getElementById('substitution-restarts').value = '100';
+                    document.getElementById('substitution-iterations').value = '5000';
+                    document.getElementById('confidence-threshold').value = '0.1';
+                    // Enable all ciphers
+                    document.getElementById('enable-caesar').checked = true;
+                    document.getElementById('enable-atbash').checked = true;
+                    document.getElementById('enable-vigenere').checked = true;
+                    document.getElementById('enable-xor').checked = true;
+                    document.getElementById('enable-substitution').checked = true;
+                    showAlert('Standard preset loaded - balanced analysis with all cipher types', 'success');
+                    break;
+                    
+                case 'thorough':
+                    // Thorough - more comprehensive
+                    document.getElementById('max-timeout').value = '600';
+                    document.getElementById('test-mode').value = 'false';
+                    document.getElementById('vigenere-iterations').value = '';
+                    document.getElementById('vigenere-key-length').value = '10';
+                    document.getElementById('substitution-restarts').value = '200';
+                    document.getElementById('substitution-iterations').value = '10000';
+                    document.getElementById('confidence-threshold').value = '0.05';
+                    // Enable all ciphers
+                    document.getElementById('enable-caesar').checked = true;
+                    document.getElementById('enable-atbash').checked = true;
+                    document.getElementById('enable-vigenere').checked = true;
+                    document.getElementById('enable-xor').checked = true;
+                    document.getElementById('enable-substitution').checked = true;
+                    showAlert('Thorough preset loaded - comprehensive analysis with extended iterations and longer Vigenère keys (up to 10 characters)', 'success');
+                    break;
+                    
+                case 'exhaustive':
+                    // Exhaustive - maximum effort
+                    document.getElementById('max-timeout').value = '1800';
+                    document.getElementById('test-mode').value = 'false';
+                    document.getElementById('vigenere-iterations').value = '';
+                    document.getElementById('vigenere-key-length').value = '15';
+                    document.getElementById('substitution-restarts').value = '500';
+                    document.getElementById('substitution-iterations').value = '20000';
+                    document.getElementById('confidence-threshold').value = '0.01';
+                    // Enable all ciphers
+                    document.getElementById('enable-caesar').checked = true;
+                    document.getElementById('enable-atbash').checked = true;
+                    document.getElementById('enable-vigenere').checked = true;
+                    document.getElementById('enable-xor').checked = true;
+                    document.getElementById('enable-substitution').checked = true;
+                    showAlert('Exhaustive preset loaded - maximum effort analysis with longest Vigenère keys (up to 15 characters) - may take up to 30 minutes', 'success');
+                    break;
+            }
+        }
+
+        // Enhanced file upload handler
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                let words = [];
+
+                if (file.name.toLowerCase().endsWith('.csv')) {
+                    // Parse CSV
+                    const lines = content.split('\n');
+                    lines.forEach(line => {
+                        const columns = line.split(',').map(col => col.trim()).filter(col => col);
+                        words.push(...columns);
+                    });
+                } else if (file.name.toLowerCase().endsWith('.xlsx') || file.name.toLowerCase().endsWith('.xls')) {
+                    // For Excel files, we'll just split by whitespace (simplified)
+                    words = content.split(/\s+/).filter(word => word.length > 0);
+                } else {
+                    // Text file - one word per line
+                    words = content.split('\n').map(line => line.trim()).filter(line => line);
+                }
+
+                // Update custom words textarea
+                const customWordsTextarea = document.getElementById('custom-words');
+                const existingWords = customWordsTextarea.value.trim();
+                const newWords = words.join(', ');
+                
+                if (existingWords) {
+                    customWordsTextarea.value = existingWords + ', ' + newWords;
+                } else {
+                    customWordsTextarea.value = newWords;
+                }
+
+                showAlert(`Loaded ${words.length} words from ${file.name}`, 'success');
+            };
+
+            reader.readAsText(file);
+        }
+    </script>
+
+    <!-- Global Error Display -->
+    <div id="globalError" class="alert alert-danger" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); background: rgba(139, 0, 0, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 0, 0, 0.3); color: white;">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span id="globalErrorMessage"></span>
+        <button type="button" class="btn-close" onclick="hideError()" style="float: right; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">&times;</button>
+    </div>
+</body>
+</html> 

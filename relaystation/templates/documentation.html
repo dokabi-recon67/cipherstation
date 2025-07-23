@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - CipherStation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-primary: #30363d;
+            --border-secondary: #21262d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --success: #238636;
+            --warning: #d29922;
+            --error: #f85149;
+            --green: #00623a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: #88fb8a;
+        }
+
+        #logo-text {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ensure encrypted text in animation is also green */
+        #logo-text.encrypted {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .github-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .github-btn:hover {
+            background: var(--border-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Documentation Content */
+        .doc-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin: 2rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .author-card {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .author-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .author-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .author-company {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .author-description {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--bg-lighter);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .code-block {
+            background: var(--bg-lighter);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .btn {
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tech-specs {
+            background: var(--bg-lighter);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .spec-value {
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-primary);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-primary);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-eye"></i>
+                    <span id="logo-text">CipherStation</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/station" class="nav-link"><i class="fas fa-broadcast-tower"></i> Relay Station</a>
+                    <a href="/classical" class="nav-link"><i class="fas fa-unlock-alt"></i> Classical Ciphers</a>
+                    <a href="/documentation" class="nav-link active">Documentation</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-book"></i> Documentation
+                </h1>
+                <p class="page-subtitle">
+                    Comprehensive documentation for CipherStation - A CS50x Final Project by Saadi Agha.
+                </p>
+            </div>
+
+
+
+            <!-- Project Overview -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-project-diagram"></i> Project Overview
+                </h2>
+                <p>
+                    CipherStation is a comprehensive cryptography toolkit built as my final project for CS50x. 
+                    It combines modern cryptographic algorithms with classical cipher analysis, advanced statistical 
+                    pattern recognition, and a secure message relay system. The project demonstrates advanced concepts 
+                    in cryptography, statistical analysis, web development, and secure software design.
+                </p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="feature-title">Modern Cryptography</h3>
+                        <p class="feature-description">
+                            AES-256-GCM, ChaCha20-Poly1305, Ed25519 signatures, X25519 key exchange, 
+                            Argon2id key derivation, and hybrid encryption.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-unlock-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Classical Cipher Analysis</h3>
+                        <p class="feature-description">
+                            Caesar, Vigenère, XOR, Atbash, and Substitution ciphers with 
+                            advanced statistical analysis and 500+ word dictionary attacks.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">Advanced Statistical Analysis</h3>
+                        <p class="feature-description">
+                            Multi-dimensional pattern recognition, frequency analysis, 
+                            bigram/trigram analysis, and confidence scoring algorithms.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3 class="feature-title">Secure Message Relay</h3>
+                        <p class="feature-description">
+                            Ticket-based dead drop system with automatic 24-hour cleanup 
+                            for anonymous encrypted message exchange.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <h3 class="feature-title">Comprehensive CLI</h3>
+                        <p class="feature-description">
+                            Full-featured command-line interface with interactive menu, 
+                            bulk operations, and advanced cryptanalysis capabilities.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Security & Audit</h3>
+                        <p class="feature-description">
+                            Hash-chained audit logging, key registry management, 
+                            format detection, and comprehensive self-tests.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Features Section -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i> Advanced Features
+                </h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h3 class="feature-title">Genetic Algorithms</h3>
+                        <p class="feature-description">
+                            Advanced genetic algorithms for key discovery with population-based 
+                            evolution, fitness functions, and adaptive mutation strategies 
+                            for complex cipher cracking.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Statistical Pattern Recognition</h3>
+                        <p class="feature-description">
+                            Multi-dimensional frequency analysis with chi-square statistics, 
+                            bigram/trigram analysis, word pattern recognition, and entropy 
+                            calculation for comprehensive cryptanalysis.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="feature-title">Enhanced Dictionary Attack</h3>
+                        <p class="feature-description">
+                            500+ word comprehensive dictionary including military terms, 
+                            intelligence words, technical terms, common names, and fruit names. 
+                            Plus custom word list support for personalized attacks.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="feature-title">Timeout Protection</h3>
+                        <p class="feature-description">
+                            Built-in timeout mechanisms and signal handling for resource-intensive 
+                            operations, preventing infinite loops and ensuring graceful 
+                            interruption of long-running processes.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Benchmark Mode</h3>
+                        <p class="feature-description">
+                            Comprehensive performance testing and benchmarking capabilities 
+                            for evaluating system performance and validating algorithm 
+                            effectiveness across different cipher types.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <h3 class="feature-title">File Upload Support</h3>
+                        <p class="feature-description">
+                            Support for TXT, CSV, and Excel file uploads for custom word lists, 
+                            enabling enhanced dictionary attacks with user-defined vocabulary 
+                            for specialized cryptanalysis tasks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLI Capabilities -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-terminal"></i> Command Line Interface (CLI) - Full Capabilities
+                </h2>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> The CLI version offers the complete feature set with superior performance, 
+                    enhanced dictionary attacks, and advanced statistical cryptanalysis capabilities.
+                </div>
+                
+                <h3 class="subsection-title">
+                    <i class="fas fa-rocket"></i> Advanced Cipher Cracking Capabilities
+                </h3>
+                <ul>
+                    <li><strong>Enhanced Dictionary Attack:</strong> 500+ word dictionary including military/intelligence terms</li>
+                    <li><strong>Advanced Statistical Analysis:</strong> Multi-dimensional confidence scoring with optimized weights</li>
+                    <li><strong>Real-Time Progress:</strong> Visual progress bars and real-time feedback</li>
+                    <li><strong>Comprehensive Coverage:</strong> Caesar, Vigenère, XOR, Atbash, and Substitution ciphers</li>
+                    <li><strong>Space Preservation:</strong> Maintains original spacing and case in decoded text</li>
+                    <li><strong>Pattern Recognition:</strong> Advanced statistical analysis for realistic text identification</li>
+                </ul>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-cogs"></i> Core CLI Commands
+                </h3>
+                
+                <h4 class="feature-subtitle">Classical Cipher Cracking</h4>
+                <div class="code-block">
+# Crack encrypted text with enhanced dictionary attack
+python cli_cracker.py --text "Wklv lv d whvw phvvdjh."
+
+# Crack Vigenère cipher with military/intelligence dictionary
+python cli_cracker.py --text "ZINCS PGVNU"  # Uses enhanced dictionary
+
+# Crack from file with progress tracking
+python cli_cracker.py --file encrypted.txt
+
+# Interactive mode for real-time cracking
+python cli_cracker.py --interactive
+
+# Run benchmark tests to verify system performance
+python cli_cracker.py --benchmark
+                </div>
+
+                <h4 class="feature-subtitle">Advanced Analysis Options</h4>
+                <div class="code-block">
+# Set custom timeout for complex ciphers (default: 300 seconds)
+python cli_cracker.py --text "complex_cipher" --timeout 600
+
+# Save results to JSON file for further analysis
+python cli_cracker.py --text "encrypted_text" --output results.json
+
+# Use custom word list for enhanced dictionary attack
+python cli_cracker.py --text "encrypted_text" --wordlist custom_words.txt
+                </div>
+
+                <h4 class="feature-subtitle">Custom Word List Support</h4>
+                <div class="code-block">
+# Create a custom word list file (one word per line)
+echo -e "SECRET\nPASSWORD\nKEY\nLEMON\nORANGE" > custom_words.txt
+
+# Use custom word list with enhanced dictionary attack
+python cli_cracker.py --text "ZINCS PGVNU" --wordlist custom_words.txt
+
+# The system combines your custom words with our 500+ word dictionary
+# for maximum cracking success
+
+# Supported file formats:
+# • TXT: One word per line
+# • CSV: Comma-separated values
+# • XLSX/XLS: Excel spreadsheets (requires pandas)
+                </div>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-tools"></i> Advanced CLI Features
+                </h3>
+                
+                <h4 class="feature-subtitle">Enhanced Dictionary Attack</h4>
+                <ul>
+                    <li><strong>Military Terms:</strong> ATTACK, DEFEND, SECRET, MISSION, TARGET, ENEMY, AGENT, SPY</li>
+                    <li><strong>Intelligence Words:</strong> SURVEIL, RECON, PATROL, GUARD, ALERT, WARNING, DANGER</li>
+                    <li><strong>Technical Terms:</strong> ALGORITHM, FUNCTION, PROCEDURE, METHOD, ROUTINE, SCRIPT</li>
+                    <li><strong>Common Names:</strong> JOHN, MARY, JAMES, PATRICIA, ROBERT, JENNIFER, MICHAEL</li>
+                    <li><strong>Fruit Names:</strong> LEMON, ORANGE, APPLE, BANANA, GRAPE, CHERRY, PEACH</li>
+                    <li><strong>Short Words:</strong> A, AN, AS, AT, BE, BY, DO, GO, HE, IF, IN, IS, IT</li>
+                    <li><strong>400+ Additional Words:</strong> Comprehensive coverage for maximum success</li>
+                </ul>
+
+                <h4 class="feature-subtitle">Advanced Statistical Analysis</h4>
+                <ul>
+                    <li><strong>Frequency Analysis:</strong> Chi-square statistics for letter distribution</li>
+                    <li><strong>Pattern Recognition:</strong> Vowel-consonant patterns and double letters</li>
+                    <li><strong>Word Recognition:</strong> Expanded word list with common English words</li>
+                    <li><strong>Bigram/Trigram Analysis:</strong> Common letter pair and triplet patterns</li>
+                    <li><strong>Entropy Calculation:</strong> Information theory-based text normality</li>
+                    <li><strong>Adaptive Scoring:</strong> Dynamic confidence calculation with optimized weights</li>
+                </ul>
+
+                <h4 class="feature-subtitle">Performance & Usability</h4>
+                <ul>
+                    <li><strong>Real-Time Progress:</strong> Visual progress bars with percentage completion</li>
+                    <li><strong>Interactive Mode:</strong> Real-time cracking with immediate feedback</li>
+                    <li><strong>Benchmark Testing:</strong> Comprehensive performance validation</li>
+                    <li><strong>Space Preservation:</strong> Maintains original text formatting and case</li>
+                    <li><strong>Error Handling:</strong> Robust error handling with graceful degradation</li>
+                    <li><strong>JSON Output:</strong> Structured results for programmatic analysis</li>
+                </ul>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-download"></i> CLI Installation
+                </h3>
+                <div class="code-block">
+# Install required Python packages
+pip install argparse pathlib
+
+# Download the CLI tool
+# The CLI is available as cli_cracker.py in the main repository
+
+# Run the CLI
+python cli_cracker.py --help
+                </div>
+
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Enhanced Capabilities:</strong> The CLI version provides the complete feature set with 
+                    enhanced dictionary attacks, advanced statistical analysis, and superior performance for 
+                    professional cryptanalysis tasks.
+                </div>
+            </div>
+
+            <!-- Technical Specifications -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-cogs"></i> Technical Specifications
+                </h2>
+                
+                <div class="tech-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Programming Language</span>
+                        <span class="spec-value">Python 3.9+</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Web Framework</span>
+                        <span class="spec-value">Flask 2.3+</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Cryptography Library</span>
+                        <span class="spec-value">cryptography 41.0+</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Key Derivation</span>
+                        <span class="spec-value">Argon2id</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Encryption Algorithms</span>
+                        <span class="spec-value">AES-256-GCM, ChaCha20-Poly1305, Ed25519, X25519</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Classical Ciphers</span>
+                        <span class="spec-value">Caesar, Vigenère, XOR, Atbash, Substitution</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Dictionary Attack</span>
+                        <span class="spec-value">500+ words (military, intelligence, technical)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Message Capacity</span>
+                        <span class="spec-value">10,000 messages</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Data Retention</span>
+                        <span class="spec-value">24 hours (auto-cleanup)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">File Size Limit</span>
+                        <span class="spec-value">20 MB</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Frontend</span>
+                        <span class="spec-value">HTML5, CSS3, JavaScript, Bootstrap 5</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Inter (Google Fonts)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-sitemap"></i> System Architecture
+                </h2>
+                
+                <h3 class="subsection-title">
+                    <i class="fas fa-layer-group"></i> Core Components
+                </h3>
+                <ul>
+                    <li><strong>ciphercore.py</strong> - Core cryptographic functions and algorithms</li>
+                    <li><strong>app.py</strong> - Flask web application and API endpoints</li>
+                    <li><strong>templates/</strong> - HTML templates with responsive design</li>
+                    <li><strong>static/</strong> - CSS, JavaScript, and static assets</li>
+                    <li><strong>tests/</strong> - Comprehensive test suites for all functionality</li>
+                    <li><strong>cli_cracker.py</strong> - Advanced CLI cipher cracking interface</li>
+                    <li><strong>advanced_cryptanalysis.py</strong> - Advanced statistical analysis and genetic algorithms</li>
+                    <li><strong>classical_ciphers.py</strong> - Classical cipher implementations</li>
+                </ul>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-database"></i> Data Flow
+                </h3>
+                <ol>
+                    <li>User enters message and password</li>
+                    <li>Password is converted to appropriate key length using Argon2id</li>
+                    <li>Message is encrypted using selected algorithm</li>
+                    <li>Encrypted data is stored with salt for key reconstruction</li>
+                    <li>Message can be sent to relay station or copied directly</li>
+                    <li>Decryption reverses the process using the same password</li>
+                    <li>Classical cipher analysis uses statistical pattern recognition</li>
+                    <li>Advanced algorithms employ genetic algorithms and multi-dimensional analysis</li>
+                </ol>
+            </div>
+
+            <!-- Security Features -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-shield-alt"></i> Security Features
+                </h2>
+                
+                <h3 class="subsection-title">
+                    <i class="fas fa-key"></i> Key Management
+                </h3>
+                <ul>
+                    <li><strong>Argon2id Key Derivation:</strong> Industry-standard password-based key derivation</li>
+                    <li><strong>Salt Generation:</strong> Unique salt for each encryption operation</li>
+                    <li><strong>Key Length Validation:</strong> Automatic key length adjustment for different algorithms</li>
+                    <li><strong>Memory Safety:</strong> Secure memory handling and cleanup</li>
+                    <li><strong>Timeout Protection:</strong> Built-in mechanisms to prevent resource exhaustion</li>
+                    <li><strong>Signal Handling:</strong> Graceful interruption handling for long-running operations</li>
+                </ul>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-clock"></i> Data Protection
+                </h3>
+                <ul>
+                    <li><strong>24-Hour Retention:</strong> Messages automatically deleted after 24 hours</li>
+                    <li><strong>Auto-Cleanup:</strong> Background thread removes expired messages</li>
+                    <li><strong>Capacity Management:</strong> Prevents memory overflow with 10,000 message limit</li>
+                    <li><strong>Secure Storage:</strong> Encrypted data never stored in plain text</li>
+                </ul>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-lock"></i> Cryptographic Standards
+                </h3>
+                <ul>
+                    <li><strong>AES-GCM:</strong> Authenticated encryption with associated data</li>
+                    <li><strong>ChaCha20-Poly1305:</strong> High-performance authenticated encryption</li>
+                    <li><strong>Ed25519/X25519:</strong> Elliptic curve cryptography for signatures and key exchange</li>
+                    <li><strong>Nonce/IV Management:</strong> Cryptographically secure random generation</li>
+                    <li><strong>Algorithm Validation:</strong> Strict algorithm and parameter validation</li>
+                    <li><strong>Hybrid Encryption:</strong> X25519 + HKDF + AEAD for secure key exchange</li>
+                </ul>
+            </div>
+
+            <!-- Web Interface Features -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-globe"></i> Web Interface Features
+                </h2>
+                
+                <h3 class="subsection-title">
+                    <i class="fas fa-unlock-alt"></i> Classical Cipher Operations
+                </h3>
+                
+                <h4 class="feature-subtitle">Complete Cipher Functionality</h4>
+                <p>
+                    The Classical Ciphers page provides comprehensive functionality for working with classical ciphers:
+                </p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="feature-title">Cipher Cracking</h3>
+                        <p class="feature-description">
+                            Advanced AI-powered cryptanalysis with real-time progress tracking, 
+                            statistical analysis, and enhanced dictionary attacks.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="feature-title">Text Encoding</h3>
+                        <p class="feature-description">
+                            Encode text using Caesar, Vigenère, XOR, Atbash, or Substitution ciphers 
+                            with customizable keys and parameters.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-unlock"></i>
+                        </div>
+                        <h3 class="feature-title">Text Decoding</h3>
+                        <p class="feature-description">
+                            Decode text using the same cipher type and key that was used for encoding. 
+                            Supports all classical cipher types.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3 class="feature-title">Text Analysis</h3>
+                        <p class="feature-description">
+                            Analyze text patterns, frequency distributions, and statistical properties 
+                            for cryptanalysis and research purposes.
+                        </p>
+                    </div>
+                </div>
+
+                <h4 class="feature-subtitle">Supported Cipher Types</h4>
+                <ul>
+                    <li><strong>Caesar Cipher:</strong> Shift-based substitution (key: 0-25)</li>
+                    <li><strong>Vigenère Cipher:</strong> Keyword-based polyalphabetic substitution</li>
+                    <li><strong>XOR Cipher:</strong> Bitwise XOR operation with key</li>
+                    <li><strong>Atbash Cipher:</strong> Simple letter reversal (no key needed)</li>
+                    <li><strong>Substitution Cipher:</strong> Custom 26-letter substitution key</li>
+                </ul>
+
+                <h4 class="feature-subtitle">Usage Examples</h4>
+                <div class="code-block">
+# Caesar Cipher Example
+Text: "HELLO WORLD"
+Key: 3
+Result: "KHOOR ZRUOG"
+
+# Vigenère Cipher Example  
+Text: "ATTACK AT DAWN"
+Key: "LEMON"
+Result: "LXFOPV EF RNHR"
+
+# XOR Cipher Example
+Text: "SECRET MESSAGE"
+Key: "KEY"
+Result: Encrypted binary data
+
+# Atbash Cipher Example
+Text: "HELLO"
+Key: None needed
+Result: "SVOOL"
+
+# Substitution Cipher Example
+Text: "HELLO WORLD"
+Key: "QWERTYUIOPASDFGHJKLZXCVBNM"
+Result: Custom substitution
+                </div>
+
+                                    <h4 class="feature-subtitle">Key Features</h4>
+                    <ul>
+                        <li><strong>Input Sanitization:</strong> Automatic XSS protection and input validation</li>
+                        <li><strong>Real-time Feedback:</strong> Immediate results with copy-to-clipboard functionality</li>
+                        <li><strong>Educational Value:</strong> Perfect for learning classical cryptography concepts</li>
+                        <li><strong>Professional Interface:</strong> Clean, responsive design with intuitive controls</li>
+                        <li><strong>Comprehensive Testing:</strong> All encode/decode functionality is tested in the self-test system</li>
+                        <li><strong>Advanced Configuration:</strong> Full control over cracking parameters and cipher selection</li>
+                        <li><strong>Performance Presets:</strong> Quick scan, standard, thorough, and exhaustive analysis modes</li>
+                        <li><strong>Custom Word Lists:</strong> Support for TXT, CSV, and Excel word list files</li>
+                        <li><strong>Real-time Progress:</strong> Live progress tracking with detailed status updates</li>
+                    </ul>
+                </div>
+
+                <!-- Advanced Cracking Features -->
+                <div class="doc-content">
+                    <h2 class="section-title">
+                        <i class="fas fa-cogs"></i> Advanced Cracking Configuration
+                    </h2>
+                    <h3 class="subsection-title">
+                        <i class="fas fa-sliders-h"></i> Full CLI Capabilities in Web Interface
+                    </h3>
+                    <p>
+                        The web interface now provides the same depth and capabilities as the CLI cracker, with comprehensive configuration options:
+                    </p>
+                    
+                    <h4 class="feature-subtitle">Cipher Selection</h4>
+                    <ul>
+                        <li><strong>Selective Cracking:</strong> Enable/disable specific cipher types (Caesar, Vigenère, XOR, Atbash, Substitution)</li>
+                        <li><strong>Performance Optimization:</strong> Focus on specific ciphers for faster results</li>
+                        <li><strong>Targeted Analysis:</strong> Crack only the cipher types you suspect</li>
+                    </ul>
+
+                    <h4 class="feature-subtitle">Performance Configuration</h4>
+                    <ul>
+                        <li><strong>Timeout Control:</strong> Set maximum cracking time (30 seconds to 1 hour)</li>
+                        <li><strong>Test Mode:</strong> Fast analysis mode for quick testing</li>
+                        <li><strong>Iteration Limits:</strong> Control Vigenère and Substitution cipher iterations</li>
+                        <li><strong>Restart Configuration:</strong> Adjust substitution cipher restart attempts</li>
+                        <li><strong>Confidence Threshold:</strong> Set minimum confidence level for results</li>
+                    </ul>
+
+                    <h4 class="feature-subtitle">Preset Configurations</h4>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                            <h3 class="feature-title">Quick Scan</h3>
+                            <p class="feature-description">Fast analysis (60s) with only Caesar and Atbash ciphers. Perfect for simple ciphers and quick testing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-balance-scale"></i></div>
+                            <h3 class="feature-title">Standard</h3>
+                            <p class="feature-description">Balanced analysis (5 minutes) with all cipher types. Default configuration for most use cases.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-search-plus"></i></div>
+                            <h3 class="feature-title">Thorough</h3>
+                            <p class="feature-description">Comprehensive analysis (10 minutes) with extended iterations. For complex or difficult ciphers.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-infinity"></i></div>
+                            <h3 class="feature-title">Exhaustive</h3>
+                            <p class="feature-description">Maximum effort analysis (30 minutes) with maximum iterations. For the most challenging ciphers.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="feature-subtitle">Advanced Features</h4>
+                    <ul>
+                        <li><strong>Real-time Progress:</strong> Live progress tracking with detailed status updates for each cipher type</li>
+                        <li><strong>Custom Word Lists:</strong> Upload TXT, CSV, or Excel files with custom words for enhanced dictionary attacks</li>
+                        <li><strong>CLI Algorithm Integration:</strong> Uses the exact same advanced algorithms as the CLI cracker</li>
+                        <li><strong>No Simulation:</strong> All cracking is performed using real algorithms, no simulated results</li>
+                        <li><strong>Professional Results:</strong> Detailed confidence scoring and algorithm information for each result</li>
+                    </ul>
+
+                    <h4 class="feature-subtitle">Usage Examples</h4>
+                    <div class="code-block">
+# Quick Scan Example
+- Timeout: 60 seconds
+- Ciphers: Caesar, Atbash only
+- Use case: Simple shift ciphers, quick testing
+
+# Standard Analysis Example  
+- Timeout: 5 minutes
+- Ciphers: All 5 cipher types
+- Use case: General purpose cracking
+
+# Thorough Analysis Example
+- Timeout: 10 minutes
+- Substitution restarts: 200
+- Substitution iterations: 10,000
+- Use case: Complex substitution ciphers
+
+# Exhaustive Analysis Example
+- Timeout: 30 minutes
+- Substitution restarts: 500
+- Substitution iterations: 20,000
+- Use case: Most challenging ciphers
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Documentation -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i> API Documentation
+                </h2>
+                
+                <h3 class="subsection-title">
+                    <i class="fas fa-paper-plane"></i> Message Encryption
+                </h3>
+                <div class="code-block">
+POST /encrypt-message
+Content-Type: application/json
+
+{
+    "text": "Hello, World!",
+    "password": "mysecretpassword",
+    "algorithm": "aes256",
+    "send_to_station": false
+}
+                </div>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-unlock"></i> Message Decryption
+                </h3>
+                <div class="code-block">
+POST /decrypt-message
+Content-Type: application/json
+
+{
+    "encrypted_text": "{...encrypted JSON...}",
+    "password": "mysecretpassword",
+    "algorithm": "aes256"
+}
+                </div>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-file-upload"></i> File Encryption
+                </h3>
+                <div class="code-block">
+POST /encrypt
+Content-Type: multipart/form-data
+
+file: [binary file data]
+algorithm: "aes256"
+description: "Optional description"
+key: [optional key file]
+                </div>
+            </div>
+
+            <!-- Installation & Setup -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-download"></i> Installation & Setup
+                </h2>
+                
+                <h3 class="subsection-title">
+                    <i class="fas fa-terminal"></i> Prerequisites
+                </h3>
+                <div class="code-block">
+Python 3.9+
+pip (Python package installer)
+Git (for cloning repository)
+                </div>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-clone"></i> Installation Steps
+                </h3>
+                <div class="code-block">
+# Clone the repository
+git clone https://github.com/dokabi-recon67/cipherstation.git
+cd cipherstation
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python app.py
+                </div>
+
+                <h3 class="subsection-title">
+                    <i class="fas fa-cog"></i> Configuration
+                </h3>
+                <p>
+                    The application runs on <code>http://localhost:5001</code> by default. 
+                    No additional configuration is required for basic usage. The system 
+                    automatically handles key generation, message storage, and cleanup.
+                </p>
+            </div>
+
+            <!-- Contributing -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-hands-helping"></i> Contributing
+                </h2>
+                
+                <p>
+                    This project was built as a CS50x final project, but contributions and feedback are welcome. 
+                    The codebase is designed to be educational and demonstrates best practices in:
+                </p>
+                
+                <ul>
+                    <li>Cryptographic implementation</li>
+                    <li>Web application security</li>
+                    <li>User interface design</li>
+                    <li>Code organization and maintainability</li>
+                </ul>
+
+                <div class="text-center mt-4">
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="btn btn-primary" target="_blank">
+                        <i class="fab fa-github"></i> View Full Source Code
+                    </a>
+                    <a href="/selftest" class="btn btn-primary" style="margin-left: 1rem;">
+                        <i class="fas fa-vial"></i> Run System Test
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">CipherStation</h3>
+                <p class="footer-description">
+                    Enterprise-grade encryption platform built for professionals who demand the highest security standards. 
+                    Secure your data with military-grade algorithms.
+                </p>
+                <div class="footer-links">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/station" class="footer-link">Relay Station</a>
+                    <a href="/documentation" class="footer-link">Documentation</a>
+                    <a href="/selftest" class="footer-link">Test</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="footer-link" target="_blank">GitHub</a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CipherStation. A CS50x Final Project by Saadi Agha.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.style.background = 'rgba(0, 0, 0, 0.98)';
+                } else {
+                    header.style.background = 'rgba(0, 0, 0, 0.95)';
+                }
+            });
+
+            // Natural password cracking animation for logo
+            const logoTextElement = document.getElementById('logo-text');
+            if (logoTextElement) {
+                const originalText = logoTextElement.textContent;
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\';
+                let animationPhase = 'encrypted';
+                let shuffleInterval;
+                let currentShuffleText = '';
+                let attempts = 0;
+                let maxAttempts = 0;
+
+                // Start with fully encrypted text
+                function startFullyEncrypted() {
+                    currentShuffleText = '';
+                    for (let i = 0; i < originalText.length; i++) {
+                        currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                    logoTextElement.textContent = currentShuffleText;
+                    logoTextElement.classList.add('encrypted');
+                    
+                    // Start cracking after 0.5 seconds
+                    setTimeout(startCracking, 500);
+                }
+
+                // Simulate password cracking attempts
+                function startCracking() {
+                    attempts = 0;
+                    maxAttempts = 40; // Reduced attempts for faster animation
+                    
+                    shuffleInterval = setInterval(() => {
+                        attempts++;
+                        
+                        // Simulate different cracking strategies
+                        if (attempts < 10) {
+                            // Early attempts: mostly random
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                            }
+                        } else if (attempts < 20) {
+                            // Middle attempts: some patterns emerge
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.3) {
+                                    // 30% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else if (attempts < 30) {
+                            // Later attempts: more correct characters
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.6) {
+                                    // 60% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else {
+                            // Final attempts: mostly correct with some errors
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.8) {
+                                    // 80% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        }
+                        
+                        logoTextElement.textContent = currentShuffleText;
+                        logoTextElement.classList.add('encrypted');
+                        
+                        if (attempts >= maxAttempts) {
+                            clearInterval(shuffleInterval);
+                            startFinalDecryption();
+                        }
+                    }, 80); // Faster for quicker animation
+                }
+
+                // Final decryption with realistic timing
+                function startFinalDecryption() {
+                    let remainingPositions = [];
+                    for (let i = 0; i < originalText.length; i++) {
+                        remainingPositions.push(i);
+                    }
+                    
+                    const decryptInterval = setInterval(() => {
+                        if (remainingPositions.length > 0) {
+                            // Pick a random position to decrypt (like finding the right character)
+                            const randomIndex = Math.floor(Math.random() * remainingPositions.length);
+                            const position = remainingPositions[randomIndex];
+                            remainingPositions.splice(randomIndex, 1);
+                            
+                            // Show a few wrong attempts before correct character
+                            let wrongAttempts = 0;
+                            const maxWrongAttempts = Math.floor(Math.random() * 2) + 1; // 1-2 wrong attempts (reduced)
+                            
+                            function showWrongAttempt() {
+                                if (wrongAttempts < maxWrongAttempts) {
+                                    const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + randomChar + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    wrongAttempts++;
+                                    setTimeout(showWrongAttempt, 40); // Faster wrong attempts
+                                } else {
+                                    // Show correct character
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + originalText[position] + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    
+                                    // Remove encrypted class when fully decrypted
+                                    if (remainingPositions.length === 0) {
+                                        logoTextElement.classList.remove('encrypted');
+                                    }
+                                }
+                            }
+                            
+                            showWrongAttempt();
+                        } else {
+                            clearInterval(decryptInterval);
+                            // Stay decrypted for 1.5 seconds, then start encrypting (reduced)
+                            setTimeout(startEncrypting, 1500);
+                        }
+                    }, 120); // Faster decryption
+                }
+
+                // Encrypt the text back (faster, like security kicking in)
+                function startEncrypting() {
+                    let currentIndex = 0;
+                    const encryptInterval = setInterval(() => {
+                        if (currentIndex < originalText.length) {
+                            const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                            const tempText = originalText.substring(0, currentIndex) + randomChar + originalText.substring(currentIndex + 1);
+                            logoTextElement.textContent = tempText;
+                            logoTextElement.classList.add('encrypted');
+                            currentIndex++;
+                        } else {
+                            clearInterval(encryptInterval);
+                            // Start the cycle again
+                            setTimeout(startFullyEncrypted, 600); // Reduced delay
+                        }
+                    }, 40); // Even faster encryption (security response)
+                }
+
+                // Start the animation cycle
+                startFullyEncrypted();
+            }
+        });
+    </script>
+
+    <!-- Global Error Display -->
+    <div id="globalError" class="alert alert-danger" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); background: rgba(139, 0, 0, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 0, 0, 0.3); color: white;">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span id="globalErrorMessage"></span>
+        <button type="button" class="btn-close" onclick="hideError()" style="float: right; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">&times;</button>
+    </div>
+
+    <script>
+        // Global error handling functions
+        function showError(message) {
+            const errorDiv = document.getElementById('globalError');
+            const errorMessage = document.getElementById('globalErrorMessage');
+            errorMessage.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                hideError();
+            }, 5000);
+        }
+
+        function hideError() {
+            const errorDiv = document.getElementById('globalError');
+            errorDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html> 
