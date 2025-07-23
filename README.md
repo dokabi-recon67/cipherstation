@@ -38,8 +38,8 @@ For a full-speed experience, especially for cracking and analysis, it's strongly
 - Demo Video: [link to be added]
 - Main Files:
   - `cipherstationv0.py` (CLI Tool)
-  - `/cursor/app.py` (Web Interface)
-- Classical cipher demo: `/cursor/classical.html`
+  - `/relaystation/app.py` (Web Interface)
+- Classical cipher demo: `/relaystation/classical.html`
 
 
 ## 🌟 Key Features
@@ -220,7 +220,7 @@ python cipherstationv0.py classical-selftest
 - **Comprehensive Results**: Detailed analysis with confidence scoring
 
 ### Usage
-1. Start the web server: `cd cursor && python app.py`
+1. Start the web server: `cd relaystation && python app.py`
 2. Open browser to: `http://localhost:5001`
 3. Navigate to the Classical Ciphers page
 4. Enter encrypted text and optionally add custom words
@@ -326,7 +326,7 @@ cipherstation/
 ├── LICENSE                 # MIT License
 ├── key_registry.json       # Key registry (auto-generated)
 ├── audit.log              # Audit trail (auto-generated)
-└── cursor/                 # Web interface
+└── cd relaystation/                 # Web interface
     ├── app.py              # Flask web application
     ├── templates/          # HTML templates
     │   ├── index.html      # Home page
@@ -406,7 +406,7 @@ cipherstation/
 
 5. **Start the web interface**
    ```bash
-   cd cursor
+   cd relaystation
    python app.py
    # Open http://localhost:5001 in your browser
    ```
@@ -431,7 +431,7 @@ python cipherstationv0.py decrypt --password --salt salt.generated --infile encr
 python cipherstationv0.py classical-crack "Wklv lv d whvw phvvdjh."
 
 # Use the web interface for classical ciphers
-cd cursor && python app.py
+cd relaystation && python app.py
 # Then visit http://localhost:5001
 ```
 
