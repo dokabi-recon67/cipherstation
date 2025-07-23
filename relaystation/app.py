@@ -211,89 +211,92 @@ class AdvancedCracker:
             if 'caesar' in enabled_ciphers:
                 update_progress('cracking_caesar', 15, 'Attempting Caesar cipher cracking...')
                 
-                def caesar_progress(msg):
+                def caesar_progress(progress, msg):
                     cracking_progress[task_id].update({
                         'status': 'cracking_caesar',
-                        'progress': 15,
+                        'progress': 15 + (progress * 0.1),  # Scale progress within Caesar's range
                         'message': f'Caesar: {msg}'
                     })
                 
-                caesar_results = crack_caesar_advanced(text, progress_callback=caesar_progress, verbose=False)
-                all_results.extend(caesar_results)
+                caesar_results = crack_caesar_advanced(text, progress_callback=caesar_progress)
+                # Add cipher type to each result
+                for key, decoded, confidence in caesar_results:
+                    all_results.append(('caesar', key, decoded, confidence))
                 total_attempts += 26
             
             # Step 3: Vigenère Cracking (if enabled)
             if 'vigenere' in enabled_ciphers:
                 update_progress('cracking_vigenere', 35, 'Attempting Vigenère cipher cracking...')
                 
-                def vigenere_progress(msg):
+                def vigenere_progress(progress, msg):
                     cracking_progress[task_id].update({
                         'status': 'cracking_vigenere',
-                        'progress': 35,
+                        'progress': 35 + (progress * 0.1),  # Scale progress within Vigenère's range
                         'message': f'Vigenère: {msg}'
                     })
                 
                 vigenere_results = crack_vigenere_advanced(
                     text, 
                     progress_callback=vigenere_progress, 
-                    custom_words=custom_words,
-                    max_iterations=vigenere_max_iterations,
-                    max_key_length=vigenere_max_key_length,
-                    verbose=False
+                    custom_words=custom_words
                 )
-                all_results.extend(vigenere_results)
+                # Add cipher type to each result
+                for key, decoded, confidence in vigenere_results:
+                    all_results.append(('vigenere', key, decoded, confidence))
                 total_attempts += len(custom_words) if custom_words else 500
             
             # Step 4: XOR Cracking (if enabled)
             if 'xor' in enabled_ciphers:
                 update_progress('cracking_xor', 55, 'Attempting XOR cipher cracking...')
                 
-                def xor_progress(msg):
+                def xor_progress(progress, msg):
                     cracking_progress[task_id].update({
                         'status': 'cracking_xor',
-                        'progress': 55,
+                        'progress': 55 + (progress * 0.1),  # Scale progress within XOR's range
                         'message': f'XOR: {msg}'
                     })
                 
-                xor_results = crack_xor_advanced(text, progress_callback=xor_progress, verbose=False)
-                all_results.extend(xor_results)
+                xor_results = crack_xor_advanced(text, progress_callback=xor_progress)
+                # Add cipher type to each result
+                for key, decoded, confidence in xor_results:
+                    all_results.append(('xor', key, decoded, confidence))
                 total_attempts += 256
             
             # Step 5: Atbash Cracking (if enabled)
             if 'atbash' in enabled_ciphers:
                 update_progress('cracking_atbash', 75, 'Attempting Atbash cipher cracking...')
                 
-                def atbash_progress(msg):
+                def atbash_progress(progress, msg):
                     cracking_progress[task_id].update({
                         'status': 'cracking_atbash',
-                        'progress': 75,
+                        'progress': 75 + (progress * 0.1),  # Scale progress within Atbash's range
                         'message': f'Atbash: {msg}'
                     })
                 
-                atbash_results = crack_atbash_advanced(text, progress_callback=atbash_progress, verbose=False)
-                all_results.extend(atbash_results)
+                atbash_results = crack_atbash_advanced(text, progress_callback=atbash_progress)
+                # Add cipher type to each result
+                for key, decoded, confidence in atbash_results:
+                    all_results.append(('atbash', key, decoded, confidence))
                 total_attempts += 1
             
             # Step 6: Substitution Cracking (if enabled)
             if 'substitution' in enabled_ciphers:
                 update_progress('cracking_substitution', 85, 'Attempting Substitution cipher cracking...')
                 
-                def substitution_progress(msg):
+                def substitution_progress(progress, msg):
                     cracking_progress[task_id].update({
                         'status': 'cracking_substitution',
-                        'progress': 85,
+                        'progress': 85 + (progress * 0.1),  # Scale progress within Substitution's range
                         'message': f'Substitution: {msg}'
                     })
                 
                 substitution_results = crack_substitution_advanced(
                     text, 
-                    progress_callback=substitution_progress,
-                    max_restarts=substitution_max_restarts,
-                    max_iterations=substitution_max_iterations,
-                    prompt_user=False,
-                    verbose=False
+                    progress_callback=substitution_progress
                 )
-                all_results.extend(substitution_results)
+                # Add cipher type to each result
+                for key, decoded, confidence in substitution_results:
+                    all_results.append(('substitution', key, decoded, confidence))
                 total_attempts += 100
             
             # Step 7: Finalize Results
@@ -321,7 +324,12 @@ class AdvancedCracker:
                 'progress': 100,
                 'message': 'Analysis completed!',
                 'results': web_results,
-                'analysis': analysis,
+                'analysis': {
+                    'best_results': web_results,  # Use our comprehensive results as the primary source
+                    'statistics': analysis.get('statistics', {}),
+                    'detected_ciphers': analysis.get('detected_ciphers', []),
+                    'analysis_time': total_time
+                },
                 'custom_words_used': len(custom_words) if custom_words else 0,
                 'crack_time': total_time,
                 'total_attempts': total_attempts,
@@ -331,7 +339,12 @@ class AdvancedCracker:
             # Store final results
             cracking_results[task_id] = {
                 'original_text': text,
-                'analysis': analysis,
+                'analysis': {
+                    'best_results': web_results,  # Use our comprehensive results as the primary source
+                    'statistics': analysis.get('statistics', {}),
+                    'detected_ciphers': analysis.get('detected_ciphers', []),
+                    'analysis_time': total_time
+                },
                 'results': web_results,
                 'timestamp': datetime.now().isoformat(),
                 'custom_words_used': len(custom_words) if custom_words else 0,
