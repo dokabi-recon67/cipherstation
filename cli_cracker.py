@@ -62,7 +62,7 @@ def crack_caesar_advanced(text: str, progress_callback=None) -> List[Tuple[int, 
     results.sort(key=lambda x: x[2], reverse=True)
     return results[:5]  # Return top 5 results
 
-def crack_vigenere_advanced(text: str, progress_callback=None, custom_words: List[str] = None) -> List[Tuple[str, str, float]]:
+def crack_vigenere_advanced(text: str, progress_callback=None, custom_words: List[str] = None, web_mode: bool = False, max_iterations: int = None) -> List[Tuple[str, str, float]]:
     """Advanced Vigenère cipher cracking with improved key detection and custom word list support"""
     results = []
     vigenere = VigenereCipher()
@@ -211,9 +211,24 @@ def crack_vigenere_advanced(text: str, progress_callback=None, custom_words: Lis
             confidence = analyzer._calculate_confidence(decoded)
             if confidence > 0.1:
                 results.append((key, decoded, confidence))
+            iteration_count += 1
+            if iteration_cap is not None and iteration_count >= iteration_cap:
+                if web_mode:
+                    if progress_callback:
+                        progress_callback(100, f"Iteration cap reached ({iteration_cap}). Returning partial results.")
+                    break
+                else:
+                    print(f"Iteration cap reached. Continue searching? (y/n/ya=always): ", end='', flush=True)
+                    ans = input().strip().lower()
+                    if ans == 'y':
+                        iteration_cap += 1000
+                    elif ans == 'ya':
+                        iteration_cap = None
+                    else:
+                        break
     else:
         # Use advanced cryptanalysis for longer texts
-        results = vigenere.cryptanalyze(text, custom_words)
+        results = vigenere.cryptanalyze(text, custom_words, web_mode=web_mode)
         
         # Update progress
         if progress_callback:
@@ -282,41 +297,41 @@ def crack_atbash_advanced(text: str, progress_callback=None) -> List[Tuple[str, 
     
     return [("ATBASH", decoded, confidence)]
 
-def crack_substitution_advanced(text: str, progress_callback=None) -> List[Tuple[str, str, float]]:
-    """Advanced substitution cipher cracking with improved analysis"""
+def crack_substitution_advanced(text: str, progress_callback=None, web_mode: bool = False, max_iterations: int = None) -> List[Tuple[str, str, float]]:
+    """Advanced substitution cipher cracking with improved analysis and web_mode iteration cap handling"""
     results = []
     analyzer = Cryptanalyzer()
-    
-    # For substitution ciphers, we'll try some common patterns
-    # This is a simplified approach - full substitution cracking is very complex
-    
+    iteration_count = 0
+    iteration_cap = max_iterations if max_iterations is not None else 1000
     if progress_callback:
         progress_callback(25, "Analyzing character frequencies...")
-    
-    # Analyze character frequencies
     freq = Counter(char.upper() for char in text if char.isalpha())
     total_chars = sum(freq.values())
-    
     if total_chars == 0:
         return []
-    
-    # Create a simple frequency-based substitution
-    # Map most frequent characters to most frequent English letters
     english_freq_order = ['E', 'T', 'A', 'O', 'I', 'N', 'S', 'R', 'H', 'D', 'L', 'U', 'C', 'M', 'F', 'Y', 'W', 'G', 'P', 'B', 'V', 'K', 'X', 'Q', 'J', 'Z']
-    
-    # Sort characters by frequency
     char_freq_order = [char for char, _ in freq.most_common()]
-    
-    # Create substitution mapping
     substitution_map = {}
     for i, char in enumerate(char_freq_order):
         if i < len(english_freq_order):
             substitution_map[char] = english_freq_order[i]
-    
+        iteration_count += 1
+        if iteration_cap is not None and iteration_count >= iteration_cap:
+            if web_mode:
+                if progress_callback:
+                    progress_callback(100, f"Iteration cap reached ({iteration_cap}). Returning partial results.")
+                break
+            else:
+                print(f"Iteration cap reached. Continue searching? (y/n/ya=always): ", end='', flush=True)
+                ans = input().strip().lower()
+                if ans == 'y':
+                    iteration_cap += 1000
+                elif ans == 'ya':
+                    iteration_cap = None
+                else:
+                    break
     if progress_callback:
         progress_callback(75, "Applying frequency-based substitution...")
-    
-    # Apply substitution
     decoded = ""
     for char in text:
         if char.isalpha():
@@ -325,16 +340,11 @@ def crack_substitution_advanced(text: str, progress_callback=None) -> List[Tuple
             decoded += mapped_char if is_upper else mapped_char.lower()
         else:
             decoded += char
-    
-    # Calculate confidence
     confidence = analyzer._calculate_confidence(decoded)
-    
     if progress_callback:
         progress_callback(100, "Substitution analysis complete!")
-    
     if confidence > 0.1:
         results.append(("FREQ_BASED", decoded, confidence))
-    
     return results
 
 class AdvancedCLICracker:

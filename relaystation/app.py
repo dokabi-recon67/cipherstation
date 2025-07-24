@@ -301,7 +301,7 @@ class AdvancedCracker:
         """Legacy method for backward compatibility"""
         self.crack_with_progress_full(text, task_id, custom_words, 300, False, 
                                      ['caesar', 'vigenere', 'xor', 'atbash', 'substitution'],
-                                     None, 100, 5000)
+                                     None, 100, 5000, web_mode=True)
 
     def crack_with_progress_full(self, text: str, task_id: str, custom_words: List[str] = None, 
                                 max_time: int = 300, test_mode: bool = False, 
@@ -309,7 +309,8 @@ class AdvancedCracker:
                                 vigenere_max_iterations: int = None, 
                                 vigenere_max_key_length: int = None,
                                 substitution_max_restarts: int = 100,
-                                substitution_max_iterations: int = 5000):
+                                substitution_max_iterations: int = 5000,
+                                web_mode: bool = True):
         """Full-capability cracking with all CLI options and real-time progress"""
         try:
             start_time = time.time()
@@ -354,7 +355,7 @@ class AdvancedCracker:
                     'message': msg
                 })
             
-            analysis = cryptanalyze_text(text, progress=True, progress_callback=analysis_progress, custom_words=custom_words)
+            analysis = cryptanalyze_text(text, progress=True, progress_callback=analysis_progress, custom_words=custom_words, web_mode=True)
             
             # Step 2: Caesar Cracking (if enabled)
             if 'caesar' in enabled_ciphers:
@@ -387,7 +388,9 @@ class AdvancedCracker:
                 vigenere_results = crack_vigenere_advanced(
                     text, 
                     progress_callback=vigenere_progress, 
-                    custom_words=custom_words
+                    custom_words=custom_words,
+                    web_mode=web_mode,
+                    max_iterations=vigenere_max_iterations
                 )
                 # Add cipher type to each result
                 for key, decoded, confidence in vigenere_results:
@@ -441,7 +444,9 @@ class AdvancedCracker:
                 
                 substitution_results = crack_substitution_advanced(
                     text, 
-                    progress_callback=substitution_progress
+                    progress_callback=substitution_progress,
+                    web_mode=web_mode,
+                    max_iterations=substitution_max_iterations
                 )
                 # Add cipher type to each result
                 for key, decoded, confidence in substitution_results:
@@ -803,7 +808,7 @@ def api_crack():
         thread = threading.Thread(
             target=advanced_cracker.crack_with_progress_full,
             args=(text, task_id, custom_words, max_time, test_mode, enabled_ciphers, 
-                  vigenere_max_iterations, vigenere_max_key_length, substitution_max_restarts, substitution_max_iterations)
+                  vigenere_max_iterations, vigenere_max_key_length, substitution_max_restarts, substitution_max_iterations, True)
         )
         thread.daemon = True
         thread.start()
