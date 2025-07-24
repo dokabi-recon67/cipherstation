@@ -403,11 +403,6 @@ def index():
     """Homepage with advanced features"""
     return render_template('index.html')
 
-@app.route('/tools')
-def tools():
-    """Tools page with file encryption/decryption"""
-    return render_template('tools.html')
-
 @app.route('/classical')
 def classical():
     """Classical cipher page with advanced cracking"""

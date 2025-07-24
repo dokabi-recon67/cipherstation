@@ -215,17 +215,20 @@ python cipherstationv0.py classical-selftest
 ### Features
 - **Modern Dark Theme**: Professional UI with animated header logo
 - **Responsive Design**: Optimized for desktop and mobile devices
-- **Real-Time Analysis**: Live progress tracking and result updates
+- **Relay Station**: Secure encrypted message dead drop system
+- **File Encryption/Decryption**: Upload and encrypt any file type directly on homepage
+- **Classical Cipher Analysis**: Advanced cryptanalysis with real-time progress
 - **Copy-to-Clipboard**: One-click result copying functionality
 - **Comprehensive Results**: Detailed analysis with confidence scoring
 
 ### Usage
 1. Start the web server: `cd relaystation && python app.py`
 2. Open browser to: `http://localhost:5001`
-3. Navigate to the Classical Ciphers page
-4. Enter encrypted text and optionally add custom words
-5. Click "Crack Cipher" to start analysis
-6. View real-time progress and results
+3. **Homepage (Relay Station)**: 
+   - Use the relay station for encrypted message drops
+   - Upload and encrypt/decrypt files directly
+4. **Classical Ciphers**: Navigate to analyze classical ciphers
+5. **Documentation**: Access comprehensive guides and examples
 
 ## 💻 Command Line Interface (CLI)
 
@@ -326,12 +329,15 @@ cipherstation/
 ├── LICENSE                 # MIT License
 ├── key_registry.json       # Key registry (auto-generated)
 ├── audit.log              # Audit trail (auto-generated)
-└── cd relaystation/                 # Web interface
+└── relaystation/            # Web interface
     ├── app.py              # Flask web application
     ├── templates/          # HTML templates
-    │   ├── index.html      # Home page
+    │   ├── index.html      # Relay Station + File Encryption
     │   ├── classical.html  # Classical ciphers page
-    │   └── documentation.html
+    │   ├── documentation.html # Documentation page
+    │   ├── selftest.html   # Self-test page
+    │   ├── download_cli.html # CLI download page
+    │   └── help.html       # Help page
     └── static/             # Static assets (CSS, JS)
 ├── share/
 │   └── knowledge_graph.json   # Persistent CipherShare knowledge graph
