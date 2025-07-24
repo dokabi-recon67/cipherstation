@@ -527,7 +527,6 @@
                 <nav class="nav-links">
                     <a href="/" class="nav-link active"><i class="fas fa-satellite-dish"></i> Relay Station</a>
                     <a href="/classical" class="nav-link"><i class="fas fa-unlock-alt"></i> Classical Ciphers</a>
-                    <a href="/tools" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
                     <a href="/documentation" class="nav-link">Documentation</a>
                     <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">
                         <i class="fab fa-github"></i>
@@ -592,7 +591,7 @@
                     <div class="mb-3">
                         <label for="plaintext" class="form-label">Plaintext Message</label>
                         <textarea id="plaintext" class="form-control" rows="2" placeholder="Enter your message..."></textarea>
-                    </div>
+                            </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="cipher_type" class="form-label">Cipher Type</label>
@@ -603,7 +602,7 @@
                                 <option value="atbash">Atbash</option>
                                 <option value="substitution">Substitution</option>
                             </select>
-                        </div>
+                            </div>
                         <div class="col-md-6">
                             <label for="cipher_key" class="form-label">Cipher Key</label>
                             <input id="cipher_key" class="form-control" placeholder="Enter key">
@@ -612,7 +611,7 @@
                     </div>
                     <button type="button" class="btn btn-primary w-100" onclick="doCipher()">
                         <i class="fas fa-lock"></i> Apply Cipher
-                    </button>
+                                </button>
                     <div id="ciphertext_output" class="feedback-message success hidden"></div>
                     <div id="cipher_api_error" class="feedback-message error hidden"></div>
                 </div>
@@ -627,10 +626,10 @@
                         <label for="enc_password" class="form-label">Encryption Password</label>
                         <input id="enc_password" type="password" class="form-control" placeholder="Enter a strong password">
                         <small class="form-text text-white">This password will be needed to decrypt the message later</small>
-                    </div>
+                            </div>
                     <button type="button" class="btn btn-primary w-100" onclick="doEncrypt()">
                         <i class="fas fa-shield-alt"></i> Encrypt Message
-                    </button>
+                                    </button>
                     <div id="encrypted_output" class="feedback-message success hidden"></div>
                     <div id="encrypt_api_error" class="feedback-message error hidden"></div>
                 </div>
@@ -642,8 +641,8 @@
                     </h4>
                     <p class="text-white mb-3">Upload your encrypted message to the relay station and receive a ticket number for retrieval.</p>
                     <button type="button" class="btn btn-success w-100" onclick="doSendToStation()">
-                        <i class="fas fa-paper-plane"></i> Send to Station
-                    </button>
+                                        <i class="fas fa-paper-plane"></i> Send to Station
+                                    </button>
                     <div id="ticket_output" class="feedback-message info hidden"></div>
                     <div id="send_api_error" class="feedback-message error hidden"></div>
                 </div>
@@ -659,23 +658,23 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="mb-0">Recent Messages</h6>
                             <small class="text-white">Last 3 messages</small>
-                        </div>
-                        
+                    </div>
+
                         <div class="message-list mb-3">
                             <div class="message-item active">
                                 <div class="d-flex justify-content-between">
                                     <span class="ticket-number">Ticket #<span id="current_ticket">-</span></span>
                                     <span class="status-badge">pending</span>
-                                </div>
-                                <small class="text-white">Just now</small>
                             </div>
+                                <small class="text-white">Just now</small>
+                        </div>
                             <div class="message-item">
                                 <div class="d-flex justify-content-between">
                                     <span class="ticket-number">Ticket #1000</span>
                                     <span class="status-badge">delivered</span>
-                                </div>
-                                <small class="text-white">2 minutes ago</small>
                             </div>
+                                <small class="text-white">2 minutes ago</small>
+                        </div>
                             <div class="message-item">
                                 <div class="d-flex justify-content-between">
                                     <span class="ticket-number">Ticket #999</span>
@@ -691,10 +690,10 @@
                                 <button class="btn btn-outline-secondary" type="button" onclick="copyTicketNumber()">
                                     <i class="fas fa-copy"></i> Copy
                                 </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                            </div>
+                                        </div>
+                                    </div>
 
                 <!-- Step 4: Retrieve -->
                 <div class="controls-section">
@@ -702,17 +701,17 @@
                         <i class="fas fa-download"></i> Step 4: Retrieve from Station
                     </h4>
                     <p class="text-white mb-3">Use your ticket number to retrieve the encrypted message from the relay station.</p>
-                    <div class="mb-3">
+                                    <div class="mb-3">
                         <label for="ticket_number" class="form-label">Ticket Number</label>
                         <input id="ticket_number" class="form-control" placeholder="Enter ticket number">
                         <small class="form-text text-white">This should be automatically filled from Step 3</small>
-                    </div>
+                                        </div>
                     <button type="button" class="btn btn-primary w-100" onclick="doRetrieve()">
                         <i class="fas fa-download"></i> Retrieve Message
                     </button>
                     <div id="retrieved_output" class="feedback-message success hidden"></div>
                     <div id="retrieve_api_error" class="feedback-message error hidden"></div>
-                </div>
+                                    </div>
 
                 <!-- Step 5: Decrypt -->
                 <div class="controls-section">
@@ -720,17 +719,17 @@
                         <i class="fas fa-unlock"></i> Step 5: Decrypt Message
                     </h4>
                     <p class="text-white mb-3">Decrypt the retrieved message using the same password from Step 2.</p>
-                    <div class="mb-3">
+                                    <div class="mb-3">
                         <label for="dec_password" class="form-label">Decryption Password</label>
                         <input id="dec_password" type="password" class="form-control" placeholder="Enter the same password from Step 2">
                         <small class="form-text text-white">Must match the encryption password exactly</small>
-                    </div>
+                                    </div>
                     <button type="button" class="btn btn-primary w-100" onclick="doDecrypt()">
                         <i class="fas fa-unlock"></i> Decrypt Message
-                    </button>
+                                    </button>
                     <div id="decrypted_output" class="feedback-message success hidden"></div>
                     <div id="decrypt_api_error" class="feedback-message error hidden"></div>
-                </div>
+                    </div>
 
                 <!-- Step 6: Decode -->
                 <div class="controls-section">
@@ -748,16 +747,16 @@
                                 <option value="atbash">Atbash</option>
                                 <option value="substitution">Substitution</option>
                             </select>
-                        </div>
+                            </div>
                         <div class="col-md-6">
                             <label for="decode_key" class="form-label">Cipher Key</label>
                             <input id="decode_key" class="form-control" placeholder="Enter key">
                             <small id="decode_key_hint" class="form-text text-white">Use the same key from Step 1</small>
-                        </div>
-                    </div>
+                                        </div>
+                                    </div>
                     <button type="button" class="btn btn-primary w-100" onclick="doDecode()">
                         <i class="fas fa-key"></i> Decode Cipher
-                    </button>
+                                    </button>
                     <div id="decoded_output" class="feedback-message success hidden"></div>
                     <div id="decode_api_error" class="feedback-message error hidden"></div>
                 </div>
@@ -778,7 +777,6 @@
                 </div>
             </section>
 
-
         </div>
     </main>
 
@@ -791,8 +789,7 @@
                     Secure platform for encrypted communication and file transfer.
                 </p>
                 <div class="footer-links">
-                    <a href="/" class="footer-link">Home</a>
-                    <a href="/tools" class="footer-link">Tools</a>
+                    <a href="/" class="footer-link">Relay Station</a>
                     <a href="/classical" class="footer-link">Classical Ciphers</a>
                     <a href="/documentation" class="footer-link">Documentation</a>
                     <a href="/selftest" class="footer-link">Test</a>
