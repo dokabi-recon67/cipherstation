@@ -687,11 +687,22 @@
                         <i class="fas fa-shield-alt"></i> Step 2: Modern Encryption
                     </h4>
                     <p class="text-white mb-3">Secure your ciphered message using AES-256-GCM encryption with password-based key derivation.</p>
-                    <div class="mb-3">
-                        <label for="enc_password" class="form-label">Encryption Password</label>
-                        <input id="enc_password" type="password" class="form-control" placeholder="Enter a strong password">
-                        <small class="form-text text-white">This password will be needed to decrypt the message later</small>
-                            </div>
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <label for="enc_password" class="form-label">Encryption Password</label>
+                            <input id="enc_password" type="password" class="form-control" placeholder="Enter a strong password">
+                            <small class="form-text text-white">This password will be needed to decrypt the message later</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="enc_algorithm" class="form-label">Algorithm</label>
+                            <select id="enc_algorithm" class="form-select">
+                                <option value="aes256">AES-256-GCM (Recommended)</option>
+                                <option value="aes192">AES-192-GCM</option>
+                                <option value="aes128">AES-128-GCM</option>
+                                <option value="chacha20">ChaCha20-Poly1305</option>
+                            </select>
+                        </div>
+                    </div>
                     <button type="button" class="btn btn-primary w-100" onclick="doEncrypt()">
                         <i class="fas fa-shield-alt"></i> Encrypt Message
                                     </button>
@@ -824,12 +835,23 @@
                     <h4 class="mb-3">
                         <i class="fas fa-unlock"></i> Step 5: Decrypt Message
                     </h4>
-                    <p class="text-white mb-3">Decrypt the retrieved message using the same password from Step 2.</p>
-                                    <div class="mb-3">
-                        <label for="dec_password" class="form-label">Decryption Password</label>
-                        <input id="dec_password" type="password" class="form-control" placeholder="Enter the same password from Step 2">
-                        <small class="form-text text-white">Must match the encryption password exactly</small>
-                                    </div>
+                    <p class="text-white mb-3">Decrypt the retrieved message using the same password and algorithm from Step 2.</p>
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <label for="dec_password" class="form-label">Decryption Password</label>
+                            <input id="dec_password" type="password" class="form-control" placeholder="Enter the same password from Step 2">
+                            <small class="form-text text-white">Must match the encryption password exactly</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dec_algorithm" class="form-label">Algorithm</label>
+                            <select id="dec_algorithm" class="form-select">
+                                <option value="aes256">AES-256-GCM (Recommended)</option>
+                                <option value="aes192">AES-192-GCM</option>
+                                <option value="aes128">AES-128-GCM</option>
+                                <option value="chacha20">ChaCha20-Poly1305</option>
+                            </select>
+                        </div>
+                    </div>
                     <button type="button" class="btn btn-primary w-100" onclick="doDecrypt()">
                         <i class="fas fa-unlock"></i> Decrypt Message
                                     </button>
@@ -1192,6 +1214,7 @@
         // Store intermediate results
         let ciphertext = '';
         let encrypted = '';
+        let encryptedAlgorithm = 'aes256'; // Default algorithm
         let ticket = '';
         let retrieved = '';
         let retrieved_salt = '';
@@ -1326,13 +1349,14 @@
         async function doEncrypt() {
             showFeedback('encrypt_api_error', 'error', '', false);
             const password = document.getElementById('enc_password').value;
+            const algorithm = document.getElementById('enc_algorithm').value;
             
             if (!ciphertext || !password) {
                 showFeedback('encrypt_api_error', 'error', 'Please complete Step 1 first and provide a password');
                 return;
             }
             
-            let data = { text: ciphertext, password: password };
+            let data = { text: ciphertext, password: password, algorithm: algorithm };
             
             try {
                 const res = await fetch('/encrypt-message', {
@@ -1344,7 +1368,8 @@
                 
                 if (result.success && result.encrypted) {
                     encrypted = result.encrypted;
-                    showFeedback('encrypted_output', 'success', `Message encrypted successfully`);
+                    encryptedAlgorithm = algorithm; // Store algorithm for later use
+                    showFeedback('encrypted_output', 'success', `Message encrypted successfully using ${algorithm.toUpperCase()}`);
                 } else {
                     showFeedback('encrypt_api_error', 'error', `${result.error || 'Encryption failed'}`);
                 }
@@ -1357,13 +1382,14 @@
         async function doSendToStation() {
             showFeedback('send_api_error', 'error', '', false);
             const password = document.getElementById('enc_password').value;
+            const algorithm = document.getElementById('enc_algorithm').value;
             
             if (!ciphertext || !password) {
                 showFeedback('send_api_error', 'error', 'Please complete Steps 1 and 2 first');
                 return;
             }
             
-            let data = { text: ciphertext, password: password, send_to_station: true };
+            let data = { text: ciphertext, password: password, algorithm: algorithm, send_to_station: true };
             
             try {
                 const res = await fetch('/encrypt-message', {
@@ -1376,9 +1402,12 @@
                 if (result.success && result.ticket_id) {
                     ticket = result.ticket_id;
                     encrypted = result.encrypted; // Update encrypted with the result
+                    encryptedAlgorithm = algorithm; // Store algorithm for later use
                     showFeedback('ticket_output', 'info', `Message sent successfully! Ticket #: ${ticket}`);
                     // Auto-fill ticket number for step 4
                     document.getElementById('ticket_number').value = ticket;
+                    // Auto-fill algorithm for step 5
+                    document.getElementById('dec_algorithm').value = algorithm;
                     // Show station preview
                     showStationPreview(ticket);
                 } else {
@@ -1433,13 +1462,14 @@
         async function doDecrypt() {
             showFeedback('decrypt_api_error', 'error', '', false);
             const password = document.getElementById('dec_password').value;
+            const algorithm = document.getElementById('dec_algorithm').value;
             
             if (!retrieved || !password) {
                 showFeedback('decrypt_api_error', 'error', 'Please complete Step 4 first and provide the password');
                 return;
             }
             
-            let data = { encrypted_text: retrieved, password: password };
+            let data = { encrypted_text: retrieved, password: password, algorithm: algorithm };
             if (retrieved_salt) {
                 data.salt = retrieved_salt;
             }
@@ -1454,7 +1484,7 @@
                 
                 if (result.success && result.decrypted) {
                     decrypted = result.decrypted;
-                    showFeedback('decrypted_output', 'success', `Decrypted: ${decrypted}`);
+                    showFeedback('decrypted_output', 'success', `Decrypted using ${algorithm.toUpperCase()}: ${decrypted}`);
                 } else {
                     showFeedback('decrypt_api_error', 'error', `${result.error || 'Decryption failed'}`);
                 }
