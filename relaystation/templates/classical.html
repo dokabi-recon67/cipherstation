@@ -1021,9 +1021,6 @@
             const container = document.getElementById('results-container');
             const resultsSection = document.getElementById('results-section');
             
-            // Debug logging
-            console.log('displayResults called with:', results);
-            
             // Add custom words info if available
             let customWordsInfo = '';
             if (results.custom_words_used && results.custom_words_used > 0) {
@@ -1063,11 +1060,7 @@
             // Use analysis.best_results if available, otherwise fall back to results.results
             const bestResults = results.analysis && results.analysis.best_results ? results.analysis.best_results : results.results;
             
-            console.log('bestResults:', bestResults);
-            console.log('bestResults length:', bestResults ? bestResults.length : 'undefined');
-            
             if (!bestResults || bestResults.length === 0) {
-                console.log('No results found, showing warning');
                 container.innerHTML = customWordsInfo + crackTimeInfo + detectedCiphersInfo + `
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -1082,8 +1075,6 @@
             
             // Only show the top (best) result
             const topResult = bestResults[0];
-            console.log('Top result:', topResult);
-            
             const confidencePercent = Math.round(topResult.confidence * 100);
             const confidenceBar = '█'.repeat(Math.floor(confidencePercent / 5)) + '░'.repeat(20 - Math.floor(confidencePercent / 5));
             
@@ -1092,8 +1083,6 @@
             const key = topResult.key || topResult.key;
             const decodedText = topResult.decoded_text || topResult.decoded;
             const algorithm = topResult.algorithm || 'Advanced Analysis Algorithm';
-            
-            console.log('Displaying result:', { cipherType, key, decodedText, confidencePercent });
             
             html += `
                 <div class="result-item">
@@ -1114,7 +1103,6 @@
             `;
             container.innerHTML = html;
             resultsSection.style.display = 'block';
-            console.log('Results displayed successfully');
         }
 
         function updateAnalysis(analysis) {

@@ -196,6 +196,10 @@ def crack_vigenere_advanced(text: str, progress_callback=None, custom_words: Lis
             'IT', 'ME', 'MY', 'NO', 'OF', 'ON', 'OR', 'SO', 'TO', 'UP', 'US', 'WE'
         ]
         
+        # Initialize iteration tracking for short text dictionary attack
+        iteration_count = 0
+        iteration_cap = max_iterations if max_iterations is not None else 1000
+        
         # Add custom words if provided
         if custom_words:
             custom_words_normalized = list(set(word.upper().strip() for word in custom_words if word.strip()))
