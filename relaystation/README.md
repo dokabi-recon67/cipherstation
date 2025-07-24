@@ -41,7 +41,7 @@ This balance allows CipherStation to be both accessible and extensible, serving 
   - **24-Hour Auto-Cleanup**: Messages automatically deleted after 24 hours
   - **Privacy-First**: Only encrypted message previews shown, no plaintext exposure
   - **Click-to-Retrieve**: Select tickets directly from the public board
-  - **In-Memory Storage**: High-capacity message handling limited by available system memory
+  - **SQLite Database**: 100MB persistent storage supporting 15,000+ messages
 
 - **Command-Line Interface (CLI)**
   - Full-featured CLI for all cryptographic and classical operations
@@ -188,10 +188,11 @@ python cipherstationv0.py hybrid-decrypt --priv my.priv --infile hybrid.json --o
 ## API Endpoints
 
 ### Message Relay Station
-- `POST /encrypt-message` - Encrypt and optionally send to station
+- `POST /encrypt-message` - Encrypt and optionally send to station (SQLite storage)
 - `POST /decrypt-message` - Decrypt retrieved messages
-- `GET /api/station/messages` - Get all station messages (for message board)
-- `GET /api/station/ticket/<id>` - Retrieve specific message by ticket ID
+- `GET /api/station/messages` - Get all station messages from database (for message board)
+- `GET /api/station/ticket/<id>` - Retrieve specific message by ticket ID from database
+- `GET /api/station/stats` - Get database statistics (message count, size, capacity)
 
 ### Classical Ciphers
 - `POST /api/encode` - Encode text with classical cipher
@@ -232,12 +233,19 @@ cipherstation/
 - **No File System Access**: No file uploads, downloads, or arbitrary file operations
 - **XSS Protection**: All output properly escaped and sanitized
 - **No Code Execution**: No eval, exec, or command injection vulnerabilities
-- **Memory Management**: Automatic cleanup of expired messages (24-hour retention)
+   - **Database Management**: SQLite-based persistent storage with automatic cleanup (24-hour retention)
 - **Privacy-First**: Only encrypted message previews displayed, no plaintext exposure
 
 ---
 
 ## Recent Updates
+
+### SQLite Database Integration (Latest)
+- **Persistent Storage**: Replaced in-memory storage with 100MB SQLite database
+- **Increased Capacity**: Support for 15,000+ messages (vs ~1,000 in-memory)
+- **Server Restart Resilience**: Messages persist across server restarts
+- **Database Statistics**: New `/api/station/stats` endpoint for monitoring
+- **Optimized Performance**: Indexed queries for fast message retrieval
 
 ### Message Relay Station Enhancements
 - **Real Server Integration**: Message board now displays actual server messages instead of fake data
