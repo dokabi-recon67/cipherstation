@@ -41,7 +41,7 @@ This balance allows CipherStation to be both accessible and extensible, serving 
   - **24-Hour Auto-Cleanup**: Messages automatically deleted after 24 hours
   - **Privacy-First**: Only encrypted message previews shown, no plaintext exposure
   - **Click-to-Retrieve**: Select tickets directly from the public board
-  - **100,000 Message Capacity**: High-volume message handling
+  - **In-Memory Storage**: High-capacity message handling limited by available system memory
 
 - **Command-Line Interface (CLI)**
   - Full-featured CLI for all cryptographic and classical operations
