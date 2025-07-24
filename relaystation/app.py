@@ -408,7 +408,7 @@ class AdvancedCracker:
                         'message': f'XOR: {msg}'
                     })
                 
-                xor_results = crack_xor_advanced(text, progress_callback=xor_progress)
+                xor_results = crack_xor_advanced(text, progress_callback=xor_progress, web_mode=web_mode)
                 # Add cipher type to each result
                 for key, decoded, confidence in xor_results:
                     all_results.append(('xor', key, decoded, confidence))
@@ -425,7 +425,7 @@ class AdvancedCracker:
                         'message': f'Atbash: {msg}'
                     })
                 
-                atbash_results = crack_atbash_advanced(text, progress_callback=atbash_progress)
+                atbash_results = crack_atbash_advanced(text, progress_callback=atbash_progress, web_mode=web_mode)
                 # Add cipher type to each result
                 for key, decoded, confidence in atbash_results:
                     all_results.append(('atbash', key, decoded, confidence))

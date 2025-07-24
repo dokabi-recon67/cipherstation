@@ -238,10 +238,12 @@ def crack_vigenere_advanced(text: str, progress_callback=None, custom_words: Lis
     results.sort(key=lambda x: x[2], reverse=True)
     return results[:5]
 
-def crack_xor_advanced(text: str, progress_callback=None) -> List[Tuple[str, str, float]]:
-    """Advanced XOR cipher cracking with improved key detection"""
+def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False, max_iterations: int = None) -> List[Tuple[str, str, float]]:
+    """Advanced XOR cipher cracking with improved key detection and web_mode iteration cap handling"""
     results = []
     analyzer = Cryptanalyzer()
+    iteration_count = 0
+    iteration_cap = max_iterations if max_iterations is not None else 256
     
     # Try single-byte keys (0-255)
     for key_byte in range(256):
@@ -264,13 +266,29 @@ def crack_xor_advanced(text: str, progress_callback=None) -> List[Tuple[str, str
                 results.append((key_hex, decoded, confidence))
         except:
             continue
+        
+        iteration_count += 1
+        if iteration_cap is not None and iteration_count >= iteration_cap:
+            if web_mode:
+                if progress_callback:
+                    progress_callback(100, f"Iteration cap reached ({iteration_cap}). Returning partial results.")
+                break
+            else:
+                print(f"Iteration cap reached. Continue searching? (y/n/ya=always): ", end='', flush=True)
+                ans = input().strip().lower()
+                if ans == 'y':
+                    iteration_cap += 256
+                elif ans == 'ya':
+                    iteration_cap = None
+                else:
+                    break
     
     # Sort by confidence
     results.sort(key=lambda x: x[2], reverse=True)
     return results[:5]
 
-def crack_atbash_advanced(text: str, progress_callback=None) -> List[Tuple[str, str, float]]:
-    """Advanced Atbash cipher cracking with improved analysis"""
+def crack_atbash_advanced(text: str, progress_callback=None, web_mode: bool = False, max_iterations: int = None) -> List[Tuple[str, str, float]]:
+    """Advanced Atbash cipher cracking with improved analysis and web_mode compatibility"""
     if progress_callback:
         progress_callback(50, "Applying Atbash transformation...")
     
