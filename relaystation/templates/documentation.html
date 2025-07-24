@@ -576,6 +576,15 @@
                             format detection, and comprehensive self-tests.
                         </p>
                     </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="feature-title">Persistent SQL Storage</h3>
+                        <p class="feature-description">
+                            SQLite database for secure, persistent message storage in the relay station. Ensures message durability, efficient retrieval, and automatic cleanup.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -846,6 +855,10 @@ python cli_cracker.py --help
                         <span class="spec-label">Font</span>
                         <span class="spec-value">Inter (Google Fonts)</span>
                     </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Database</span>
+                        <span class="spec-value">SQLite (SQL-based, 100MB capacity, auto-cleanup)</span>
+                    </div>
                 </div>
             </div>
 
@@ -867,6 +880,7 @@ python cli_cracker.py --help
                     <li><strong>cli_cracker.py</strong> - Advanced CLI cipher cracking interface</li>
                     <li><strong>advanced_cryptanalysis.py</strong> - Advanced statistical analysis and genetic algorithms</li>
                     <li><strong>classical_ciphers.py</strong> - Classical cipher implementations</li>
+                    <li><strong>station_messages.db (SQLite)</strong> - SQL database for persistent relay station message storage</li>
                 </ul>
 
                 <h3 class="subsection-title">
@@ -934,6 +948,11 @@ python cli_cracker.py --help
                 <p>
                     The homepage features a comprehensive 6-step workflow for secure message relay, combining 
                     classical cipher encoding with modern encryption for maximum security and educational value.
+                </p>
+
+                <h4 class="feature-subtitle">Step Progression and Smooth Scrolling</h4>
+                <p>
+                    The web interface features automatic step progression. As users complete each step in the workflow, the next step is automatically highlighted and the page scrolls smoothly to center the active section. Completed steps are visually marked, and users are guided through the entire process without manual navigation. This enhancement improves usability and ensures a clear, guided workflow.
                 </p>
 
                 <div class="feature-grid">

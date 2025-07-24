@@ -2,127 +2,74 @@
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com/)
-
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)](https://github.com/saadiagha/cipherstation)
 
 Site Link: https://cipherstation.onrender.com/
 A comprehensive cryptography toolkit featuring both modern encryption systems and classical cipher analysis. Built as a single-file CLI tool with web interface support.
 
-🚧 CS50x Render Demo Disclaimer
-Note for CS50 Reviewers: This deployed version on Render is a test/demo instance for evaluation purposes. The Encrypt, Decrypt, and Message Relay Station (Dead Drop) features are fully functional.
+## Table of Contents
 
-Classical cipher cracking is also enabled but runs very slowly on Render due to the limitations of the free CPU tier (0.1 CPU).
+- Key Features
+- Modern Cryptography
+- Message Relay Station - Dead Drop
+- Classical Cipher Analysis
+- Web Interface
+- Command Line Interface (CLI)
+- Project Structure
+- Technical Specifications
+- Getting Started
+- Performance Benchmarks
+- Security Considerations
+- Support
 
-For a full-speed experience, especially for cracking and analysis, it's strongly recommended to clone the repository and run it locally, either via Flask web interface or preferably the CLI on a system like an M1 Mac. Benchmarks for local performance will also be attached for comparison.
+## Key Features
 
-
-## 📋 Table of Contents
-
-- [🌟 Key Features](#-key-features)
-- [🔐 Modern Cryptography](#-modern-cryptography)
-- [📩 Message Relay Station - Dead Drop](#message-relay-station-secure-encrypted-dead-drop)
-- [🎯 Classical Cipher Analysis](#-classical-cipher-analysis)
-- [🖥️ Web Interface](#️-web-interface)
-- [💻 Command Line Interface (CLI)](#-command-line-interface-cli)
-- [📁 Project Structure](#-project-structure)
-- [🔧 Technical Specifications](#-technical-specifications)
-- [🚀 Getting Started](#-getting-started)
-- [📈 Performance Benchmarks](#-performance-benchmarks)
-- [🔒 Security Considerations](#-security-considerations)
-- [📞 Support](#-support)
-
-## 🎓 For CS50x Reviewers
-
-- GitHub Repo: https://github.com/dokabi-recon67/cipherstation
-- Live Demo: https://cipherstation.onrender.com/
-- Demo Video: [link to be added]
-- Main Files:
-  - `cipherstationv0.py` (CLI Tool)
-  - `/relaystation/app.py` (Web Interface)
-- Classical cipher demo: `/relaystation/classical.html`
-
-
-## 🌟 Key Features
-
-### 🔐 Modern Cryptography
-- **AES-256-GCM**: Authenticated encryption with Galois/Counter Mode
-- **ChaCha20-Poly1305**: High-performance authenticated encryption
-- **Ed25519**: Digital signatures with elliptic curve cryptography
-- **X25519**: Elliptic curve Diffie-Hellman key exchange
-- **Argon2id**: Memory-hard password-based key derivation
-- **Hybrid Encryption**: X25519 + HKDF + AEAD for secure key exchange
-- **Audit Logging**: Hash-chained audit trail for security compliance
+### Modern Cryptography
+- AES-256-GCM: Authenticated encryption with Galois/Counter Mode
+- ChaCha20-Poly1305: High-performance authenticated encryption
+- Ed25519: Digital signatures with elliptic curve cryptography
+- X25519: Elliptic curve Diffie-Hellman key exchange
+- Argon2id: Memory-hard password-based key derivation
+- Hybrid Encryption: X25519 + HKDF + AEAD for secure key exchange
+- Audit Logging: Hash-chained audit trail for security compliance
 
 ### Message Relay Station: Secure Encrypted Dead Drop
 
-The CipherStation Message Relay Station features a comprehensive 6-step workflow for secure message relay. Users encode messages with classical ciphers, encrypt with modern algorithms, and upload to the station for ticket-based retrieval. The system includes a rotating public message board showing available messages (without content leaks), automatic 24-hour message deletion, and 100,000 message capacity. Recipients can browse the public board or enter specific ticket numbers to retrieve encrypted messages. This creates a realistic "dead drop" experience where messages are visible on a public board, but only those with the ticket number and decryption details can access the content. The system is designed for privacy, education, and security—perfect for learning cryptography concepts while maintaining practical security standards. 
+CipherStation's Message Relay Station features a comprehensive 6-step workflow for secure message relay. Users encode messages with classical ciphers, encrypt with modern algorithms, and upload to the station for ticket-based retrieval. The system includes a rotating public message board showing available messages (without content leaks), automatic 24-hour message deletion, and high message capacity. Recipients can browse the public board or enter specific ticket numbers to retrieve encrypted messages. Only those with the ticket number and decryption details can access the content. The system is designed for privacy, education, and security—ideal for learning cryptography concepts while maintaining practical security standards.
 
-### 🎯 Classical Cipher Analysis
-- **Caesar Cipher**: Shift-based encryption with brute force analysis
-- **Vigenère Cipher**: Keyword-based encryption with 500+ word dictionary attack
-- **XOR Cipher**: Alphabet-constrained XOR-style cipher using modular arithmetic (Vigenère-like) with support for both classical and ASCII XOR cracking
-- **Atbash Cipher**: Reverse alphabet transformation
-- **Substitution Cipher**: Custom character mapping with frequency analysis
+### Classical Cipher Analysis
+- Caesar Cipher: Shift-based encryption with brute force analysis
+- Vigenère Cipher: Keyword-based encryption with dictionary attack
+- XOR Cipher: Alphabet-constrained XOR-style cipher using modular arithmetic (Vigenère-like) with support for both classical and ASCII XOR cracking
+- Atbash Cipher: Reverse alphabet transformation
+- Substitution Cipher: Custom character mapping with frequency analysis
 
-### 🔧 XOR Cipher Implementation (Recently Improved)
-The XOR cipher has been completely rewritten to address fundamental mathematical issues:
+### Analysis
+- Multi-Dimensional Confidence Scoring: Advanced algorithms with optimized weights
+- Frequency Analysis: Chi-square statistics for letter distribution analysis
+- Pattern Recognition: Vowel-consonant patterns and double letter detection
+- Word Recognition: Expanded vocabulary with common English words
+- Bigram/Trigram Analysis: Common letter pair and triplet pattern recognition
+- Entropy Calculation: Information theory-based text normality assessment
 
-**Previous Issues Fixed:**
-- ❌ **Broken reversibility**: Original implementation used bitwise XOR with modulo 26, which destroyed information
-- ❌ **Non-printable output**: XOR results outside A-Z range produced control characters
-- ❌ **Round-trip failures**: Encode→Decode didn't return original text
-- ❌ **Poor cracking results**: Cracker couldn't find meaningful solutions
+### Enhanced Dictionary Attack
+- Military Terms, Intelligence Words, Technical Terms, Common Names, Fruit Names
+- Custom Word Lists: Support for user-defined word lists to enhance dictionary attacks
 
-**New Implementation:**
-- ✅ **Vigenère-style modular arithmetic**: Uses `(char + key) % 26` for encoding, `(char - key) % 26` for decoding
-- ✅ **Perfect reversibility**: All encode/decode operations work correctly
-- ✅ **Alphabet-constrained**: Output stays within A-Z range while maintaining security
-- ✅ **Dual XOR support**: Handles both alphabet-constrained and true ASCII XOR ciphers
-- ✅ **Enhanced cracking**: Successfully cracks both implementation types
-- ✅ **Space preservation**: Properly handles spaces and punctuation
+### Advanced Features
+- Interactive Menu: User-friendly CLI with progress bars
+- Format Detection: Automatic detection of encrypted data formats
+- Key Registry: Secure key management with fingerprinting
+- Directory Operations: Bulk encrypt/decrypt entire directories
+- Real-Time Progress: Visual progress tracking for all operations
+- JSON Envelopes: Structured encrypted data with metadata
 
-**Cracking Capabilities:**
-- **Common Keys**: Expanded dictionary with LEMON, ORANGE, APPLE, BANANA, CHERRY, etc.
-- **ASCII XOR**: Handles raw bitwise XOR on full ASCII character set
-- **Key Detection**: Automatically detects single-character and multi-character keys
-- **Success Rate**: 95% success rate with improved confidence scoring
+### CipherShare Knowledge Graph
+- Persistent Storage: JSON-backed database for storing cracked ciphers, pipelines, and tags
+- Community Integration: Integrated with both CLI and web UI for submitting and browsing cracked samples
+- Research Tool: Facilitates community sharing and research of cipher cracking pipelines and results
 
-**Test Results:**
-- ✅ All round-trip tests pass (9/9)
-- ✅ All cracking tests pass (4/4) 
-- ✅ Successfully cracks user examples: K(0x4B) and X(0x58) keys
-- ✅ Handles edge cases: empty strings, mixed content, punctuation
-
-### 🧠  Analysis
-- **Multi-Dimensional Confidence Scoring**: Advanced algorithms with optimized weights
-- **Frequency Analysis**: Chi-square statistics for letter distribution analysis
-- **Pattern Recognition**: Vowel-consonant patterns and double letter detection
-- **Word Recognition**: Expanded vocabulary with common English words
-- **Bigram/Trigram Analysis**: Common letter pair and triplet pattern recognition
-- **Entropy Calculation**: Information theory-based text normality assessment
-
-### 🎖️ Enhanced Dictionary Attack (500+ Words)
-- **Military Terms**: ATTACK, DEFEND, SECRET, MISSION, TARGET, ENEMY, AGENT, SPY
-- **Intelligence Words**: SURVEIL, RECON, PATROL, GUARD, ALERT, WARNING, DANGER
-- **Technical Terms**: ALGORITHM, FUNCTION, PROCEDURE, METHOD, ROUTINE, SCRIPT
-- **Common Names**: JOHN, MARY, JAMES, PATRICIA, ROBERT, JENNIFER, MICHAEL
-- **Fruit Names**: LEMON, ORANGE, APPLE, BANANA, GRAPE, CHERRY, PEACH
-- **Custom Word Lists**: Support for user-defined word lists to enhance dictionary attacks
-
-### 🚀 Advanced Features
-- **Interactive Menu**: User-friendly CLI with progress bars
-- **Format Detection**: Automatic detection of encrypted data formats
-- **Key Registry**: Secure key management with fingerprinting
-- **Directory Operations**: Bulk encrypt/decrypt entire directories
-- **Real-Time Progress**: Visual progress tracking for all operations
-- **JSON Envelopes**: Structured encrypted data with metadata
-
-### 🌟 CipherShare Knowledge Graph
-- **Persistent Storage**: JSON-backed database for storing cracked ciphers, pipelines, and tags. Located at `share/knowledge_graph.json`.
-- **Community Integration**: Integrated with both CLI and web UI for submitting and browsing cracked samples.
-- **Research Tool**: Facilitates community sharing and research of cipher cracking pipelines and results.
-
-## 🔐 Modern Cryptography
+## Modern Cryptography
 
 ### Symmetric Encryption
 ```bash
@@ -199,69 +146,30 @@ python cipherstationv0.py detect encrypted.json
 python cipherstationv0.py selftest
 ```
 
-## 🎯 Classical Cipher Analysis
-
-### Web Interface
-- **Modern Dark Theme**: Professional UI with animated header logo
-- **Real-Time Analysis**: Live progress tracking and result updates
-- **File Upload Support**: Upload TXT, CSV, Excel files for word lists
-- **Custom Word Lists**: Add your own words to enhance dictionary attacks
-
-### CLI Analysis
-```bash
-# Crack classical ciphers with AI-powered analysis
-python cli_cracker.py --text "Wklv lv d whvw phvvdjh."
-
-# Use custom word list for enhanced dictionary attack
-python cli_cracker.py --text "ZINCS PGVNU" --wordlist custom_words.txt
-
-# Interactive mode for real-time cracking
-python cli_cracker.py --interactive
-
-# Run benchmark tests
-python cli_cracker.py --benchmark
-```
-
-### Classical Cipher Commands
-```bash
-# Encode text with classical ciphers
-python cipherstationv0.py classical-encode --cipher caesar --text "HELLO WORLD" --shift 3
-python cipherstationv0.py classical-encode --cipher vigenere --text "HELLO WORLD" --key "SECRET"
-
-# Decode text with classical ciphers
-python cipherstationv0.py classical-decode --cipher caesar --text "KHOOR ZRUOG" --shift 3
-python cipherstationv0.py classical-decode --cipher vigenere --text "RIJVSUYVJN" --key "SECRET"
-
-# Crack unknown classical ciphers
-python cipherstationv0.py classical-crack "Wklv lv d whvw phvvdjh." --verbose
-
-# Run classical cipher self-tests
-python cipherstationv0.py classical-selftest
-```
-
-## 🖥️ Web Interface
+## Web Interface
 
 ### Features
-- **Modern Dark Theme**: Professional UI with animated header logo
-- **Responsive Design**: Optimized for desktop and mobile devices
-- **6-Step Relay Station Workflow**: Complete secure message relay system
-- **Rotating Public Message Board**: Real-time message updates with 24hr auto-deletion
-- **Classical Cipher Analysis**: Advanced cryptanalysis with real-time progress
-- **100k Message Capacity**: High-volume message handling with automatic cleanup
-- **Copy-to-Clipboard**: One-click result copying functionality
-- **Comprehensive Results**: Detailed analysis with confidence scoring
+- Modern dark theme with professional UI
+- Responsive design for desktop and mobile devices
+- 6-step relay station workflow with automatic step progression and smooth scrolling
+- Rotating public message board with 24-hour auto-deletion
+- Classical cipher analysis with real-time progress
+- High message capacity with automatic cleanup
+- Copy-to-clipboard functionality
+- Comprehensive results with confidence scoring
+
+### Step Progression and Smooth Scrolling
+The web interface now features automatic step progression. As users complete each step in the workflow, the next step is automatically highlighted and the page scrolls smoothly to center the active section. Completed steps are visually marked, and users are guided through the entire process without manual navigation. This enhancement improves usability and ensures a clear, guided workflow.
 
 ### Usage
 1. Start the web server: `cd relaystation && python app.py`
 2. Open browser to: `http://localhost:5001`
-3. **Homepage (Relay Station)**: 
-   - 6-step workflow: Encode → Encrypt → Send → Retrieve → Decrypt → Decode
-   - Public message board with rotating tickets
-   - Classical cipher encoding + modern encryption
-4. **Classical Ciphers**: Advanced cryptanalysis and cipher tools
-5. **Documentation**: Comprehensive guides and API reference
+3. Homepage (Relay Station): 6-step workflow: Encode → Encrypt → Send → Retrieve → Decrypt → Decode
+4. Public message board with rotating tickets
+5. Classical cipher encoding and modern encryption
+6. Documentation: Comprehensive guides and API reference
 
-## 💻 Command Line Interface (CLI)
+## Command Line Interface (CLI)
 
 ### Interactive Menu
 ```bash
@@ -348,7 +256,7 @@ python cipherstationv0.py detect file.bin
 python cipherstationv0.py selftest
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 cipherstation/
@@ -356,10 +264,10 @@ cipherstation/
 ├── classical_ciphers.py      # Classical cipher implementation
 ├── cli_cracker.py           # Classical cipher CLI interface
 ├── requirements.txt         # Python dependencies
-├── README.md               # This file
-├── LICENSE                 # MIT License
-├── key_registry.json       # Key registry (auto-generated)
-├── audit.log              # Audit trail (auto-generated)
+├── README.md                # This file
+├── LICENSE                  # MIT License
+├── key_registry.json        # Key registry (auto-generated)
+├── audit.log                # Audit trail (auto-generated)
 └── relaystation/            # Web interface
     ├── app.py              # Flask web application
     ├── templates/          # HTML templates
@@ -374,40 +282,44 @@ cipherstation/
 │   └── knowledge_graph.json   # Persistent CipherShare knowledge graph
 ```
 
-## 🔧 Technical Specifications
+## Technical Specifications
 
 ### System Requirements
-- **Python**: 3.9 or higher
-- **Dependencies**: See requirements.txt for full list
+- Python: 3.9 or higher
+- Dependencies: See requirements.txt for full list
 
 ### Core Dependencies
-- **cryptography**: Modern cryptographic primitives
-- **typer**: CLI framework
-- **rich**: Terminal formatting and progress bars
-- **argon2-cffi**: Password-based key derivation
-- **flask**: Web framework (for web interface)
+- cryptography: Modern cryptographic primitives
+- typer: CLI framework
+- rich: Terminal formatting and progress bars
+- argon2-cffi: Password-based key derivation
+- flask: Web framework (for web interface)
+- sqlite3: SQL database for persistent message storage
 
 ### Architecture
-- **Single-File CLI**: Complete cryptography toolkit in one file
-- **Modular Design**: Separate modules for classical ciphers
-- **Web Interface**: Flask-based web application
-- **Audit System**: Hash-chained audit trail
-- **Key Management**: Secure key registry with fingerprinting
+- Single-file CLI: Complete cryptography toolkit in one file
+- Modular Design: Separate modules for classical ciphers
+- Web Interface: Flask-based web application
+- Audit System: Hash-chained audit trail
+- Key Management: Secure key registry with fingerprinting
+- SQLite Database: Persistent storage for message relay station
 
 ### Security Features
-- **AEAD Encryption**: Authenticated encryption with associated data
-- **Memory-Hard KDF**: Argon2id for password derivation
-- **Elliptic Curve**: Ed25519 signatures, X25519 key exchange
-- **Hybrid Encryption**: Asymmetric + symmetric encryption
-- **Audit Logging**: Tamper-evident audit trail
-- **Format Detection**: Automatic encrypted data recognition
+- AEAD Encryption: Authenticated encryption with associated data
+- Memory-Hard KDF: Argon2id for password derivation
+- Elliptic Curve: Ed25519 signatures, X25519 key exchange
+- Hybrid Encryption: Asymmetric + symmetric encryption
+- Audit Logging: Tamper-evident audit trail
+- Format Detection: Automatic encrypted data recognition
+- Input Validation: All user input is sanitized and validated
+- SQLite Database: Used for persistent storage with proper input handling
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- **Python**: 3.9 or higher
-- **pip**: Python package installer
-- **Git**: For cloning the repository
+- Python: 3.9 or higher
+- pip: Python package installer
+- Git: For cloning the repository
 
 ### Installation
 
@@ -478,7 +390,7 @@ cd relaystation && python app.py
 python cipherstationv0.py menu
 ```
 
-## 📈 Performance Benchmarks
+## Performance Benchmarks
 
 ### Modern Cryptography
 - **AES-256-GCM**: ~100MB/s encryption/decryption
@@ -501,26 +413,26 @@ python cipherstationv0.py menu
 - **Message Capacity**: 100MB SQLite database supporting 15,000+ messages with 24hr auto-cleanup
 - **Scalability**: Handles high-volume message relay efficiently
 
-## 🔒 Security Considerations
+## Security Considerations
 
 ### Modern Cryptography
-- **AEAD Encryption**: Provides both confidentiality and authenticity
-- **Memory-Hard KDF**: Resistant to hardware attacks
-- **Elliptic Curve**: Uses well-vetted curves (Ed25519, X25519)
-- **Hybrid Encryption**: Combines asymmetric and symmetric encryption
-- **Audit Logging**: Tamper-evident audit trail
+- AEAD Encryption: Provides both confidentiality and authenticity
+- Memory-Hard KDF: Resistant to hardware attacks
+- Elliptic Curve: Uses well-vetted curves (Ed25519, X25519)
+- Hybrid Encryption: Combines asymmetric and symmetric encryption
+- Audit Logging: Tamper-evident audit trail
 
 ### Classical Ciphers
-- **Educational Purpose**: Designed for learning and research
-- **Historical Analysis**: Understanding classical cryptanalysis
-- **Not for Security**: Classical ciphers are not cryptographically secure
+- Educational Purpose: Designed for learning and research
+- Historical Analysis: Understanding classical cryptanalysis
+- Not for Security: Classical ciphers are not cryptographically secure
 
 ### Ethical Use
-- **Authorized Testing**: Only test systems you own or have permission to test
-- **Legal Compliance**: Ensure compliance with local laws and regulations
-- **Educational Tool**: Primarily intended for educational and research purposes
+- Authorized Testing: Only test systems you own or have permission to test
+- Legal Compliance: Ensure compliance with local laws and regulations
+- Educational Tool: Primarily intended for educational and research purposes
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -554,8 +466,7 @@ Warning: Classical ciphers module not found
 - Close other applications to free up system resources
 - Use appropriate Argon2id parameters for your hardware
 
-
-## 📋 Changelog
+## Changelog
 
 ### v0.1.0 (Current)
 - ✨ Initial release with comprehensive cryptography toolkit
@@ -574,40 +485,63 @@ Warning: Classical ciphers module not found
 - 🛠️ **Enhanced Key Detection**: Added LEMON, ORANGE, APPLE, BANANA, CHERRY and other common keys
 - 🔄 **Perfect Reversibility**: All XOR encode/decode operations now work correctly with proper space handling
 
-## 📄 License
+## License
+This project is made by Saadi Agha as a CS50x final project with the help of Cursor and ChatGPT. All rights reserved.
 
-This project is made by Saadi Agha as a CS50x final project with the help of Cursor and ChatGPT 4o and o3.
+## Acknowledgments
+- Cryptography Community: For inspiration and educational resources
+- Open Source Projects: For various libraries and tools used
+- Research Community: For academic papers and cryptographic research
+- CS50: For the educational foundation and introduction to Flask
 
-## 🙏 Acknowledgments
+## Support
+- Documentation: Check the /documentation page in the web interface
+- Issues: Report bugs or request features via GitHub Issues
+- Discussions: Use GitHub Discussions for questions and ideas
+- Wiki: Check the project wiki for additional resources
 
-- **Cryptography Community**: For inspiration and educational resources
-- **Open Source Projects**: For various libraries and tools used
-- **Research Community**: For academic papers and cryptographic research
-- **CS50**: For the educational foundation and introduction to flask.
-
-## 📞 Support
-
-### Getting Help
-- **Documentation**: Check the `/documentation` page in the web interface
-- **Issues**: Report bugs or request features via GitHub Issues
-- **Discussions**: Use GitHub Discussions for questions and ideas
-- **Wiki**: Check the project wiki for additional resources
-
-### Resources
-- **Examples**: Sample usage examples in the documentation
-- **Testing**: Built-in benchmark and testing capabilities
-- **API Reference**: Comprehensive API documentation
-- **Tutorials**: Step-by-step guides for common use cases
-
-### Community
-- **GitHub**: https://github.com/dokabi-recon67/cipherstation/
-
-## ⭐ Star This Project
-
-If you find this project useful, please consider giving it a star on GitHub! It helps us reach more people and continue development.
-
-**CipherStation v0** - The most comprehensive cryptography toolkit ever created. 🚀🔐
+## Community
+- GitHub: https://github.com/dokabi-recon67/cipherstation/
 
 ---
 
-*Built by Saadi Agha as a CS50x final project for the cryptography community* 
+Built by Saadi Agha as a CS50x final project for the cryptography community.
+
+## Secure Dead Drop
+
+CipherStation features a secure dead drop system for encrypted message exchange. This system allows users to upload encrypted messages to a public message board, where they are visible only as ciphertext. Each message is associated with a unique ticket number. Only users with the correct ticket and decryption credentials can retrieve and decrypt the message. Messages are automatically deleted after 24 hours, ensuring privacy and minimizing data retention. The dead drop is implemented using a persistent SQLite database, providing durability and resilience across server restarts. This approach enables real-world secure communication and is suitable for privacy-focused, time-limited message exchange scenarios.
+
+**Key properties:**
+- Public message board displays only encrypted content (no plaintext exposure)
+- Ticket-based retrieval: only those with the ticket and decryption details can access the message
+- Automatic 24-hour message expiration and cleanup
+- High message capacity and efficient retrieval
+- No user registration or persistent identity required
+
+## Summary of Innovations
+
+CipherStation is not merely an implementation of existing algorithms, but a sophisticated cryptographic research platform with significant novel contributions. For a full technical and academic analysis, see the file `CRYPTOGRAPHIC_ANALYSIS.md` in this repository.
+
+**Major Custom Algorithms and Innovations:**
+
+- **Hybrid XOR Cipher:** Alphabet-constrained modular arithmetic variant combining XOR and Vigenère principles for perfect reversibility and readable output.
+- **Multi-dimensional Cryptanalysis Engine:** Advanced statistical analysis using multiple metrics for higher accuracy cipher detection and confidence scoring.
+- **Automatic Hex Input Processing:** Multi-format hex detection and seamless conversion, enabling direct analysis of hex dumps for XOR ciphers.
+- **Real-time Web Cryptanalysis:** Progressive analysis with live updates, resource management, and enterprise-grade concurrency control in the web interface.
+- **Dead Drop Message System:** Secure, time-limited encrypted message exchange using SQLite storage, providing a real-world secure communication tool.
+
+**Enhanced Standard Algorithms:**
+- Advanced Vigenère analysis (Kasiski, Index of Coincidence, dictionary attacks)
+- Statistical cipher detection (multi-cipher probabilistic identification)
+- Confidence scoring system (mathematical confidence rating for all results)
+- Multi-threaded processing (parallel cipher cracking)
+- Dictionary attack engine (hierarchical word prioritization)
+
+**Research and Academic Value:**
+- Novel hybrid cipher design bridging classical and modern approaches
+- Multi-modal input processing for binary and text-based ciphers
+- Real-time cryptanalysis architecture for web-based progressive analysis
+- Comprehensive statistical framework outperforming traditional single-metric approaches
+- Secure communication innovation with cryptographic dead drop
+
+For a detailed breakdown of these innovations, including mathematical proofs, implementation details, and academic context, please read `CRYPTOGRAPHIC_ANALYSIS.md`.

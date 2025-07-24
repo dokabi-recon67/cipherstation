@@ -7,15 +7,14 @@ CipherStation is a professional-grade platform for classical cipher analysis, mo
 
 ---
 
-## Lightweight Test Implementation Notice
-
-CipherStation is designed as a lightweight, efficient test implementation for educational and practical use. It is optimized to easily crack small and moderate-sized ciphers with minimal compute power, making it ideal for quick analysis, demonstrations, and resource-constrained environments.
-
-- **Performance Tradeoff:** To ensure fast response and avoid excessive CPU usage, the default configuration uses limited key lengths and a moderate dictionary size for attacks.
-- **Scalability:** For advanced users running CipherStation privately on a high-performance machine, the system can be extended to support larger keyspaces, longer keys, and exhaustive dictionary attacks for more robust cryptanalysis.
-- **Customization:** You may increase dictionary size, key length, and brute-force depth in the code to tackle more complex or industrial-strength ciphers, at the cost of higher compute requirements.
-
-This balance allows CipherStation to be both accessible and extensible, serving as a practical tool for most classical ciphers while remaining adaptable for more demanding research or forensic applications.
+## Technical Stack
+- Python 3.9+
+- Flask 2.3+
+- cryptography
+- argon2-cffi
+- SQLite (persistent message storage)
+- Bootstrap 5 (web UI)
+- HTML5, CSS3, JavaScript
 
 ---
 
@@ -31,7 +30,7 @@ This balance allows CipherStation to be both accessible and extensible, serving 
   - AES-128/192/256-GCM, ChaCha20-Poly1305
   - Password-based key derivation (Argon2id)
   - Text and file encryption/decryption (web & CLI)
-  - No file storage: all processing is in-memory and temporary
+  - All processing is in-memory and temporary except for relay station messages
 
 - **Enhanced Message Relay Station**
   - **6-Step Secure Workflow**: Cipher → Encrypt → Send → Retrieve → Decrypt → Decode
@@ -40,8 +39,7 @@ This balance allows CipherStation to be both accessible and extensible, serving 
   - **Auto-Rotation**: Message board updates every 30 seconds with newest messages
   - **24-Hour Auto-Cleanup**: Messages automatically deleted after 24 hours
   - **Privacy-First**: Only encrypted message previews shown, no plaintext exposure
-  - **Click-to-Retrieve**: Select tickets directly from the public board
-  - **SQLite Database**: 100MB persistent storage supporting 15,000+ messages
+  - **SQLite Database**: 100MB persistent storage supporting high message capacity
 
 - **Command-Line Interface (CLI)**
   - Full-featured CLI for all cryptographic and classical operations
@@ -54,9 +52,9 @@ This balance allows CipherStation to be both accessible and extensible, serving 
   - Live progress bars, queue system, and real-time analysis stats
   - Input sanitization and XSS protection
   - Animated logo with encryption/decryption simulation
+  - **Automatic Step Progression**: As each step is completed, the next is highlighted and the page scrolls smoothly to the active section, providing a guided workflow.
 
 - **Security & Performance**
-  - No SQL/database usage (no SQL injection risk)
   - All user input sanitized and validated
   - Rate limiting (10 requests/minute/IP per endpoint)
   - Input size limits (10,000 characters max)
@@ -64,6 +62,8 @@ This balance allows CipherStation to be both accessible and extensible, serving 
   - No file uploads or arbitrary file access
   - No command injection, eval, or exec
   - No sensitive data exposure
+  - **Database Management**: SQLite-based persistent storage with automatic cleanup (24-hour retention)
+  - Only encrypted message previews displayed, no plaintext exposure
 
 - **Comprehensive Self-Test & Health Check**
   - Built-in self-test page (`/selftest`) for cryptographic verification
@@ -76,7 +76,7 @@ This balance allows CipherStation to be both accessible and extensible, serving 
 
 ## Web UI Usage
 
-### 1. **Message Relay Station (Homepage)**
+### 1. Message Relay Station (Homepage)
 Complete 6-step secure messaging workflow:
 
 1. **Step 1: Apply Cipher** - Transform plaintext using classical cryptography (Caesar, Vigenère, XOR, Atbash, Substitution)
@@ -93,20 +93,23 @@ Complete 6-step secure messaging workflow:
 - Shows "X min ago" timestamps for each message
 - Messages persist across page refreshes until 24-hour cleanup
 
-### 2. **Classical Cipher Cracking**
+**Step Progression and Smooth Scrolling:**
+- The web interface features automatic step progression. As users complete each step, the next step is highlighted and the page scrolls smoothly to the active section. Completed steps are visually marked, and users are guided through the entire process without manual navigation.
+
+### 2. Classical Cipher Cracking
    - Go to `/classical`
    - Enter encrypted text, optionally add custom words
    - Configure advanced options (time limits, cipher selection, key lengths)
    - Click "Crack Cipher" to start analysis with real-time progress
    - View confidence-ranked results with detailed analysis
 
-### 3. **Self-Test & Diagnostics**
+### 3. Self-Test & Diagnostics
    - Go to `/selftest` to verify all system components
    - Run comprehensive tests covering cryptography, APIs, and web interface
    - View real-time progress and detailed results
    - Verify system health and troubleshoot issues
 
-### 4. **Documentation**
+### 4. Documentation
    - Go to `/documentation` for complete usage guides
    - API documentation and examples
    - Security best practices and implementation details
@@ -212,7 +215,7 @@ cipherstation/
 ├── classical_ciphers.py      # Classical cipher implementation
 ├── cli_cracker.py            # Advanced classical cipher CLI interface
 ├── requirements.txt          # Python dependencies
-├── README.md                 # This file
+├── README.md                 # Main project documentation
 └── relaystation/             # Web interface
     ├── app.py                # Flask web application
     ├── templates/            # HTML templates
@@ -226,39 +229,39 @@ cipherstation/
 ---
 
 ## Security Summary
-- **No Database Dependencies**: All data stored in memory, no SQL injection risks
-- **Input Validation**: All user input sanitized and size-limited (10,000 chars max)
-- **Rate Limiting**: 10 requests/minute/IP per endpoint to prevent abuse
-- **Queue Management**: Max 3 concurrent heavy operations, others queued with position display
-- **No File System Access**: No file uploads, downloads, or arbitrary file operations
-- **XSS Protection**: All output properly escaped and sanitized
-- **No Code Execution**: No eval, exec, or command injection vulnerabilities
-   - **Database Management**: SQLite-based persistent storage with automatic cleanup (24-hour retention)
-- **Privacy-First**: Only encrypted message previews displayed, no plaintext exposure
+- All data stored in SQLite database for relay station messages (no SQL injection risk with parameterized queries)
+- All user input sanitized and size-limited (10,000 chars max)
+- Rate limiting: 10 requests/minute/IP per endpoint to prevent abuse
+- Queue management: Max 3 concurrent heavy operations, others queued with position display
+- No file system access for uploads or arbitrary file operations
+- XSS protection: All output properly escaped and sanitized
+- No code execution: No eval, exec, or command injection vulnerabilities
+- Database management: SQLite-based persistent storage with automatic cleanup (24-hour retention)
+- Privacy-first: Only encrypted message previews displayed, no plaintext exposure
 
 ---
 
 ## Recent Updates
 
 ### SQLite Database Integration (Latest)
-- **Persistent Storage**: Replaced in-memory storage with 100MB SQLite database
-- **Increased Capacity**: Support for 15,000+ messages (vs ~1,000 in-memory)
-- **Server Restart Resilience**: Messages persist across server restarts
-- **Database Statistics**: New `/api/station/stats` endpoint for monitoring
-- **Optimized Performance**: Indexed queries for fast message retrieval
+- Persistent Storage: Uses 100MB SQLite database for message relay station
+- Increased Capacity: Supports high message volume
+- Server Restart Resilience: Messages persist across server restarts
+- Database Statistics: `/api/station/stats` endpoint for monitoring
+- Optimized Performance: Indexed queries for fast message retrieval
 
 ### Message Relay Station Enhancements
-- **Real Server Integration**: Message board now displays actual server messages instead of fake data
-- **Live Updates**: Auto-refreshes every 30 seconds with current server state
-- **Improved UX**: Better loading states, error handling, and visual feedback
-- **Text Visibility**: Fixed all status text to be properly visible on dark background
-- **Debugging Tools**: Added console logging for troubleshooting ticket retrieval issues
+- Real Server Integration: Message board displays actual server messages
+- Live Updates: Auto-refreshes every 30 seconds with current server state
+- Improved UX: Better loading states, error handling, and visual feedback
+- Debugging Tools: Added console logging for troubleshooting ticket retrieval issues
 
 ### System Improvements
-- **Comprehensive Self-Test**: 24 automated tests covering all system components
-- **Enhanced Documentation**: Updated to reflect all current features and workflows
-- **Performance Optimization**: Improved response times and resource usage
-- **Error Handling**: Better error messages and user feedback throughout the system
+- Comprehensive Self-Test: 24 automated tests covering all system components
+- Enhanced Documentation: Updated to reflect all current features and workflows
+- Performance Optimization: Improved response times and resource usage
+- Error Handling: Better error messages and user feedback throughout the system
+- Step Progression: Automatic highlighting and smooth scrolling for each workflow step
 
 ---
 
@@ -267,9 +270,9 @@ cipherstation/
 **Project by:**
 - Saadi Agha (Advocate High Court)
 - Cursor AI Assistant
-- ChatGPT 4o and o3 Models
+- ChatGPT Models
 
-All code, design, and implementation by the above. No MIT or open-source license applies. All rights reserved.
+All code, design, and implementation by the above. All rights reserved.
 
 ---
 
