@@ -1042,23 +1042,43 @@
                 `;
             }
             
-            // Add detected ciphers info if available
+            // Add detected ciphers info - prioritize actual cracking results
             let detectedCiphersInfo = '';
-            if (results.detected_ciphers && results.detected_ciphers.length > 0) {
+            
+            // Use analysis.best_results if available, otherwise fall back to results.results
+            const bestResults = results.analysis && results.analysis.best_results ? results.analysis.best_results : results.results;
+            
+            if (bestResults && bestResults.length > 0) {
+                // Show actual cracking results (top 3 with confidence > 0.1)
+                const significantResults = bestResults.filter(r => r.confidence > 0.1).slice(0, 3);
+                if (significantResults.length > 0) {
+                    const detectedList = significantResults.map(result => {
+                        const confidencePercent = Math.round(result.confidence * 100);
+                        const cipherType = result.cipher_type || result.cipher;
+                        return `<span class="badge bg-purple" style="margin-right: 0.5rem;">${cipherType.toUpperCase()} (${confidencePercent}%)</span>`;
+                    }).join('');
+                    detectedCiphersInfo = `
+                        <div class="alert alert-purple" style="margin-bottom: 1rem; background: rgba(128, 0, 128, 0.1); border-color: var(--purple);">
+                            <i class="fas fa-search"></i>
+                            <strong>Successful Cracks Found:</strong> ${detectedList}
+                        </div>
+                    `;
+                }
+            }
+            
+            // Fallback to initial analysis detection if no significant results
+            if (!detectedCiphersInfo && results.detected_ciphers && results.detected_ciphers.length > 0) {
                 const detectedList = results.detected_ciphers.map(detection => {
                     const confidencePercent = Math.round(detection[1] * 100);
-                    return `<span class="badge bg-purple" style="margin-right: 0.5rem;">${detection[0].toUpperCase()} (${confidencePercent}%)</span>`;
+                    return `<span class="badge bg-secondary" style="margin-right: 0.5rem;">${detection[0].toUpperCase()} (${confidencePercent}%)</span>`;
                 }).join('');
                 detectedCiphersInfo = `
-                    <div class="alert alert-purple" style="margin-bottom: 1rem; background: rgba(128, 0, 128, 0.1); border-color: var(--purple);">
+                    <div class="alert alert-secondary" style="margin-bottom: 1rem; background: rgba(108, 117, 125, 0.1); border-color: #6c757d;">
                         <i class="fas fa-search"></i>
                         <strong>Auto-Detected Ciphers:</strong> ${detectedList}
                     </div>
                 `;
             }
-            
-            // Use analysis.best_results if available, otherwise fall back to results.results
-            const bestResults = results.analysis && results.analysis.best_results ? results.analysis.best_results : results.results;
             
             if (!bestResults || bestResults.length === 0) {
                 container.innerHTML = customWordsInfo + crackTimeInfo + detectedCiphersInfo + `
