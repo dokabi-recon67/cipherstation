@@ -1363,7 +1363,10 @@ def encode_text(text: str, cipher_type: str, **kwargs) -> str:
     cipher_type = cipher_type.lower()
     
     if cipher_type == 'caesar':
-        shift = kwargs.get('shift', 3)
+        # Support both 'shift' and 'key' parameters for Caesar cipher
+        shift = kwargs.get('shift') or kwargs.get('key', 3)
+        if isinstance(shift, str):
+            shift = int(shift)
         cipher = CaesarCipher()
         return cipher.encode(text, shift)
     
@@ -1400,7 +1403,10 @@ def decode_text(text: str, cipher_type: str, **kwargs) -> str:
     cipher_type = cipher_type.lower()
     
     if cipher_type == 'caesar':
-        shift = kwargs.get('shift', 3)
+        # Support both 'shift' and 'key' parameters for Caesar cipher
+        shift = kwargs.get('shift') or kwargs.get('key', 3)
+        if isinstance(shift, str):
+            shift = int(shift)
         cipher = CaesarCipher()
         return cipher.decode(text, shift)
     
