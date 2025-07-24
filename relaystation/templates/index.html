@@ -775,12 +775,12 @@
                     <div class="public-board mb-4">
                         <h6 class="text-white mb-2">
                             <i class="fas fa-broadcast-tower"></i> Public Message Board
-                            <small class="text-muted">(Click any ticket to retrieve)</small>
+                            <small class="text-white">(Click any ticket to retrieve)</small>
                         </h6>
                         <div class="message-board" id="public_message_board">
                             <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <span class="text-muted">
+                                    <span class="text-white">
                                         <i class="fas fa-spinner fa-spin"></i> Loading messages...
                                     </span>
                                 </div>
@@ -968,7 +968,7 @@
                         messageBoard.innerHTML = `
                             <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <span class="text-muted">
+                                    <span class="text-white">
                                         <i class="fas fa-inbox"></i> No messages available
                                     </span>
                                 </div>
@@ -981,7 +981,7 @@
                     messageBoard.innerHTML = `
                         <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
                             <div class="d-flex justify-content-center align-items-center">
-                                <span class="text-muted">
+                                <span class="text-white">
                                     <i class="fas fa-exclamation-triangle"></i> Error loading messages
                                 </span>
                             </div>
@@ -994,7 +994,7 @@
                 messageBoard.innerHTML = `
                     <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
                         <div class="d-flex justify-content-center align-items-center">
-                            <span class="text-muted">
+                            <span class="text-white">
                                 <i class="fas fa-wifi"></i> Connection error
                             </span>
                         </div>
