@@ -243,29 +243,46 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
     results = []
     analyzer = Cryptanalyzer()
     iteration_count = 0
-    iteration_cap = max_iterations if max_iterations is not None else 256
+    iteration_cap = max_iterations if max_iterations is not None else 1000
     
-    # Try single-byte keys (0-255)
-    for key_byte in range(256):
+    # Common XOR keys to try (single characters and common words)
+    common_keys = [
+        # Single byte keys (most common ASCII characters)
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        
+        # Common multi-character keys
+        'KEY', 'XOR', 'SECRET', 'PASSWORD', 'CIPHER', 'CODE', 'HELLO', 'WORLD', 'TEST', 'ADMIN',
+        'key', 'xor', 'secret', 'password', 'cipher', 'code', 'hello', 'world', 'test', 'admin',
+        'THE', 'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'ALL', 'CAN', 'HER',
+        'ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQR', 'STU', 'VWX', 'YZ'
+    ]
+    
+    # Also try some numeric keys as single bytes
+    for i in range(256):
+        if iteration_count >= iteration_cap:
+            break
+        
         if progress_callback:
-            progress_callback(key_byte / 256 * 100, f"Testing key 0x{key_byte:02X}...")
+            progress_callback(iteration_count / iteration_cap * 100, f"Testing byte key 0x{i:02X}...")
         
         try:
-            # Decode with current key
+            # Decode with current single-byte key
             decoded = ""
             for char in text:
-                decoded_char = chr(ord(char) ^ key_byte)
+                decoded_char = chr(ord(char) ^ i)
                 decoded += decoded_char
             
             # Calculate confidence
             confidence = analyzer._calculate_confidence(decoded)
             
             # Only keep results with reasonable confidence
-            if confidence > 0.2:
-                key_hex = f"0x{key_byte:02X}"
+            if confidence > 0.15:
+                key_hex = f"0x{i:02X} ('{chr(i) if 32 <= i <= 126 else '?'}')"
                 results.append((key_hex, decoded, confidence))
         except:
-            continue
+            pass
         
         iteration_count += 1
         if iteration_cap is not None and iteration_count >= iteration_cap:
@@ -277,11 +294,51 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
                 print(f"Iteration cap reached. Continue searching? (y/n/ya=always): ", end='', flush=True)
                 ans = input().strip().lower()
                 if ans == 'y':
-                    iteration_cap += 256
+                    iteration_cap += 1000
                 elif ans == 'ya':
                     iteration_cap = None
                 else:
                     break
+    
+    # Try multi-character keys
+    for key_str in common_keys:
+        if iteration_count >= iteration_cap:
+            if web_mode:
+                if progress_callback:
+                    progress_callback(100, f"Iteration cap reached ({iteration_cap}). Returning partial results.")
+                break
+            else:
+                print(f"Iteration cap reached. Continue searching? (y/n/ya=always): ", end='', flush=True)
+                ans = input().strip().lower()
+                if ans == 'y':
+                    iteration_cap += 1000
+                elif ans == 'ya':
+                    iteration_cap = None
+                else:
+                    break
+        
+        if progress_callback:
+            progress_callback(iteration_count / iteration_cap * 100, f"Testing key '{key_str}'...")
+        
+        try:
+            # Decode with current multi-character key
+            decoded = ""
+            key_bytes = [ord(c) for c in key_str]
+            for i, char in enumerate(text):
+                key_byte = key_bytes[i % len(key_bytes)]
+                decoded_char = chr(ord(char) ^ key_byte)
+                decoded += decoded_char
+            
+            # Calculate confidence
+            confidence = analyzer._calculate_confidence(decoded)
+            
+            # Only keep results with reasonable confidence
+            if confidence > 0.15:
+                results.append((f"'{key_str}'", decoded, confidence))
+        except:
+            pass
+        
+        iteration_count += 1
     
     # Sort by confidence
     results.sort(key=lambda x: x[2], reverse=True)
