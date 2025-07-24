@@ -260,9 +260,9 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
         
         # Common multi-character keys (prioritize most common)
         'KEY', 'XOR', 'SECRET', 'PASSWORD', 'CIPHER', 'CODE', 'HELLO', 'WORLD', 'TEST', 'ADMIN',
-        'MESSAGE', 'ENCRYPT', 'DECRYPT', 'ATTACK', 'DEFEND', 'AGENT', 'SPY',
-        'THE', 'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'ALL', 'CAN', 'HER',
-        'ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQR', 'STU', 'VWX', 'YZ'
+        'MESSAGE', 'ENCRYPT', 'DECRYPT', 'ATTACK', 'DEFEND', 'AGENT', 'SPY', 'LEMON', 'ORANGE',
+        'THE', 'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'ALL', 'CAN', 'HER', 'APPLE', 'FRUIT',
+        'ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQR', 'STU', 'VWX', 'YZ', 'BANANA', 'CHERRY'
     ]
     
     # Try all common keys
@@ -325,23 +325,25 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
                 # ASCII-based XOR (for compatibility with other XOR implementations)
                 decoded = ""
                 for char in text:
-                    if char.isalpha():
-                        decoded_char = chr(ord(char) ^ i)
-                        # Only keep if result is printable
-                        if 32 <= ord(decoded_char) <= 126:
-                            decoded += decoded_char
-                        else:
-                            decoded += char  # Keep original if not printable
+                    # Apply XOR to ALL characters, not just alphabetic
+                    decoded_char = chr(ord(char) ^ i)
+                    # Only keep if result is printable ASCII
+                    if 32 <= ord(decoded_char) <= 126:
+                        decoded += decoded_char
                     else:
-                        decoded += char
+                        # Skip non-printable results entirely
+                        decoded = ""
+                        break
                 
-                # Calculate confidence
-                confidence = analyzer._calculate_confidence(decoded)
-                
-                # Only keep results with reasonable confidence
-                if confidence > 0.15:
-                    key_display = f"ASCII 0x{i:02X} ('{chr(i)}')"
-                    results.append((key_display, decoded, confidence))
+                # Only process if we got a valid decoded string
+                if decoded:
+                    # Calculate confidence
+                    confidence = analyzer._calculate_confidence(decoded)
+                    
+                    # Only keep results with reasonable confidence
+                    if confidence > 0.15:
+                        key_display = f"ASCII 0x{i:02X} ('{chr(i)}')"
+                        results.append((key_display, decoded, confidence))
             except:
                 pass
             

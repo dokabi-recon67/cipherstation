@@ -581,28 +581,72 @@ class VigenereCipher(ClassicalCipher):
         return sorted(results, key=lambda x: -x[2])
 
 class XORCipher(ClassicalCipher):
-    """XOR cipher implementation with space preservation"""
+    """XOR-style cipher that stays within A-Z alphabet using modular arithmetic (like Vigenère)"""
     
     def encode(self, text: str, key: str) -> str:
-        text = self._normalize_text(text, preserve_spaces=False)
+        text = self._normalize_text(text, preserve_spaces=True)
         key = self._normalize_text(key, preserve_spaces=False)
         if not key:
             return text
         result = []
         key_len = len(key)
-        for i, char in enumerate(text):
-            if char in self.char_to_num:
-                key_char = key[i % key_len]
-                xor_val = self.char_to_num[char] ^ self.char_to_num[key_char]
-                xor_val = xor_val % self.alphabet_len
-                result.append(self.alphabet[xor_val])
+        key_index = 0  # Track key position independently of text position
+        
+        for char in text:
+            if char.isalpha():
+                # Only advance key for alphabetic characters
+                key_char = key[key_index % key_len]
+                
+                # Convert to 0-25 range
+                char_num = ord(char.upper()) - ord('A')
+                key_num = ord(key_char) - ord('A')
+                
+                # Use modular addition (like Vigenère) to stay within A-Z
+                # This maintains alphabet constraints while being reversible
+                encoded_num = (char_num + key_num) % 26
+                
+                # Convert back to character
+                result_char = chr(encoded_num + ord('A'))
+                result.append(result_char)
+                
+                key_index += 1
             else:
+                # Preserve non-alphabetic characters (spaces, punctuation)
                 result.append(char)
+        
         return ''.join(result)
     
     def decode(self, text: str, key: str) -> str:
-        # Decoding is identical to encoding for XOR
-        return self.encode(text, key)
+        text = self._normalize_text(text, preserve_spaces=True)
+        key = self._normalize_text(key, preserve_spaces=False)
+        if not key:
+            return text
+        result = []
+        key_len = len(key)
+        key_index = 0  # Track key position independently of text position
+        
+        for char in text:
+            if char.isalpha():
+                # Only advance key for alphabetic characters
+                key_char = key[key_index % key_len]
+                
+                # Convert to 0-25 range
+                char_num = ord(char.upper()) - ord('A')
+                key_num = ord(key_char) - ord('A')
+                
+                # Use modular subtraction to decode
+                decoded_num = (char_num - key_num) % 26
+                
+                # Convert back to character
+                result_char = chr(decoded_num + ord('A'))
+                result.append(result_char)
+                
+                key_index += 1
+            else:
+                # Preserve non-alphabetic characters (spaces, punctuation)
+                result.append(char)
+        
+        return ''.join(result)
     
     def brute_force_short_key(self, text: str, max_key_length: int = 8) -> List[Tuple[str, str, float]]:
         """Brute force XOR with short keys and full dictionary"""
