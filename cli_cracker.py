@@ -292,8 +292,9 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
             # Calculate confidence
             confidence = analyzer._calculate_confidence(decoded)
             
-            # Only keep results with reasonable confidence
-            if confidence > 0.15:
+            # Use lower threshold for XOR results since they often have lower confidence scores
+            # due to binary-to-text conversion
+            if confidence > 0.05:  # Lowered from 0.15 to 0.05 for XOR
                 results.append((f"'{key_str}'", decoded, confidence))
         except:
             pass
@@ -340,8 +341,9 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
                     # Calculate confidence
                     confidence = analyzer._calculate_confidence(decoded)
                     
-                    # Only keep results with reasonable confidence
-                    if confidence > 0.15:
+                    # Use lower threshold for XOR results since they often have lower confidence scores
+                    # due to binary-to-text conversion
+                    if confidence > 0.05:  # Lowered from 0.15 to 0.05 for XOR
                         key_display = f"ASCII 0x{i:02X} ('{chr(i)}')"
                         results.append((key_display, decoded, confidence))
             except:

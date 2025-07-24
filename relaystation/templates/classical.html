@@ -683,11 +683,6 @@
                                     <input type="number" class="form-control" id="substitution-iterations" value="5000" min="1000" max="50000">
                                     <small class="form-text text-white">Iterations per restart (1000-50000)</small>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="confidence-threshold" class="form-label text-white">Confidence Threshold:</label>
-                                    <input type="number" class="form-control" id="confidence-threshold" value="0.1" min="0" max="1" step="0.1">
-                                    <small class="form-text text-white">Minimum confidence to show results (0-1)</small>
-                                </div>
                             </div>
 
                             <!-- Preset Configurations -->
@@ -878,6 +873,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Cache busting - force reload of JavaScript
+        console.log('Classical cipher page loaded at:', new Date().toISOString());
+        
         function sanitizeInput(value) {
             // Remove <, >, and script tags
             return value.replace(/<.*?>/g, '').replace(/</g, '').replace(/>/g, '').replace(/script/gi, '');
@@ -885,11 +883,16 @@
 
         let currentTaskId = null;
         let progressInterval = null;
+        let latestTaskId = null; // Track the most recent task ID
 
         // Advanced Cracking Functions
         async function startCracking() {
             const text = document.getElementById('crack-text').value.trim();
             const customWords = document.getElementById('custom-words').value.trim();
+            
+            console.log('=== STARTING NEW CRACKING TASK ===');
+            console.log('Input text:', text);
+            console.log('Custom words:', customWords);
             
             if (!text) {
                 showAlert('Please enter text to crack', 'error');
@@ -903,6 +906,9 @@
             if (document.getElementById('enable-xor').checked) enabledCiphers.push('xor');
             if (document.getElementById('enable-atbash').checked) enabledCiphers.push('atbash');
             if (document.getElementById('enable-substitution').checked) enabledCiphers.push('substitution');
+            
+            console.log('Enabled ciphers:', enabledCiphers);
+            console.log('XOR enabled:', document.getElementById('enable-xor').checked);
 
             if (enabledCiphers.length === 0) {
                 showAlert('Please select at least one cipher type to crack', 'error');
@@ -945,6 +951,9 @@
                 const data = await response.json();
                 if (data.success) {
                     currentTaskId = data.task_id;
+                    latestTaskId = data.task_id; // Update latest task ID
+                    console.log('New task started:', currentTaskId);
+                    console.log('Task ID for input text:', text);
                     startProgressTracking();
                 } else {
                     showAlert(data.error, 'error');
@@ -961,7 +970,14 @@
 
             progressInterval = setInterval(async () => {
                 try {
-                    const response = await fetch(`/api/crack/progress/${currentTaskId}`);
+                    // Always use the latest task ID
+                    const taskIdToCheck = latestTaskId || currentTaskId;
+                    if (!taskIdToCheck) {
+                        console.log('No task ID available for progress tracking');
+                        return;
+                    }
+                    
+                    const response = await fetch(`/api/crack/progress/${taskIdToCheck}`);
                     const data = await response.json();
 
                     if (data.success) {
@@ -970,7 +986,10 @@
                         
                         if (data.progress.status === 'completed') {
                             clearInterval(progressInterval);
-                            showResults(currentTaskId);
+                            // Add a longer delay to ensure results are fully stored
+                            setTimeout(() => {
+                                showResults(taskIdToCheck);
+                            }, 2000);
                         } else if (data.progress.status === 'error') {
                             clearInterval(progressInterval);
                             showAlert(data.progress.message, 'error');
@@ -1002,17 +1021,70 @@
         }
 
         async function showResults(taskId) {
+            console.log('showResults called with taskId:', taskId);
+            console.log('Latest task ID:', latestTaskId);
+            console.log('Current task ID:', currentTaskId);
+            
+            // Check if this is a stale task ID
+            if (latestTaskId && taskId !== latestTaskId) {
+                console.log('Ignoring stale result for old taskId:', taskId, 'latest is', latestTaskId);
+                return;
+            }
+            
             try {
-                const response = await fetch(`/api/crack/results/${taskId}`);
+                // Add cache-busting parameter to force fresh results
+                const response = await fetch(`/api/crack/results/${taskId}?t=${Date.now()}`);
                 const data = await response.json();
+                console.log('showResults received data:', data);
 
                 if (data.success) {
+                    // Validate that this is the correct task
+                    const results = data.results;
+                    // Normalize whitespace for comparison
+                    const expectedText = '03 0E 07 07 07 04 6B 1C 04 19 07 0F';
+                    const actualText = results.original_text.replace(/\s+/g, ' ').trim();
+                    if (actualText !== expectedText) {
+                        console.log('WARNING: Results are for different text, this might be wrong task');
+                        console.log('Expected:', expectedText);
+                        console.log('Got:', actualText);
+                    } else {
+                        console.log('Text validation passed - this is the correct task');
+                    }
+                    // Verify we have the expected results
+                    if (results.analysis && results.analysis.best_results) {
+                        const bestResults = results.analysis.best_results;
+                        console.log(`Received ${bestResults.length} results for task ${taskId}`);
+                        
+                        // Check if we have XOR results (should be the case for hex input)
+                        const xorResults = bestResults.filter(r => r.cipher_type === 'xor');
+                        if (xorResults.length === 0) {
+                            console.log('WARNING: No XOR results found, this might be a stale or incomplete task');
+                            console.log('Available results:', bestResults.map(r => `${r.cipher_type}:${r.confidence}`));
+                            
+                            // If we don't have XOR results but this is hex input, log the issue but don't retry
+                            if (actualText === expectedText && actualText.includes(' ')) {
+                                console.log('ERROR: Hex input detected but no XOR results found - backend issue');
+                                console.log('This suggests XOR cracking is not working properly on the backend');
+                            }
+                            
+                            // If we have very few results (less than 3), this might be incomplete
+                            if (bestResults.length < 3) {
+                                console.log('WARNING: Very few results received, this might be incomplete');
+                                console.log('Expected at least 3 results for hex input, got:', bestResults.length);
+                            }
+                        } else {
+                            console.log(`Found ${xorResults.length} XOR results, top confidence: ${xorResults[0].confidence}`);
+                        }
+                    }
+                    
+                    console.log('Calling displayResults with:', data.results);
                     displayResults(data.results);
                     if (data.results.analysis) {
                         updateAnalysis(data.results.analysis);
                     }
                 }
             } catch (error) {
+                console.error('showResults error:', error);
                 showAlert('Error loading results: ' + error.message, 'error');
             }
         }
@@ -1020,6 +1092,30 @@
         function displayResults(results) {
             const container = document.getElementById('results-container');
             const resultsSection = document.getElementById('results-section');
+            
+            console.log('displayResults called');
+            console.log('Container element found:', container);
+            console.log('Results section element found:', resultsSection);
+            
+            // Debug: Log the results to console
+            console.log('DisplayResults called with:', results);
+            console.log('results.analysis:', results.analysis);
+            console.log('results.analysis.best_results:', results.analysis?.best_results);
+            console.log('results.results:', results.results);
+            console.log('bestResults:', results.analysis && results.analysis.best_results ? results.analysis.best_results : (results.results || []));
+            
+            // Additional debugging to see the exact structure
+            if (results.analysis && results.analysis.best_results) {
+                console.log('Using analysis.best_results, length:', results.analysis.best_results.length);
+                console.log('First result from analysis.best_results:', results.analysis.best_results[0]);
+            } else if (results.results) {
+                console.log('Using results.results, length:', results.results.length);
+                console.log('First result from results.results:', results.results[0]);
+            } else {
+                console.log('No results found in either location!');
+            }
+            
+
             
             // Add custom words info if available
             let customWordsInfo = '';
@@ -1045,12 +1141,17 @@
             // Add detected ciphers info - prioritize actual cracking results
             let detectedCiphersInfo = '';
             
-            // Use analysis.best_results if available, otherwise fall back to results.results
-            const bestResults = results.analysis && results.analysis.best_results ? results.analysis.best_results : results.results;
+            // Always use analysis.best_results if available, as it contains the properly sorted results
+            const bestResults = results.analysis && results.analysis.best_results ? results.analysis.best_results : (results.results || []);
+            console.log('bestResults array:', bestResults);
+            console.log('bestResults[0]:', bestResults[0]);
+            console.log('bestResults[0].cipher_type:', bestResults[0]?.cipher_type);
+            console.log('bestResults[0].confidence:', bestResults[0]?.confidence);
             
             if (bestResults && bestResults.length > 0) {
-                // Show actual cracking results (top 3 with confidence > 0.1)
-                const significantResults = bestResults.filter(r => r.confidence > 0.1).slice(0, 3);
+                
+                // Show actual cracking results (top 3)
+                const significantResults = bestResults.slice(0, 3);
                 if (significantResults.length > 0) {
                     const detectedList = significantResults.map(result => {
                         const confidencePercent = Math.round(result.confidence * 100);
@@ -1095,6 +1196,15 @@
             
             // Only show the top (best) result
             const topResult = bestResults[0];
+            console.log('Top result:', topResult);
+            
+            // Force check - ensure we're using the correct result
+            if (topResult && topResult.cipher_type === 'xor' && topResult.confidence > 0.3) {
+                console.log('Using XOR result with high confidence');
+            } else {
+                console.log('WARNING: Not using XOR result!');
+                console.log('Expected XOR with confidence > 0.3, got:', topResult?.cipher_type, 'with confidence:', topResult?.confidence);
+            }
             const confidencePercent = Math.round(topResult.confidence * 100);
             const confidenceBar = '█'.repeat(Math.floor(confidencePercent / 5)) + '░'.repeat(20 - Math.floor(confidencePercent / 5));
             
@@ -1121,8 +1231,12 @@
                     </button>
                 </div>
             `;
+            console.log('Generated HTML:', html);
+            console.log('Container element:', container);
+            console.log('Results section element:', resultsSection);
             container.innerHTML = html;
             resultsSection.style.display = 'block';
+            console.log('Results section display set to block');
         }
 
         function updateAnalysis(analysis) {
