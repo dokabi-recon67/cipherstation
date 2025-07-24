@@ -547,11 +547,11 @@
                         <div class="feature-icon">
                             <i class="fas fa-paper-plane"></i>
                         </div>
-                        <h3 class="feature-title">Secure Message Relay & File Encryption</h3>
+                        <h3 class="feature-title">Secure Message Relay Station</h3>
                         <p class="feature-description">
-                            Ticket-based dead drop system with automatic 24-hour cleanup 
-                            for anonymous encrypted message exchange, plus direct file 
-                            encryption/decryption on the homepage.
+                            Ticket-based dead drop system with rotating public message board,
+                            automatic 24-hour cleanup, and 100,000 message capacity for 
+                            anonymous encrypted message exchange.
                         </p>
                     </div>
                     
@@ -828,7 +828,7 @@ python cli_cracker.py --help
                     </div>
                     <div class="spec-item">
                         <span class="spec-label">Message Capacity</span>
-                        <span class="spec-value">10,000 messages</span>
+                        <span class="spec-value">100,000 messages</span>
                     </div>
                     <div class="spec-item">
                         <span class="spec-label">Data Retention</span>
@@ -925,14 +925,71 @@ python cli_cracker.py --help
                 </ul>
             </div>
 
+            <!-- Relay Station Workflow -->
+            <div class="doc-content">
+                <h2 class="section-title">
+                    <i class="fas fa-satellite-dish"></i> Relay Station Workflow
+                </h2>
+                
+                <p>
+                    The homepage features a comprehensive 6-step workflow for secure message relay, combining 
+                    classical cipher encoding with modern encryption for maximum security and educational value.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="feature-title">Step 1-2: Encode & Encrypt</h3>
+                        <p class="feature-description">
+                            Encode messages with classical ciphers (Caesar, Vigenère, etc.) then 
+                            encrypt with modern algorithms (AES-256-GCM, ChaCha20-Poly1305).
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3 class="feature-title">Step 3: Send to Station</h3>
+                        <p class="feature-description">
+                            Upload encrypted messages to the relay station and receive a unique 
+                            ticket number for secure retrieval by intended recipients.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                        <h3 class="feature-title">Step 4: Public Message Board</h3>
+                        <p class="feature-description">
+                            Browse rotating public message board or enter specific ticket numbers.
+                            Messages auto-delete after 24 hours with 100k message capacity.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-unlock-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Step 5-6: Decrypt & Decode</h3>
+                        <p class="feature-description">
+                            Decrypt retrieved messages with the shared password, then decode 
+                            the classical cipher to reveal the original plaintext message.
+                        </p>
+                    </div>
+                </div>
+
             <!-- Web Interface Features -->
             <div class="doc-content">
                 <h2 class="section-title">
-                    <i class="fas fa-globe"></i> Web Interface Features
+                    <i class="fas fa-globe"></i> Classical Cipher Operations
                 </h2>
                 
                 <h3 class="subsection-title">
-                    <i class="fas fa-unlock-alt"></i> Classical Cipher Operations
+                    <i class="fas fa-unlock-alt"></i> Advanced Cryptanalysis Page
                 </h3>
                 
                 <h4 class="feature-subtitle">Complete Cipher Functionality</h4>
@@ -1161,20 +1218,24 @@ Content-Type: application/json
                 </div>
 
                 <h3 class="subsection-title">
-                    <i class="fas fa-file-upload"></i> File Encryption (Homepage)
+                    <i class="fas fa-broadcast-tower"></i> Message Relay Station
                 </h3>
                 <div class="code-block">
-POST /encrypt
-Content-Type: multipart/form-data
+# Step 3: Send to Station
+POST /encrypt-message
+Content-Type: application/json
 
-file: [binary file data]
-algorithm: "aes256"
-description: "Optional description"
-key: [optional key file]
+{
+    "text": "Classical cipher encoded message",
+    "password": "encryption_password", 
+    "algorithm": "aes256",
+    "send_to_station": true
+}
 
-# Available on homepage for direct file encryption
-# Supports any file type up to 20MB
-# Automatic key generation if no key provided
+# Step 4: Retrieve from Station
+GET /api/station/ticket/{ticket_id}
+
+# Returns encrypted message data for decryption
                 </div>
             </div>
 

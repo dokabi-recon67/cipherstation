@@ -1,0 +1,67 @@
+{
+  "test_start_time": "2025-07-24T01:50:27.970245",
+  "key_generation_tests": {
+    "aes_keys": [
+      {
+        "algorithm": "aes128",
+        "success": false,
+        "execution_time": 0.03713703155517578,
+        "key_size_bytes": 0,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "algorithm": "aes192",
+        "success": false,
+        "execution_time": 0.02972102165222168,
+        "key_size_bytes": 0,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "algorithm": "aes256",
+        "success": false,
+        "execution_time": 0.027985811233520508,
+        "key_size_bytes": 0,
+        "stdout_length": 0,
+        "stderr_length": 182
+      }
+    ],
+    "ed25519_keys": [
+      {
+        "success": false,
+        "execution_time": 0.029054880142211914,
+        "private_key_size": 0,
+        "public_key_size": 0,
+        "stdout_length": 0,
+        "stderr_length": 182
+      }
+    ],
+    "x25519_keys": [
+      {
+        "success": false,
+        "execution_time": 0.029062747955322266,
+        "private_key_size": 0,
+        "public_key_size": 0,
+        "stdout_length": 0,
+        "stderr_length": 182
+      }
+    ],
+    "performance": {
+      "aes_success_rate": 0.0,
+      "ed25519_success_rate": 0.0,
+      "x25519_success_rate": 0.0,
+      "avg_aes_time": 0.03161462148030599,
+      "avg_ed25519_time": 0.029054880142211914,
+      "avg_x25519_time": 0.029062747955322266
+    }
+  },
+  "encryption_tests": {},
+  "decryption_tests": {},
+  "signature_tests": {},
+  "hybrid_tests": {},
+  "performance_data": {},
+  "error_log": [
+    "'encrypt_time'"
+  ]
+}

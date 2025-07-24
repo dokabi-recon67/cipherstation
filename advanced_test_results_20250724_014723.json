@@ -1,0 +1,356 @@
+{
+  "test_start_time": "2025-07-24T01:44:24.025755",
+  "cli_tests": {
+    "basic_commands": [
+      {
+        "command": "python3 cli_cracker.py --help",
+        "description": "Help command",
+        "success": true,
+        "execution_time": 0.4155120849609375,
+        "stdout_length": 1761,
+        "stderr_length": 0
+      },
+      {
+        "command": "python3 cipherstationv0.py --help",
+        "description": "Main CLI help",
+        "success": false,
+        "execution_time": 0.031983137130737305,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "command": "python3 cipherstationv0.py keygen --help",
+        "description": "Keygen help",
+        "success": false,
+        "execution_time": 0.029912948608398438,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "command": "python3 cipherstationv0.py encrypt --help",
+        "description": "Encrypt help",
+        "success": false,
+        "execution_time": 0.028359174728393555,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "command": "python3 cipherstationv0.py decrypt --help",
+        "description": "Decrypt help",
+        "success": false,
+        "execution_time": 0.027816295623779297,
+        "stdout_length": 0,
+        "stderr_length": 182
+      }
+    ],
+    "cipher_operations": [
+      {
+        "input": "KHOORZRUOG",
+        "description": "Caesar cipher test",
+        "success": true,
+        "execution_time": 2.405081033706665,
+        "stdout_length": 1864,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      },
+      {
+        "input": "RIJVSUYVJN",
+        "description": "Vigen\u00e8re cipher test",
+        "success": true,
+        "execution_time": 2.4165942668914795,
+        "stdout_length": 1864,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      },
+      {
+        "input": "SVOOLDLIOW",
+        "description": "Atbash cipher test",
+        "success": true,
+        "execution_time": 2.3164491653442383,
+        "stdout_length": 1864,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      },
+      {
+        "input": "HELLO WORLD",
+        "description": "Plain text test",
+        "success": true,
+        "execution_time": 2.3536388874053955,
+        "stdout_length": 1857,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      }
+    ],
+    "error_handling": [
+      {
+        "command": "python3 cli_cracker.py --text ",
+        "description": "Empty text",
+        "expected_failure": true,
+        "actual_failure": true,
+        "execution_time": 0.4021790027618408,
+        "stderr_length": 0
+      },
+      {
+        "command": "python3 cli_cracker.py --text 123!@#",
+        "description": "Non-alphabetic text",
+        "expected_failure": true,
+        "actual_failure": false,
+        "execution_time": 0.39589715003967285,
+        "stderr_length": 0
+      },
+      {
+        "command": "python3 cli_cracker.py --invalid-flag",
+        "description": "Invalid flag",
+        "expected_failure": true,
+        "actual_failure": true,
+        "execution_time": 0.4022538661956787,
+        "stderr_length": 321
+      }
+    ],
+    "performance": {
+      "basic_command_success_rate": 0.2,
+      "cipher_operation_success_rate": 1.0,
+      "error_handling_success_rate": 0.6666666666666666,
+      "avg_basic_command_time": 0.10671672821044922,
+      "avg_cipher_operation_time": 2.3729408383369446
+    }
+  },
+  "web_tests": {
+    "server_startup": {
+      "success": false,
+      "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104164700>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+    },
+    "api_endpoints": [
+      {
+        "endpoint": "/classical",
+        "method": "GET",
+        "description": "Classical ciphers page",
+        "success": false,
+        "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /classical (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104186190>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      {
+        "endpoint": "/api/encode",
+        "method": "POST",
+        "description": "Encode API",
+        "success": false,
+        "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/encode (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104186bb0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      {
+        "endpoint": "/api/decode",
+        "method": "POST",
+        "description": "Decode API",
+        "success": false,
+        "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/decode (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104190550>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      {
+        "endpoint": "/api/crack",
+        "method": "POST",
+        "description": "Crack API",
+        "success": false,
+        "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/crack (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104186ee0>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    ],
+    "cipher_operations": [
+      {
+        "input": "KHOORZRUOG",
+        "description": "Caesar cipher",
+        "success": false,
+        "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/crack (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104186280>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      {
+        "input": "RIJVSUYVJN",
+        "description": "Vigen\u00e8re cipher",
+        "success": false,
+        "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/crack (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104164b20>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      },
+      {
+        "input": "SVOOLDLIOW",
+        "description": "Atbash cipher",
+        "success": false,
+        "error": "HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/crack (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x104164700>: Failed to establish a new connection: [Errno 61] Connection refused'))"
+      }
+    ],
+    "performance": {
+      "server_startup_success": false,
+      "api_endpoint_success_rate": 0.0,
+      "cipher_operation_success_rate": 0.0,
+      "avg_api_response_time": 0.0,
+      "avg_cipher_response_time": 0.0
+    }
+  },
+  "stress_tests": {
+    "large_text_tests": [
+      {
+        "text_length": 1000,
+        "description": "1000 repeated characters",
+        "success": true,
+        "execution_time": 29.604562044143677,
+        "memory_usage": 3313
+      },
+      {
+        "text_length": 1000,
+        "description": "1000 character pangram",
+        "success": true,
+        "execution_time": 31.24391198158264,
+        "memory_usage": 3299
+      },
+      {
+        "text_length": 1000,
+        "description": "1000 random characters",
+        "success": true,
+        "execution_time": 35.3575918674469,
+        "memory_usage": 3313
+      },
+      {
+        "text_length": 996,
+        "description": "1000 character repeated phrase",
+        "success": true,
+        "execution_time": 30.314213275909424,
+        "memory_usage": 3301
+      }
+    ],
+    "concurrent_tests": [
+      {
+        "index": 2,
+        "text": "SVOOLDLIOW",
+        "success": true,
+        "execution_time": 6.151740074157715
+      },
+      {
+        "index": 1,
+        "text": "RIJVSUYVJN",
+        "success": true,
+        "execution_time": 6.197301149368286
+      },
+      {
+        "index": 3,
+        "text": "HELLO WORLD",
+        "success": true,
+        "execution_time": 6.217896223068237
+      },
+      {
+        "index": 0,
+        "text": "KHOORZRUOG",
+        "success": true,
+        "execution_time": 6.230325937271118
+      }
+    ],
+    "memory_tests": [],
+    "performance": {
+      "large_text_success_rate": 1.0,
+      "concurrent_success_rate": 1.0,
+      "avg_large_text_time": 31.63006979227066,
+      "avg_concurrent_time": 6.199315845966339,
+      "max_concurrent_time": 6.230325937271118
+    }
+  },
+  "performance_data": {},
+  "error_log": [],
+  "dictionary_tests": {
+    "dictionary_tests": [
+      {
+        "key": "KEY",
+        "ciphertext": "RIJVS UYVJN XFSW GC E ROWR WIQCEEO",
+        "success": true,
+        "execution_time": 4.3191492557525635,
+        "stdout_length": 2034,
+        "found_key": true,
+        "found_plaintext": true
+      },
+      {
+        "key": "SECRET",
+        "ciphertext": "ZINCS PGVNU XAAW KJ E MWWV DILKEIV",
+        "success": false,
+        "execution_time": 3.9895219802856445,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "PASSWORD",
+        "ciphertext": "WEDDK KFUAD LZEG ZV P TWKP AVVHAYW",
+        "success": false,
+        "execution_time": 3.981088161468506,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "LEMON",
+        "ciphertext": "SIXZB HSDZQ ELUG VD E FSFE QQGFLKQ",
+        "success": false,
+        "execution_time": 3.9710168838500977,
+        "stdout_length": 2053,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "ATTACK",
+        "ciphertext": "HXELQ GOKED VRIL BS C DELM MGCSTZE",
+        "success": true,
+        "execution_time": 4.071471214294434,
+        "stdout_length": 2035,
+        "found_key": true,
+        "found_plaintext": false
+      },
+      {
+        "key": "DEFEND",
+        "ciphertext": "KIQPB ZRVQH GKLW NW N WHWY QRVVELI",
+        "success": false,
+        "execution_time": 4.018716096878052,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "MISSION",
+        "ciphertext": "TMDDW KBDTV LPWF UA S LMGG YMKKIUR",
+        "success": false,
+        "execution_time": 4.011131048202515,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "TARGET",
+        "ciphertext": "AECRS PHRCJ XABS ZY E MXSK SILLAXK",
+        "success": false,
+        "execution_time": 4.006144046783447,
+        "stdout_length": 2053,
+        "found_key": false,
+        "found_plaintext": false
+      }
+    ],
+    "performance": {
+      "dictionary_success_rate": 0.25,
+      "avg_dictionary_time": 4.046029835939407,
+      "key_found_rate": 0.25,
+      "plaintext_found_rate": 0.125
+    }
+  },
+  "test_end_time": "2025-07-24T01:47:23.421279",
+  "overall_metrics": {
+    "total_tests": 0,
+    "successful_tests": 0,
+    "overall_success_rate": 0.0,
+    "avg_execution_time": 0.0,
+    "test_summary": {
+      "cli_tests": {
+        "success_rate": 0.2,
+        "avg_time": 0.10671672821044922
+      },
+      "web_tests": {
+        "success_rate": false,
+        "avg_time": 0.0
+      },
+      "stress_tests": {
+        "success_rate": 1.0,
+        "avg_time": 31.63006979227066
+      },
+      "dictionary_tests": {
+        "success_rate": 0.25,
+        "avg_time": 4.046029835939407
+      }
+    }
+  }
+}

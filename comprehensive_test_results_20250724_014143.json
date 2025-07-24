@@ -1,0 +1,3717 @@
+{
+  "test_start_time": "2025-07-24T01:41:41.899860",
+  "system_info": {
+    "platform": "macOS-14.3-arm64-arm-64bit",
+    "python_version": "3.9.13 (v3.9.13:6de2ca5339, May 17 2022, 11:37:23) \n[Clang 13.0.0 (clang-1300.0.29.30)]",
+    "architecture": [
+      "64bit",
+      ""
+    ],
+    "processor": "arm",
+    "memory": {
+      "note": "psutil not available"
+    }
+  },
+  "test_results": {
+    "caesar": {
+      "encoding_tests": [
+        {
+          "test_id": 0,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 0,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 9.417533874511719e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 1,
+          "expected": "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+          "actual": "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+          "success": true,
+          "execution_time": 5.91278076171875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 2,
+          "expected": "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+          "actual": "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+          "success": true,
+          "execution_time": 5.91278076171875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 3,
+          "expected": "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+          "actual": "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+          "success": true,
+          "execution_time": 5.5789947509765625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 4,
+          "expected": "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+          "actual": "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+          "success": true,
+          "execution_time": 5.698204040527344e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 5,
+          "expected": "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+          "actual": "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 6,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 6,
+          "expected": "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+          "actual": "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+          "success": true,
+          "execution_time": 5.364418029785156e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 7,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 7,
+          "expected": "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+          "actual": "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 8,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 8,
+          "expected": "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+          "actual": "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+          "success": true,
+          "execution_time": 5.3882598876953125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 9,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 9,
+          "expected": "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+          "actual": "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+          "success": true,
+          "execution_time": 5.412101745605469e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 10,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 10,
+          "expected": "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+          "actual": "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+          "success": true,
+          "execution_time": 5.412101745605469e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 11,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 11,
+          "expected": "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+          "actual": "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 12,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 12,
+          "expected": "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+          "actual": "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+          "success": true,
+          "execution_time": 5.4836273193359375e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 13,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 13,
+          "expected": "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+          "actual": "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+          "success": true,
+          "execution_time": 5.3882598876953125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 14,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 14,
+          "expected": "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+          "actual": "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+          "success": true,
+          "execution_time": 5.3882598876953125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 15,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 15,
+          "expected": "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+          "actual": "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+          "success": true,
+          "execution_time": 5.3882598876953125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 16,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 16,
+          "expected": "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+          "actual": "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 17,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 17,
+          "expected": "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+          "actual": "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 18,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 18,
+          "expected": "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+          "actual": "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+          "success": true,
+          "execution_time": 5.412101745605469e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 19,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 19,
+          "expected": "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+          "actual": "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+          "success": true,
+          "execution_time": 5.4836273193359375e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 20,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 20,
+          "expected": "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+          "actual": "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 21,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 21,
+          "expected": "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+          "actual": "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+          "success": true,
+          "execution_time": 5.3882598876953125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 22,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 22,
+          "expected": "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+          "actual": "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 23,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 23,
+          "expected": "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+          "actual": "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+          "success": true,
+          "execution_time": 5.3882598876953125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 24,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 24,
+          "expected": "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+          "actual": "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+          "success": true,
+          "execution_time": 6.079673767089844e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 25,
+          "plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 25,
+          "expected": "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+          "actual": "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+          "success": true,
+          "execution_time": 5.4836273193359375e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "decoding_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "key": 0,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.412101745605469e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+          "key": 1,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.412101745605469e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+          "key": 2,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.91278076171875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "ciphertext": "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+          "key": 3,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "ciphertext": "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+          "key": 4,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.4836273193359375e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "ciphertext": "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+          "key": 5,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 6.127357482910156e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 6,
+          "ciphertext": "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+          "key": 6,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 7,
+          "ciphertext": "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+          "key": 7,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.412101745605469e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 8,
+          "ciphertext": "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+          "key": 8,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 9,
+          "ciphertext": "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+          "key": 9,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 6.604194641113281e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 10,
+          "ciphertext": "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+          "key": 10,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 11,
+          "ciphertext": "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+          "key": 11,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.412101745605469e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 12,
+          "ciphertext": "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+          "key": 12,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 13,
+          "ciphertext": "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+          "key": 13,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.459785461425781e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 14,
+          "ciphertext": "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+          "key": 14,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 7.009506225585938e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 15,
+          "ciphertext": "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+          "key": 15,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 0.00010323524475097656,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 16,
+          "ciphertext": "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+          "key": 16,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 17,
+          "ciphertext": "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+          "key": 17,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 18,
+          "ciphertext": "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+          "key": 18,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.602836608886719e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 19,
+          "ciphertext": "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+          "key": 19,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.5789947509765625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 20,
+          "ciphertext": "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+          "key": 20,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.4836273193359375e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 21,
+          "ciphertext": "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+          "key": 21,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 22,
+          "ciphertext": "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+          "key": 22,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 23,
+          "ciphertext": "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+          "key": 23,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.4836273193359375e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 24,
+          "ciphertext": "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+          "key": 24,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 5.507469177246094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 25,
+          "ciphertext": "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+          "key": 25,
+          "expected": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "actual": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "success": true,
+          "execution_time": 0.0003218650817871094,
+          "memory_delta": 0.0
+        }
+      ],
+      "cracking_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              0,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              10,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              1,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              16,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              22,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              15,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              21,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              3,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              4,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              6,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              9,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              13,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              14,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              17,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              13,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              11,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              18,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              24,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              8,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              12,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              20,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              7,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              5,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              23,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              19,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              25,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              2,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.009939908981323242,
+          "memory_delta": 80.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              1,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              11,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              2,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              17,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              23,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              16,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              22,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              4,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              5,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              7,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              10,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              14,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              15,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              18,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              12,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              19,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              25,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              9,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              13,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              13,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              21,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              8,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              6,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              24,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              0,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              20,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              3,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.007074832916259766,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              2,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              12,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              3,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              18,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              24,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              17,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              23,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              5,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              6,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              8,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              11,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              15,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              16,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              19,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              13,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              13,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              0,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              20,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              10,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              14,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              22,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              9,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              7,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              25,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              1,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              21,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              4,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.007546901702880859,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "ciphertext": "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              3,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              13,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              13,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              4,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              19,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              25,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              18,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              24,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              6,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              7,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              9,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              12,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              16,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              17,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              20,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              14,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              1,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              21,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              11,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              15,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              23,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              10,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              8,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              0,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              2,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              22,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              5,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.0067598819732666016,
+          "memory_delta": 16.0
+        },
+        {
+          "test_id": 4,
+          "ciphertext": "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              4,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              14,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              5,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              0,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              20,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              19,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              25,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              7,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              8,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              10,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              13,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              17,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              18,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              21,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              13,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              15,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              2,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              22,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              12,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              16,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              24,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              11,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              9,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              1,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              3,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              23,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              6,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.0075778961181640625,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "ciphertext": "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              5,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              15,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              6,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              1,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              21,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              20,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              0,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              8,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              9,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              11,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              14,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              18,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              19,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              22,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              16,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              3,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              23,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              13,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              13,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              17,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              25,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              12,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              10,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              2,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              4,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              24,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              7,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.006499290466308594,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 6,
+          "ciphertext": "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              6,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              16,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              7,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              2,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              22,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              21,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              1,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              9,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              10,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              12,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              15,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              19,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              20,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              23,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              17,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              4,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              24,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              14,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              18,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              0,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              13,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              13,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              11,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              3,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              5,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              25,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              8,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.007176876068115234,
+          "memory_delta": 16.0
+        },
+        {
+          "test_id": 7,
+          "ciphertext": "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              7,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              17,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              8,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              3,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              23,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              22,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              2,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              10,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              11,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              13,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              13,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              16,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              20,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              21,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              24,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              18,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              5,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              25,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              15,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              19,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              1,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              14,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              12,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              4,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              0,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              6,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              9,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.006693840026855469,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 8,
+          "ciphertext": "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              8,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              18,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              9,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              4,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              24,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              23,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              3,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              11,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              12,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              14,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              17,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              21,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              22,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              25,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              19,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              0,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              6,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              16,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              20,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              2,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              15,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              13,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              13,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              5,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              1,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              7,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              10,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.006700038909912109,
+          "memory_delta": 16.0
+        },
+        {
+          "test_id": 9,
+          "ciphertext": "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+          "expected_plaintext": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "results": [
+            [
+              9,
+              "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+              0.9505192569130375
+            ],
+            [
+              19,
+              "JXU GKYSA RHEMD VEN ZKCFI ELUH JXU BQPO TEW",
+              0.16324089841516676
+            ],
+            [
+              10,
+              "SGD PTHBJ AQNVM ENW ITLOR NUDQ SGD KZYX CNF",
+              0.1596417843509364
+            ],
+            [
+              5,
+              "XLI UYMGO FVSAR JSB NYQTW SZIV XLI PEDC HSK",
+              0.14203381092900952
+            ],
+            [
+              25,
+              "DRO AESMU LBYGX PYH TEWZC YFOB DRO VKJI NYQ",
+              0.14203381092900952
+            ],
+            [
+              24,
+              "ESP BFTNV MCZHY QZI UFXAD ZGPC ESP WLKJ OZR",
+              0.13738264813831186
+            ],
+            [
+              4,
+              "YMJ VZNHP GWTBS KTC OZRUX TAJW YMJ QFED ITL",
+              0.13583226054141262
+            ],
+            [
+              12,
+              "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD",
+              0.1301290490242476
+            ],
+            [
+              13,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              13,
+              "PDA MQEYG XNKSJ BKT FQILO KRAN PDA HWVU ZKC",
+              0.1301290490242476
+            ],
+            [
+              15,
+              "NBY KOCWE VLIQH ZIR DOGJM IPYL NBY FUTS XIA",
+              0.12977467471638493
+            ],
+            [
+              0,
+              "CQN ZDRLT KAXFW OXG SDVYB XENA CQN UJIH MXP",
+              0.12702827383044918
+            ],
+            [
+              18,
+              "KYV HLZTB SIFNE WFO ALDGJ FMVI KYV CRQP UFX",
+              0.12702827383044918
+            ],
+            [
+              22,
+              "GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT",
+              0.12702827383044918
+            ],
+            [
+              23,
+              "FTQ CGUOW NDAIZ RAJ VGYBE AHQD FTQ XMLK PAS",
+              0.12702827383044918
+            ],
+            [
+              20,
+              "IWT FJXRZ QGDLC UDM YJBEH DKTG IWT APON SDV",
+              0.12547788623354994
+            ],
+            [
+              1,
+              "BPM YCQKS JZWEV NWF RCUXA WDMZ BPM TIHG LWO",
+              0.12237711103975148
+            ],
+            [
+              7,
+              "VJG SWKEM DTQYP HQZ LWORU QXGT VJG NCBA FQI",
+              0.12237711103975148
+            ],
+            [
+              17,
+              "LZW IMAUC TJGOF XGP BMEHK GNWJ LZW DSRQ VGY",
+              0.12082672344285227
+            ],
+            [
+              21,
+              "HVS EIWQY PFCKB TCL XIADG CJSF HVS ZONM RCU",
+              0.11927633584595303
+            ],
+            [
+              3,
+              "ZNK WAOIQ HXUCT LUD PASVY UBKX ZNK RGFE JUM",
+              0.11822428711948571
+            ],
+            [
+              16,
+              "MAX JNBVD UKHPG YHQ CNFIL HOXK MAX ETSR WHZ",
+              0.11512351192568725
+            ],
+            [
+              14,
+              "OCZ LPDXF WMJRI AJS EPHKN JQZM OCZ GVUT YJB",
+              0.11357312432878804
+            ],
+            [
+              6,
+              "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ",
+              0.11202273673188881
+            ],
+            [
+              2,
+              "AOL XBPJR IYVDU MVE QBTWZ VCLY AOL SHGF KVN",
+              0.11047234913498957
+            ],
+            [
+              8,
+              "UIF RVJDL CSPXO GPY KVNQT PWFS UIF MBAZ EPH",
+              0.11047234913498957
+            ],
+            [
+              11,
+              "RFC OSGAI ZPMUL DMV HSKNQ MTCP RFC JYXW BME",
+              0.10737157394119112
+            ]
+          ],
+          "success": true,
+          "execution_time": 0.006853818893432617,
+          "memory_delta": 0.0
+        }
+      ],
+      "performance": {
+        "encoding_success_rate": 1.0,
+        "decoding_success_rate": 1.0,
+        "cracking_success_rate": 1.0,
+        "avg_encoding_time": 5.6743621826171875e-05,
+        "avg_decoding_time": 6.845364203819862e-05,
+        "avg_cracking_time": 0.007282328605651855,
+        "total_tests": 62
+      }
+    },
+    "vigenere": {
+      "encoding_tests": [
+        {
+          "test_id": 0,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "KEY",
+          "expected": "RIJVS UYVJN XFSW GC E ROWR WIQCEEO",
+          "actual": "RIJVS UYVJN XFSW GC E ROWR WIQCEEO",
+          "success": true,
+          "execution_time": 6.508827209472656e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "SECRET",
+          "expected": "ZINCS PGVNU XAAW KJ E MWWV DILKEIV",
+          "actual": "ZINCS PGVNU XAAW KJ E MWWV DILKEIV",
+          "success": true,
+          "execution_time": 5.2928924560546875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "PASSWORD",
+          "expected": "WEDDK KFUAD LZEG ZV P TWKP AVVHAYW",
+          "actual": "WEDDK KFUAD LZEG ZV P TWKP AVVHAYW",
+          "success": true,
+          "execution_time": 4.8160552978515625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "LEMON",
+          "expected": "SIXZB HSDZQ ELUG VD E FSFE QQGFLKQ",
+          "actual": "SIXZB HSDZQ ELUG VD E FSFE QQGFLKQ",
+          "success": true,
+          "execution_time": 4.696846008300781e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "ATTACK",
+          "expected": "HXELQ GOKED VRIL BS C DELM MGCSTZE",
+          "actual": "HXELQ GOKED VRIL BS C DELM MGCSTZE",
+          "success": true,
+          "execution_time": 4.696846008300781e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "DEFEND",
+          "expected": "KIQPB ZRVQH GKLW NW N WHWY QRVVELI",
+          "actual": "KIQPB ZRVQH GKLW NW N WHWY QRVVELI",
+          "success": true,
+          "execution_time": 4.673004150390625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 6,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "MISSION",
+          "expected": "TMDDW KBDTV LPWF UA S LMGG YMKKIUR",
+          "actual": "TMDDW KBDTV LPWF UA S LMGG YMKKIUR",
+          "success": true,
+          "execution_time": 4.673004150390625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 7,
+          "plaintext": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "key": "TARGET",
+          "expected": "AECRS PHRCJ XABS ZY E MXSK SILLAXK",
+          "actual": "AECRS PHRCJ XABS ZY E MXSK SILLAXK",
+          "success": true,
+          "execution_time": 4.601478576660156e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "decoding_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "RIJVS UYVJN XFSW GC E ROWR WIQCEEO",
+          "key": "KEY",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.3882598876953125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "ZINCS PGVNU XAAW KJ E MWWV DILKEIV",
+          "key": "SECRET",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.1975250244140625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "WEDDK KFUAD LZEG ZV P TWKP AVVHAYW",
+          "key": "PASSWORD",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.221366882324219e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "ciphertext": "SIXZB HSDZQ ELUG VD E FSFE QQGFLKQ",
+          "key": "LEMON",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.078315734863281e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "ciphertext": "HXELQ GOKED VRIL BS C DELM MGCSTZE",
+          "key": "ATTACK",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.1975250244140625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "ciphertext": "KIQPB ZRVQH GKLW NW N WHWY QRVVELI",
+          "key": "DEFEND",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.125999450683594e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 6,
+          "ciphertext": "TMDDW KBDTV LPWF UA S LMGG YMKKIUR",
+          "key": "MISSION",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.1975250244140625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 7,
+          "ciphertext": "AECRS PHRCJ XABS ZY E MXSK SILLAXK",
+          "key": "TARGET",
+          "expected": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "actual": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "success": true,
+          "execution_time": 5.078315734863281e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "cracking_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "RIJVS UYVJN XFSW GC E ROWR WIQCEEO",
+          "expected_key": "KEY",
+          "results": [
+            [
+              "R",
+              "ARSEB DHESW GOBF PL N AXFA FRZLNNX",
+              0.17751696286597862
+            ],
+            [
+              "O",
+              "DUVHE GKHVZ JREI SO Q DAID IUCOQQA",
+              0.17020858496936542
+            ],
+            [
+              "FN",
+              "MVEIN HTIEA SSNJ BP Z EJJM JDDXRZB",
+              0.16836223908926456
+            ],
+            [
+              "FN",
+              "MVEIN HTIEA SSNJ BP Z EJJM JDDXRZB",
+              0.16836223908926456
+            ],
+            [
+              "FN",
+              "MVEIN HTIEA SSNJ BP Z EJJM JDDXRZB",
+              0.16836223908926456
+            ],
+            [
+              "FN",
+              "MVEIN HTIEA SSNJ BP Z EJJM JDDXRZB",
+              0.16836223908926456
+            ],
+            [
+              "FN",
+              "MVEIN HTIEA SSNJ BP Z EJJM JDDXRZB",
+              0.16836223908926456
+            ],
+            [
+              "VISAMMIN",
+              "WARVG IQIOF FFGK YP J JWWF KADHWMO",
+              0.16399407343963407
+            ],
+            [
+              "NONCHOKEBORE",
+              "EUWTL GORIZ GBFI TA X DESQ IRMPQRM",
+              0.15527464194597304
+            ],
+            [
+              "PO",
+              "CUUHD GJHUZ IRDI RO P DZIC ITCNQPA",
+              0.14999105332405016
+            ],
+            [
+              "K",
+              "HYZLI KOLZD NVIM WS U HEMH MYGSUUE",
+              0.14721393256294835
+            ],
+            [
+              "C",
+              "PGHTQ SWTHL VDQU EA C PMUP UGOACCM",
+              0.14525314824922286
+            ],
+            [
+              "D",
+              "OFGSP RVSGK UCPT DZ B OLTO TFNZBBL",
+              0.13937079530804636
+            ],
+            [
+              "E",
+              "NEFRO QURFJ TBOS CY A NKSN SEMYAAK",
+              0.13794477035260966
+            ],
+            [
+              "B",
+              "QHIUR TXUIM WERV FB D QNVQ VHPBDDN",
+              0.13741001099432087
+            ],
+            [
+              "F",
+              "MDEQN PTQEI SANR BX Z MJRM RDLXZZJ",
+              0.13741001099432087
+            ],
+            [
+              "CONCERTMASTER",
+              "PUWTO DFJJV EBBU SP C NXDF WQXYNCA",
+              0.13656048359571427
+            ],
+            [
+              "CAVAE",
+              "PIOVO SYAJJ VFXW CA E WOSP WNQYCET",
+              0.13458423718096285
+            ],
+            [
+              "HOMOSTYLIC",
+              "KUXHA BAKBL QRGI OJ G GGUK IWCKLGD",
+              0.13396721568532455
+            ],
+            [
+              "A",
+              "RIJVS UYVJN XFSW GC E ROWR WIQCEEO",
+              0.13206241741143315
+            ],
+            [
+              "J",
+              "IZAMJ LPMAE OWJN XT V IFNI NZHTVVF",
+              0.13206241741143315
+            ],
+            [
+              "N",
+              "EVWIF HLIWA KSFJ TP R EBJE JVDPRRB",
+              0.13206241741143315
+            ],
+            [
+              "I",
+              "JABNK MQNBF PXKO YU W JGOJ OAIUWWG",
+              0.13010163309770767
+            ],
+            [
+              "S",
+              "ZQRDA CGDRV FNAE OK M ZWEZ EQYKMMW",
+              0.13010163309770767
+            ],
+            [
+              "Q",
+              "BSTFC EIFTX HPCG QM O BYGB GSAMOOY",
+              0.1261800644702567
+            ],
+            [
+              "G",
+              "LCDPM OSPDH RZMQ AW Y LIQL QCKWYYI",
+              0.1242192801565312
+            ],
+            [
+              "XY",
+              "UKMXV WBXMP AHVY JE H TRYU YLSFGHQ",
+              0.12352671451678947
+            ],
+            [
+              "M",
+              "FWXJG IMJXB LTGK UQ S FCKF KWEQSSC",
+              0.12225849584280572
+            ],
+            [
+              "P",
+              "CTUGD FJGUY IQDH RN P CZHC HTBNPPZ",
+              0.12225849584280572
+            ],
+            [
+              "H",
+              "KBCOL NROCG QYLP ZV X KHPK PBJVXXH",
+              0.11833692721535474
+            ],
+            [
+              "T",
+              "YPQCZ BFCQU EMZD NJ L YVDY DPXJLLV",
+              0.11833692721535474
+            ],
+            [
+              "TRUSTIFY",
+              "YRPDZ MTXQW DNZO BE L AUEY ODSJNKW",
+              0.11521673573791687
+            ],
+            [
+              "L",
+              "GXYKH JNKYC MUHL VR T GDLG LXFRTTD",
+              0.11441535858790376
+            ],
+            [
+              "MAXILLIPEDARY",
+              "FIMNH JQGFK XOUK GF W GDOC SFQLGSO",
+              0.11060822839407741
+            ]
+          ],
+          "success": false,
+          "execution_time": 0.026424169540405273,
+          "memory_delta": 48.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "ZINCS PGVNU XAAW KJ E MWWV DILKEIV",
+          "expected_key": "SECRET",
+          "results": [
+            [
+              "E",
+              "VEJYO LCRJQ TWWS GF A ISSR ZEHGAER",
+              0.18193357756212675
+            ],
+            [
+              "I",
+              "RAFUK HYNFM PSSO CB W EOON VADCWAN",
+              0.17193357756212674
+            ],
+            [
+              "P",
+              "KTYND ARGYF ILLH VU P XHHG OTWVPTG",
+              0.1640904403072248
+            ],
+            [
+              "VR",
+              "ERSLX YLESD CJFF PS J VBFA MNUPNNE",
+              0.16310231709984907
+            ],
+            [
+              "CAVAE",
+              "XISCO NGANQ VAFW GH E RWST DNLGCIA",
+              0.16036495011114638
+            ],
+            [
+              "A",
+              "ZINCS PGVNU XAAW KJ E MWWV DILKEIV",
+              0.1567820624106116
+            ],
+            [
+              "VP",
+              "ETSNX ALGSF CLFH PU J XBHA ONWPPNG",
+              0.1558007060301433
+            ],
+            [
+              "VP",
+              "ETSNX ALGSF CLFH PU J XBHA ONWPPNG",
+              0.1558007060301433
+            ],
+            [
+              "G",
+              "TCHWM JAPHO RUUQ ED Y GQQP XCFEYCP",
+              0.1528604937831606
+            ],
+            [
+              "J",
+              "QZETJ GXMEL ORRN BA V DNNM UZCBVZM",
+              0.1528604937831606
+            ],
+            [
+              "VISAMMIN",
+              "EAVCG DYISM FAOK CW J EEWJ RAYPWQV",
+              0.1510957879008077
+            ],
+            [
+              "B",
+              "YHMBR OFUMT WZZV JI D LVVU CHKJDHU",
+              0.1508997094694351
+            ],
+            [
+              "H",
+              "SBGVL IZOGN QTTP DC X FPPO WBEDXBO",
+              0.1508997094694351
+            ],
+            [
+              "R",
+              "IRWLB YPEWD GJJF TS N VFFE MRUTNRE",
+              0.1489389251557096
+            ],
+            [
+              "S",
+              "HQVKA XODVC FIIE SR M UEED LQTSMQD",
+              0.1489389251557096
+            ],
+            [
+              "N",
+              "MVAPF CTIAH KNNJ XW R ZJJI QVYXRVI",
+              0.14697814084198413
+            ],
+            [
+              "M",
+              "NWBQG DUJBI LOOK YX S AKKJ RWZYSWJ",
+              0.14378741000419448
+            ],
+            [
+              "C",
+              "XGLAQ NETLS VYYU IH C KUUT BGJICGT",
+              0.14163054725909646
+            ],
+            [
+              "O",
+              "LUZOE BSHZG JMMI WV Q YIIH PUXWQUH",
+              0.14163054725909646
+            ],
+            [
+              "HP",
+              "STGNL AZGGF QLTH DU X XPHO OBWDPBG",
+              0.1385125726353212
+            ],
+            [
+              "NONCHOKEBORE",
+              "MUAAL BWRMG GWNI XH X YMSU PRHXQVT",
+              0.13548419805222928
+            ],
+            [
+              "K",
+              "PYDSI FWLDK NQQM AZ U CMML TYBAUYL",
+              0.13378741000419447
+            ],
+            [
+              "Q",
+              "JSXMC ZQFXE HKKG UT O WGGF NSVUOSF",
+              0.13378741000419447
+            ],
+            [
+              "CONCERTMASTER",
+              "XUAAO YNJNC EWJU WW C IFDJ DQSGNGH",
+              0.13307004988941687
+            ],
+            [
+              "F",
+              "UDIXN KBQIP SVVR FE Z HRRQ YDGFZDQ",
+              0.131826625690469
+            ],
+            [
+              "D",
+              "WFKZP MDSKR UXXT HG B JTTS AFIHBFS",
+              0.1298658413767435
+            ],
+            [
+              "T",
+              "GPUJZ WNCUB EHHD RQ L TDDC KPSRLPC",
+              0.1298658413767435
+            ],
+            [
+              "HOMOSTYLIC",
+              "SUBOA WIKFS QMOI SQ G BOUO PWXSLKK",
+              0.128491078938571
+            ],
+            [
+              "L",
+              "OXCRH EVKCJ MPPL ZY T BLLK SXAZTXK",
+              0.12790505706301802
+            ],
+            [
+              "HK",
+              "SYGSL FZLGK QQTM DZ X CPMO TBBDUBL",
+              0.12635119421358015
+            ],
+            [
+              "VL",
+              "EXSRX ELKSJ CPFL PY J BBLA SNAPTNK",
+              0.11987062377750869
+            ],
+            [
+              "TRUSTIFY",
+              "GRTKZ HBXUD DIHO FL L VCEC VDNRNOD",
+              0.11819606465740722
+            ],
+            [
+              "SY",
+              "HKVEA ROXVW FCIY SL M OEYD FQNSGQX",
+              0.11494597264531876
+            ],
+            [
+              "MAXILLIPEDARY",
+              "NIQUH EYGJR XJCK KM W BLOG ZFLTGWV",
+              0.11378201550836163
+            ]
+          ],
+          "success": false,
+          "execution_time": 0.024314165115356445,
+          "memory_delta": 48.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "WEDDK KFUAD LZEG ZV P TWKP AVVHAYW",
+          "expected_key": "PASSWORD",
+          "results": [
+            [
+              "M",
+              "KSRRY YTIOR ZNSU NJ D HKYD OJJVOMK",
+              0.186446955276427
+            ],
+            [
+              "S",
+              "EMLLS SNCIL THMO HD X BESX IDDPIGE",
+              0.16929009253132896
+            ],
+            [
+              "H",
+              "PXWWD DYNTW ESXZ SO I MPDI TOOATRP",
+              0.16536852390387793
+            ],
+            [
+              "Q",
+              "GONNU UPEKN VJOQ JF Z DGUZ KFFRKIG",
+              0.15806014600726476
+            ],
+            [
+              "G",
+              "QYXXE EZOUX FTYA TP J NQEJ UPPBUSQ",
+              0.1529086308557496
+            ],
+            [
+              "A",
+              "WEDDK KFUAD LZEG ZV P TWKP AVVHAYW",
+              0.1502170087523628
+            ],
+            [
+              "C",
+              "UCBBI IDSYB JXCE XT N RUIN YTTFYWU",
+              0.1502170087523628
+            ],
+            [
+              "D",
+              "TBAAH HCRXA IWBD WS M QTHM XSSEXVT",
+              0.14629544012491183
+            ],
+            [
+              "F",
+              "RZYYF FAPVY GUZB UQ K ORFK VQQCVTR",
+              0.14629544012491183
+            ],
+            [
+              "R",
+              "FNMMT TODJM UINP IE Y CFTY JEEQJHF",
+              0.14629544012491183
+            ],
+            [
+              "NONCHOKEBORE",
+              "JQQBD WVQZP UVRS MT I FMGO MERUMLU",
+              0.14528811962085675
+            ],
+            [
+              "CONCERTMASTER",
+              "UQQBG TMIAL SVNE LI N PFRD ADCDJWI",
+              0.14436450417810853
+            ],
+            [
+              "LN",
+              "LRSQZ XUHPQ AMTT OI E GLXE NKIWNNJ",
+              0.14266771613007373
+            ],
+            [
+              "LN",
+              "LRSQZ XUHPQ AMTT OI E GLXE NKIWNNJ",
+              0.14266771613007373
+            ],
+            [
+              "LN",
+              "LRSQZ XUHPQ AMTT OI E GLXE NKIWNNJ",
+              0.14266771613007373
+            ],
+            [
+              "LN",
+              "LRSQZ XUHPQ AMTT OI E GLXE NKIWNNJ",
+              0.14266771613007373
+            ],
+            [
+              "HOMOSTYLIC",
+              "PQRPS RHJSB ELSS HC R IOII MJHPHAL",
+              0.1415667143260601
+            ],
+            [
+              "K",
+              "MUTTA AVKQT BPUW PL F JMAF QLLXQOM",
+              0.13898706222829862
+            ],
+            [
+              "L",
+              "LTSSZ ZUJPS AOTV OK E ILZE PKKWPNL",
+              0.13898706222829862
+            ],
+            [
+              "VISAMMIN",
+              "BWLDY YXHFV TZSU RI U LEKD ONIMSGW",
+              0.13722326493695827
+            ],
+            [
+              "E",
+              "SAZZG GBQWZ HVAC VR L PSGL WRRDWUS",
+              0.13722235634594568
+            ],
+            [
+              "B",
+              "VDCCJ JETZC KYDF YU O SVJO ZUUGZXV",
+              0.13506549360084766
+            ],
+            [
+              "P",
+              "HPOOV VQFLO WKPR KG A EHVA LGGSLJH",
+              0.13506549360084766
+            ],
+            [
+              "CAVAE",
+              "UEIDG IFZAZ JZJG VT P YWGN AAVDYYB",
+              0.1346783645584865
+            ],
+            [
+              "TRUSTIFY",
+              "DNJLR CAWHM RHLY UX W CCSW SQXOJEE",
+              0.1322335471547566
+            ],
+            [
+              "LX",
+              "LHSGZ NUXPG ACTJ OY E WLNE DKYWDNZ",
+              0.12936002179436434
+            ],
+            [
+              "LX",
+              "LHSGZ NUXPG ACTJ OY E WLNE DKYWDNZ",
+              0.12936002179436434
+            ],
+            [
+              "JV",
+              "NJUIB PWZRI CEVL QA G YNPG FMAYFPB",
+              0.1265028789372215
+            ],
+            [
+              "I",
+              "OWVVC CXMSV DRWY RN H LOCH SNNZSQO",
+              0.1233007877184947
+            ],
+            [
+              "J",
+              "NVUUB BWLRU CQVX QM G KNBG RMMYRPN",
+              0.1233007877184947
+            ],
+            [
+              "N",
+              "JRQQX XSHNQ YMRT MI C GJXC NIIUNLJ",
+              0.1233007877184947
+            ],
+            [
+              "O",
+              "IQPPW WRGMP XLQS LH B FIWB MHHTMKI",
+              0.1233007877184947
+            ],
+            [
+              "T",
+              "DLKKR RMBHK SGLN GC W ADRW HCCOHFD",
+              0.1233007877184947
+            ],
+            [
+              "MAXILLIPEDARY",
+              "KEGVZ ZXFWA LIGU ZY H ILCA WSVQCMW",
+              0.12229346721443964
+            ]
+          ],
+          "success": false,
+          "execution_time": 0.021914243698120117,
+          "memory_delta": 2896.0
+        }
+      ],
+      "performance": {
+        "encoding_success_rate": 1.0,
+        "decoding_success_rate": 1.0,
+        "cracking_success_rate": 0.0,
+        "avg_encoding_time": 4.9948692321777344e-05,
+        "avg_decoding_time": 5.1856040954589844e-05,
+        "avg_cracking_time": 0.024217526117960613,
+        "total_tests": 19
+      }
+    },
+    "xor": {
+      "encoding_tests": [
+        {
+          "test_id": 0,
+          "plaintext": "HELLO WORLD",
+          "key": "XOR",
+          "expected": "\u0010\n\u001e\u0014\u0000r\u000f\u0000\u0000\u0014\u000b",
+          "actual": "QKACAHZFAU",
+          "success": false,
+          "execution_time": 0.0002980232238769531,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "plaintext": "HELLO WORLD",
+          "key": "KEY",
+          "expected": "\u0003\u0000\u0015\u0007\ny\u001c\n\u000b\u0007\u0001",
+          "actual": "NATBKOEVTJ",
+          "success": false,
+          "execution_time": 4.887580871582031e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "plaintext": "HELLO WORLD",
+          "key": "SECRET",
+          "expected": "\u001b\u0000\u000f\u001e\nt\u0004\n\u0011\u001e\u0001",
+          "actual": "VAJAKFCVJS",
+          "success": false,
+          "execution_time": 4.506111145019531e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "plaintext": "HELLO WORLD",
+          "key": "TEST",
+          "expected": "\u001c\u0000\u001f\u0018\u001be\u0004\u001b\u0006\t\u0017",
+          "actual": "UAZYDSCCYH",
+          "success": false,
+          "execution_time": 0.00013017654418945312,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "plaintext": "HELLO WORLD",
+          "key": "ABC",
+          "expected": "\t\u0007\u000f\r\rc\u0016\r\u0011\r\u0006",
+          "actual": "HFJLPUOQJD",
+          "success": false,
+          "execution_time": 4.315376281738281e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "plaintext": "HELLO WORLD",
+          "key": "XYZ",
+          "expected": "\u0010\u001c\u0016\u0014\u0016z\u000f\u0016\b\u0014\u001d",
+          "actual": "QCSCWPZJSU",
+          "success": false,
+          "execution_time": 6.604194641113281e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "decoding_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "\u0010\n\u001e\u0014\u0000r\u000f\u0000\u0000\u0014\u000b",
+          "key": "XOR",
+          "expected": "HELLO WORLD",
+          "actual": "G",
+          "success": false,
+          "execution_time": 4.100799560546875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "\u0003\u0000\u0015\u0007\ny\u001c\n\u000b\u0007\u0001",
+          "key": "KEY",
+          "expected": "HELLO WORLD",
+          "actual": "S",
+          "success": false,
+          "execution_time": 4.100799560546875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "\u001b\u0000\u000f\u001e\nt\u0004\n\u0011\u001e\u0001",
+          "key": "SECRET",
+          "expected": "HELLO WORLD",
+          "actual": "B",
+          "success": false,
+          "execution_time": 4.100799560546875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "ciphertext": "\u001c\u0000\u001f\u0018\u001be\u0004\u001b\u0006\t\u0017",
+          "key": "TEST",
+          "expected": "HELLO WORLD",
+          "actual": "X",
+          "success": false,
+          "execution_time": 4.00543212890625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "ciphertext": "\t\u0007\u000f\r\rc\u0016\r\u0011\r\u0006",
+          "key": "ABC",
+          "expected": "HELLO WORLD",
+          "actual": "C",
+          "success": false,
+          "execution_time": 3.981590270996094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "ciphertext": "\u0010\u001c\u0016\u0014\u0016z\u000f\u0016\b\u0014\u001d",
+          "key": "XYZ",
+          "expected": "HELLO WORLD",
+          "actual": "O",
+          "success": false,
+          "execution_time": 4.00543212890625e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "cracking_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "\u0010\n\u001e\u0014\u0000r\u000f\u0000\u0000\u0014\u000b",
+          "expected_key": "XOR",
+          "results": [],
+          "success": false,
+          "execution_time": 0.4158940315246582,
+          "memory_delta": 16.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "\u0003\u0000\u0015\u0007\ny\u001c\n\u000b\u0007\u0001",
+          "expected_key": "KEY",
+          "results": [],
+          "success": false,
+          "execution_time": 0.42685675621032715,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "\u001b\u0000\u000f\u001e\nt\u0004\n\u0011\u001e\u0001",
+          "expected_key": "SECRET",
+          "results": [],
+          "success": false,
+          "execution_time": 0.40955424308776855,
+          "memory_delta": 0.0
+        }
+      ],
+      "performance": {
+        "encoding_success_rate": 0.0,
+        "decoding_success_rate": 0.0,
+        "cracking_success_rate": 0.0,
+        "avg_encoding_time": 0.00010522206624348958,
+        "avg_decoding_time": 4.049142201741537e-05,
+        "avg_cracking_time": 0.4174350102742513,
+        "total_tests": 15
+      }
+    },
+    "atbash": {
+      "encoding_tests": [
+        {
+          "test_id": 0,
+          "plaintext": "HELLO",
+          "expected": "SVOOL",
+          "actual": "SVOOL",
+          "success": true,
+          "execution_time": 6.103515625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "plaintext": "WORLD",
+          "expected": "DLIOW",
+          "actual": "DLIOW",
+          "success": true,
+          "execution_time": 5.2928924560546875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "plaintext": "TEST",
+          "expected": "GVHG",
+          "actual": "GVHG",
+          "success": true,
+          "execution_time": 4.601478576660156e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "plaintext": "MESSAGE",
+          "expected": "NVHHZTV",
+          "actual": "NVHHZTV",
+          "success": true,
+          "execution_time": 3.981590270996094e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "plaintext": "CRYPTOGRAPHY",
+          "expected": "XIBKGLTIZKSB",
+          "actual": "XIBKGLTIZKSB",
+          "success": true,
+          "execution_time": 4.1961669921875e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "decoding_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "SVOOL",
+          "expected": "HELLO",
+          "actual": "HELLO",
+          "success": true,
+          "execution_time": 3.910064697265625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "DLIOW",
+          "expected": "WORLD",
+          "actual": "WORLD",
+          "success": true,
+          "execution_time": 4.00543212890625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "GVHG",
+          "expected": "TEST",
+          "actual": "TEST",
+          "success": true,
+          "execution_time": 3.600120544433594e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "ciphertext": "NVHHZTV",
+          "expected": "MESSAGE",
+          "actual": "MESSAGE",
+          "success": true,
+          "execution_time": 3.6716461181640625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "ciphertext": "XIBKGLTIZKSB",
+          "expected": "CRYPTOGRAPHY",
+          "actual": "CRYPTOGRAPHY",
+          "success": true,
+          "execution_time": 3.910064697265625e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "cracking_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "SVOOL",
+          "expected_plaintext": "HELLO",
+          "result": "HELLO",
+          "success": true,
+          "execution_time": 3.719329833984375e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "DLIOW",
+          "expected_plaintext": "WORLD",
+          "result": "WORLD",
+          "success": true,
+          "execution_time": 3.814697265625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "ciphertext": "GVHG",
+          "expected_plaintext": "TEST",
+          "result": "TEST",
+          "success": true,
+          "execution_time": 3.600120544433594e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "ciphertext": "NVHHZTV",
+          "expected_plaintext": "MESSAGE",
+          "result": "MESSAGE",
+          "success": true,
+          "execution_time": 3.695487976074219e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "ciphertext": "XIBKGLTIZKSB",
+          "expected_plaintext": "CRYPTOGRAPHY",
+          "result": "CRYPTOGRAPHY",
+          "success": true,
+          "execution_time": 3.790855407714844e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "performance": {
+        "encoding_success_rate": 1.0,
+        "decoding_success_rate": 1.0,
+        "cracking_success_rate": 1.0,
+        "avg_encoding_time": 4.835128784179688e-05,
+        "avg_decoding_time": 3.819465637207031e-05,
+        "avg_cracking_time": 3.724098205566406e-05,
+        "total_tests": 15
+      }
+    },
+    "substitution": {
+      "encoding_tests": [
+        {
+          "test_id": 0,
+          "plaintext": "HELLO WORLD",
+          "key": "QWERTYUIOPASDFGHJKLZXCVBNM",
+          "expected": "ITSSG VGKSR",
+          "actual": "ITSSGVGKSR",
+          "success": false,
+          "execution_time": 4.8160552978515625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "plaintext": "HELLO WORLD",
+          "key": "ZYXWVUTSRQPONMLKJIHGFEDCBA",
+          "expected": "SVOOL DLIOW",
+          "actual": "SVOOLDLIOW",
+          "success": false,
+          "execution_time": 3.910064697265625e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "decoding_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "ITSSG VGKSR",
+          "key": "QWERTYUIOPASDFGHJKLZXCVBNM",
+          "expected": "HELLO WORLD",
+          "actual": "HELLO WORLD",
+          "success": true,
+          "execution_time": 4.1961669921875e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "ciphertext": "SVOOL DLIOW",
+          "key": "ZYXWVUTSRQPONMLKJIHGFEDCBA",
+          "expected": "HELLO WORLD",
+          "actual": "HELLO WORLD",
+          "success": true,
+          "execution_time": 4.00543212890625e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "cracking_tests": [
+        {
+          "test_id": 0,
+          "ciphertext": "ITSSG",
+          "expected_plaintext": "HELLO",
+          "result": [
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            "ITSSG",
+            0.99
+          ],
+          "success": false,
+          "execution_time": 7.700920104980469e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "performance": {
+        "encoding_success_rate": 0.0,
+        "decoding_success_rate": 1.0,
+        "cracking_success_rate": 0.0,
+        "avg_encoding_time": 4.363059997558594e-05,
+        "avg_decoding_time": 4.100799560546875e-05,
+        "avg_cracking_time": 7.700920104980469e-05,
+        "total_tests": 5
+      }
+    },
+    "cryptanalyzer": {
+      "confidence_tests": [
+        {
+          "test_id": 0,
+          "text": "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG",
+          "description": "English pangram",
+          "confidence": 0.9505192569130375,
+          "execution_time": 0.0003859996795654297,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          "description": "Alphabet",
+          "confidence": 0.11575448748983662,
+          "execution_time": 0.00027823448181152344,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "text": "AAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "description": "Repeated letters",
+          "confidence": 0.12333333333333334,
+          "execution_time": 0.0001983642578125,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "text": "HELLO WORLD THIS IS A TEST MESSAGE",
+          "description": "Normal English",
+          "confidence": 1.0,
+          "execution_time": 0.00025081634521484375,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 4,
+          "text": "QWERTYUIOPASDFGHJKLZXCVBNM",
+          "description": "Keyboard pattern",
+          "confidence": 0.12806217979752893,
+          "execution_time": 0.00022602081298828125,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 5,
+          "text": "",
+          "description": "Empty string",
+          "confidence": 0.0,
+          "execution_time": 3.528594970703125e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 6,
+          "text": "1234567890",
+          "description": "Numbers only",
+          "confidence": 0.0,
+          "execution_time": 3.5762786865234375e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 7,
+          "text": "!@#$%^&*()",
+          "description": "Symbols only",
+          "confidence": 0.0,
+          "execution_time": 3.504753112792969e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "detection_tests": [
+        {
+          "test_id": 0,
+          "text": "KHOORZRUOG",
+          "description": "Caesar cipher",
+          "detection_result": [
+            [
+              "caesar",
+              0.8
+            ],
+            [
+              "vigenere",
+              0.5
+            ],
+            [
+              "atbash",
+              0.4
+            ]
+          ],
+          "execution_time": 4.029273986816406e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 1,
+          "text": "RIJVSUYVJN",
+          "description": "Vigen\u00e8re cipher",
+          "detection_result": [
+            [
+              "caesar",
+              0.8
+            ],
+            [
+              "vigenere",
+              0.5
+            ],
+            [
+              "atbash",
+              0.4
+            ]
+          ],
+          "execution_time": 3.910064697265625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 2,
+          "text": "SVOOLDLIOW",
+          "description": "Atbash cipher",
+          "detection_result": [
+            [
+              "caesar",
+              0.8
+            ],
+            [
+              "vigenere",
+              0.5
+            ],
+            [
+              "atbash",
+              0.4
+            ]
+          ],
+          "execution_time": 3.814697265625e-05,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "text": "HELLO WORLD",
+          "description": "Plain text",
+          "detection_result": [
+            [
+              "caesar",
+              0.8
+            ],
+            [
+              "vigenere",
+              0.5
+            ],
+            [
+              "atbash",
+              0.4
+            ]
+          ],
+          "execution_time": 3.910064697265625e-05,
+          "memory_delta": 0.0
+        }
+      ],
+      "performance": {
+        "avg_confidence_time": 0.00018069148063659668,
+        "avg_detection_time": 3.916025161743164e-05,
+        "total_tests": 12
+      }
+    },
+    "integration": {
+      "cryptanalysis_tests": [
+        {
+          "test_id": 0,
+          "text": "KHOORZRUOG",
+          "description": "Caesar cipher with shift 3",
+          "result": {
+            "input_length": 10,
+            "analysis_time": 0.01584601402282715,
+            "detected_ciphers": [
+              [
+                "caesar",
+                0.8
+              ],
+              [
+                "vigenere",
+                0.5
+              ],
+              [
+                "atbash",
+                0.4
+              ]
+            ],
+            "best_results": [
+              {
+                "cipher": "substitution",
+                "key": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                "decoded": "KHOORZRUOG",
+                "confidence": 0.99
+              },
+              {
+                "cipher": "caesar",
+                "key": "3",
+                "decoded": "HELLOWORLD",
+                "confidence": 0.2872736505447685
+              },
+              {
+                "cipher": "vigenere",
+                "key": "D",
+                "decoded": "HELLOWORLD",
+                "confidence": 0.2872736505447685
+              },
+              {
+                "cipher": "vigenere",
+                "key": "KC",
+                "decoded": "AFEMHXHSEE",
+                "confidence": 0.23394031721143516
+              },
+              {
+                "cipher": "vigenere",
+                "key": "KC",
+                "decoded": "AFEMHXHSEE",
+                "confidence": 0.23394031721143516
+              },
+              {
+                "cipher": "vigenere",
+                "key": "KC",
+                "decoded": "AFEMHXHSEE",
+                "confidence": 0.23394031721143516
+              },
+              {
+                "cipher": "vigenere",
+                "key": "KC",
+                "decoded": "AFEMHXHSEE",
+                "confidence": 0.23394031721143516
+              },
+              {
+                "cipher": "caesar",
+                "key": "0",
+                "decoded": "KHOORZRUOG",
+                "confidence": 0.06002571416127313
+              },
+              {
+                "cipher": "caesar",
+                "key": "10",
+                "decoded": "AXEEHPHKEW",
+                "confidence": 0.04780349193905091
+              },
+              {
+                "cipher": "caesar",
+                "key": "13",
+                "decoded": "XUBBEMEHBT",
+                "confidence": 0.04780349193905091
+              }
+            ],
+            "statistics": {
+              "entropy": 0.6454730108953697,
+              "unique_chars": 7,
+              "alpha_ratio": 1.0,
+              "index_of_coincidence": 0.08888888888888889,
+              "grid_pattern_score": 0.0
+            }
+          },
+          "execution_time": 0.015924930572509766,
+          "memory_delta": 16.0
+        },
+        {
+          "test_id": 1,
+          "text": "RIJVSUYVJN",
+          "description": "Vigen\u00e8re cipher with key 'KEY'",
+          "result": {
+            "input_length": 10,
+            "analysis_time": 0.07456827163696289,
+            "detected_ciphers": [
+              [
+                "caesar",
+                0.8
+              ],
+              [
+                "vigenere",
+                0.5
+              ],
+              [
+                "atbash",
+                0.4
+              ]
+            ],
+            "best_results": [
+              {
+                "cipher": "substitution",
+                "key": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                "decoded": "RIJVSUYVJN",
+                "confidence": 0.99
+              },
+              {
+                "cipher": "vigenere",
+                "key": "VISAMMIN",
+                "decoded": "WARVGIQIOF",
+                "confidence": 0.06736948025337822
+              },
+              {
+                "cipher": "caesar",
+                "key": "17",
+                "decoded": "ARSEBDHESW",
+                "confidence": 0.06614996805825628
+              },
+              {
+                "cipher": "vigenere",
+                "key": "R",
+                "decoded": "ARSEBDHESW",
+                "confidence": 0.06614996805825628
+              },
+              {
+                "cipher": "vigenere",
+                "key": "NONCHOKEBORE",
+                "decoded": "EUWTLGORIZ",
+                "confidence": 0.05747788133738907
+              },
+              {
+                "cipher": "caesar",
+                "key": "14",
+                "decoded": "DUVHEGKHVZ",
+                "confidence": 0.0533721902804785
+              },
+              {
+                "cipher": "vigenere",
+                "key": "O",
+                "decoded": "DUVHEGKHVZ",
+                "confidence": 0.0533721902804785
+              },
+              {
+                "cipher": "vigenere",
+                "key": "JE",
+                "decoded": "IEARJQPRAJ",
+                "confidence": 0.05048601141868988
+              },
+              {
+                "cipher": "caesar",
+                "key": "3",
+                "decoded": "OFGSPRVSGK",
+                "confidence": 0.0483721902804785
+              },
+              {
+                "cipher": "caesar",
+                "key": "2",
+                "decoded": "PGHTQSWTHL",
+                "confidence": 0.046705523613811833
+              }
+            ],
+            "statistics": {
+              "entropy": 0.7126653889969177,
+              "unique_chars": 8,
+              "alpha_ratio": 1.0,
+              "index_of_coincidence": 0.044444444444444446,
+              "grid_pattern_score": 0.0
+            }
+          },
+          "execution_time": 0.07469701766967773,
+          "memory_delta": 144.0
+        },
+        {
+          "test_id": 2,
+          "text": "SVOOLDLIOW",
+          "description": "Atbash cipher",
+          "result": {
+            "input_length": 10,
+            "analysis_time": 0.01548314094543457,
+            "detected_ciphers": [
+              [
+                "caesar",
+                0.8
+              ],
+              [
+                "vigenere",
+                0.5
+              ],
+              [
+                "atbash",
+                0.4
+              ]
+            ],
+            "best_results": [
+              {
+                "cipher": "substitution",
+                "key": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                "decoded": "SVOOLDLIOW",
+                "confidence": 0.99
+              },
+              {
+                "cipher": "caesar",
+                "key": "0",
+                "decoded": "SVOOLDLIOW",
+                "confidence": 0.20894031721143516
+              },
+              {
+                "cipher": "vigenere",
+                "key": "A",
+                "decoded": "SVOOLDLIOW",
+                "confidence": 0.20894031721143516
+              },
+              {
+                "cipher": "vigenere",
+                "key": "DV",
+                "decoded": "PALTIIINLB",
+                "confidence": 0.07113682527238424
+              },
+              {
+                "cipher": "vigenere",
+                "key": "DV",
+                "decoded": "PALTIIINLB",
+                "confidence": 0.07113682527238424
+              },
+              {
+                "cipher": "vigenere",
+                "key": "DV",
+                "decoded": "PALTIIINLB",
+                "confidence": 0.07113682527238424
+              },
+              {
+                "cipher": "vigenere",
+                "key": "DV",
+                "decoded": "PALTIIINLB",
+                "confidence": 0.07113682527238424
+              },
+              {
+                "cipher": "caesar",
+                "key": "4",
+                "decoded": "ORKKHZHEKS",
+                "confidence": 0.06947015860571758
+              },
+              {
+                "cipher": "caesar",
+                "key": "7",
+                "decoded": "LOHHEWEBHP",
+                "confidence": 0.061692380827939805
+              },
+              {
+                "cipher": "caesar",
+                "key": "21",
+                "decoded": "XATTQIQNTB",
+                "confidence": 0.06002571416127313
+              }
+            ],
+            "statistics": {
+              "entropy": 0.6454730108953697,
+              "unique_chars": 7,
+              "alpha_ratio": 1.0,
+              "index_of_coincidence": 0.08888888888888889,
+              "grid_pattern_score": 0.0
+            },
+            "pattern_hypotheses": [
+              {
+                "pattern": "diagonal_2",
+                "decoded": "SVOOLDLIOW",
+                "confidence": 0.20894031721143516
+              }
+            ]
+          },
+          "execution_time": 0.015557289123535156,
+          "memory_delta": 0.0
+        },
+        {
+          "test_id": 3,
+          "text": "HELLO WORLD",
+          "description": "Plain text",
+          "result": {
+            "input_length": 11,
+            "analysis_time": 0.016412973403930664,
+            "detected_ciphers": [
+              [
+                "caesar",
+                0.8
+              ],
+              [
+                "vigenere",
+                0.5
+              ],
+              [
+                "atbash",
+                0.4
+              ]
+            ],
+            "best_results": [
+              {
+                "cipher": "substitution",
+                "key": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                "decoded": "HELLO WORLD",
+                "confidence": 0.99
+              },
+              {
+                "cipher": "caesar",
+                "key": "0",
+                "decoded": "HELLO WORLD",
+                "confidence": 0.8
+              },
+              {
+                "cipher": "vigenere",
+                "key": "A",
+                "decoded": "HELLO WORLD",
+                "confidence": 0.8
+              },
+              {
+                "cipher": "vigenere",
+                "key": "OW",
+                "decoded": "TIXPA AAVXH",
+                "confidence": 0.06075879174215455
+              },
+              {
+                "cipher": "caesar",
+                "key": "23",
+                "decoded": "KHOOR ZRUOG",
+                "confidence": 0.05848606446942728
+              },
+              {
+                "cipher": "vigenere",
+                "key": "NONCHOKEBORE",
+                "decoded": "UQYJH IENKP",
+                "confidence": 0.05313954978104783
+              },
+              {
+                "cipher": "vigenere",
+                "key": "TRUSTIFY",
+                "decoded": "ONRTV OJTSM",
+                "confidence": 0.05092225488082609
+              },
+              {
+                "cipher": "caesar",
+                "key": "10",
+                "decoded": "XUBBE MEHBT",
+                "confidence": 0.048258791742154555
+              },
+              {
+                "cipher": "vigenere",
+                "key": "K",
+                "decoded": "XUBBE MEHBT",
+                "confidence": 0.048258791742154555
+              },
+              {
+                "cipher": "caesar",
+                "key": "7",
+                "decoded": "AXEEH PHKEW",
+                "confidence": 0.04750121598457879
+              }
+            ],
+            "statistics": {
+              "entropy": 0.6939880333225457,
+              "unique_chars": 8,
+              "alpha_ratio": 0.9090909090909091,
+              "index_of_coincidence": 0.08888888888888889,
+              "grid_pattern_score": 0.0
+            },
+            "pattern_hypotheses": [
+              {
+                "pattern": "diagonal_2",
+                "decoded": "HELLOWORLD",
+                "confidence": 0.2872736505447685
+              },
+              {
+                "pattern": "diagonal_3",
+                "decoded": "HELLOOWRDL",
+                "confidence": 0.23671809498921292
+              }
+            ]
+          },
+          "execution_time": 0.016481876373291016,
+          "memory_delta": 0.0
+        }
+      ],
+      "performance": {
+        "avg_cryptanalysis_time": 0.030665278434753418,
+        "total_tests": 4
+      }
+    }
+  },
+  "performance_data": {},
+  "accuracy_data": {},
+  "error_log": [],
+  "test_end_time": "2025-07-24T01:41:43.626147",
+  "overall_metrics": {
+    "total_tests": 132,
+    "successful_tests": 0,
+    "overall_success_rate": 0.0,
+    "avg_execution_time": 0.019090026418676773,
+    "cipher_success_rates": {
+      "caesar": {
+        "encoding": 1.0,
+        "decoding": 1.0,
+        "cracking": 1.0
+      },
+      "vigenere": {
+        "encoding": 1.0,
+        "decoding": 1.0,
+        "cracking": 0.0
+      },
+      "xor": {
+        "encoding": 0.0,
+        "decoding": 0.0,
+        "cracking": 0.0
+      },
+      "atbash": {
+        "encoding": 1.0,
+        "decoding": 1.0,
+        "cracking": 1.0
+      },
+      "substitution": {
+        "encoding": 0.0,
+        "decoding": 1.0,
+        "cracking": 0.0
+      },
+      "cryptanalyzer": {
+        "encoding": 0,
+        "decoding": 0,
+        "cracking": 0
+      },
+      "integration": {
+        "encoding": 0,
+        "decoding": 0,
+        "cracking": 0
+      }
+    },
+    "performance_summary": {}
+  }
+}
