@@ -778,26 +778,12 @@
                             <small class="text-muted">(Click any ticket to retrieve)</small>
                         </h6>
                         <div class="message-board" id="public_message_board">
-                            <div class="board-message" onclick="selectTicket('T1001')">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="ticket-display">Ticket #T1001</span>
-                                    <span class="time-stamp">2 min ago</span>
+                            <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <span class="text-muted">
+                                        <i class="fas fa-spinner fa-spin"></i> Loading messages...
+                                    </span>
                                 </div>
-                                <div class="message-status">📧 Encrypted message available</div>
-                            </div>
-                            <div class="board-message" onclick="selectTicket('T1000')">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="ticket-display">Ticket #T1000</span>
-                                    <span class="time-stamp">5 min ago</span>
-                                </div>
-                                <div class="message-status">📧 Encrypted message available</div>
-                            </div>
-                            <div class="board-message" onclick="selectTicket('T999')">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="ticket-display">Ticket #T999</span>
-                                    <span class="time-stamp">8 min ago</span>
-                                </div>
-                                <div class="message-status">📧 Encrypted message available</div>
                             </div>
                         </div>
                         <div class="text-center mt-2">
@@ -945,38 +931,95 @@
             });
         }
 
-        // Rotate messages every 30 seconds
-        function rotateMessages() {
+        // Fetch and display real messages from server
+        async function rotateMessages() {
             const messageBoard = document.getElementById('public_message_board');
             if (!messageBoard) return;
             
-            const messages = [
-                {ticket: 'T1001', time: '2 min ago'},
-                {ticket: 'T1000', time: '5 min ago'},
-                {ticket: 'T999', time: '8 min ago'},
-                {ticket: 'T1002', time: '1 min ago'},
-                {ticket: 'T998', time: '12 min ago'},
-                {ticket: 'T1003', time: '3 min ago'},
-                {ticket: 'T997', time: '15 min ago'},
-                {ticket: 'T1004', time: '30 sec ago'},
-                {ticket: 'T1005', time: '45 sec ago'},
-                {ticket: 'T996', time: '18 min ago'},
-                {ticket: 'T1006', time: '20 sec ago'},
-                {ticket: 'T995', time: '22 min ago'}
-            ];
-            
-            // Shuffle messages and pick 3
-            const shuffled = messages.sort(() => Math.random() - 0.5).slice(0, 3);
-            
-            messageBoard.innerHTML = shuffled.map(msg => `
-                <div class="board-message" onclick="selectTicket('${msg.ticket}')">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="ticket-display">Ticket #${msg.ticket}</span>
-                        <span class="time-stamp">${msg.time}</span>
+            try {
+                const response = await fetch('/api/station/messages');
+                const data = await response.json();
+                
+                if (data.success && data.messages) {
+                    // Convert messages object to array and sort by timestamp (newest first)
+                    const messagesArray = Object.entries(data.messages).map(([ticket_id, message_data]) => ({
+                        ticket: `T${ticket_id}`,
+                        ticket_id: ticket_id,
+                        timestamp: message_data.timestamp,
+                        time: formatTimeAgo(message_data.timestamp)
+                    }));
+                    
+                    // Sort by timestamp (newest first) and take first 3
+                    messagesArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                    const recentMessages = messagesArray.slice(0, 3);
+                    
+                    if (recentMessages.length > 0) {
+                        messageBoard.innerHTML = recentMessages.map(msg => `
+                            <div class="board-message" onclick="selectTicket('${msg.ticket}')">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="ticket-display">Ticket #${msg.ticket}</span>
+                                    <span class="time-stamp">${msg.time}</span>
+                                </div>
+                                <div class="message-status">📧 Encrypted message available</div>
+                            </div>
+                        `).join('');
+                    } else {
+                        // Show placeholder when no messages
+                        messageBoard.innerHTML = `
+                            <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <span class="text-muted">
+                                        <i class="fas fa-inbox"></i> No messages available
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    console.error('Failed to fetch messages:', data.error || 'Unknown error');
+                    // Show error state
+                    messageBoard.innerHTML = `
+                        <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <span class="text-muted">
+                                    <i class="fas fa-exclamation-triangle"></i> Error loading messages
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+                // Show error state
+                messageBoard.innerHTML = `
+                    <div class="board-message" style="opacity: 0.6; cursor: default;" onclick="event.preventDefault()">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <span class="text-muted">
+                                <i class="fas fa-wifi"></i> Connection error
+                            </span>
+                        </div>
                     </div>
-                    <div class="message-status">📧 Encrypted message available</div>
-                </div>
-            `).join('');
+                `;
+            }
+        }
+
+        // Helper function to format timestamp as "X min ago"
+        function formatTimeAgo(timestamp) {
+            try {
+                const now = new Date();
+                const messageTime = new Date(timestamp);
+                const diffMs = now - messageTime;
+                const diffMinutes = Math.floor(diffMs / (1000 * 60));
+                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                
+                if (diffMinutes < 1) return 'Just now';
+                if (diffMinutes < 60) return `${diffMinutes} min ago`;
+                if (diffHours < 24) return `${diffHours} hr ago`;
+                return `${diffDays} day ago`;
+            } catch (error) {
+                return 'Unknown time';
+            }
         }
 
         // Logo Animation (copied from original index.html)
