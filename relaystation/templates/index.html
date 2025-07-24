@@ -937,8 +937,10 @@
             if (!messageBoard) return;
             
             try {
+                console.log('🔄 Fetching messages from server...');
                 const response = await fetch('/api/station/messages');
                 const data = await response.json();
+                console.log('📨 Server response:', data);
                 
                 if (data.success && data.messages) {
                     // Convert messages object to array and sort by timestamp (newest first)
@@ -952,6 +954,7 @@
                     // Sort by timestamp (newest first) and take first 3
                     messagesArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                     const recentMessages = messagesArray.slice(0, 3);
+                    console.log('🎫 Displaying tickets:', recentMessages.map(m => m.ticket));
                     
                     if (recentMessages.length > 0) {
                         messageBoard.innerHTML = recentMessages.map(msg => `
@@ -1398,13 +1401,20 @@
             
             // Extract numeric part from ticket (e.g., "T1001" -> "1001")
             const ticket_number = ticket_input.replace(/^T/, '');
+            console.log(`🎫 Attempting to retrieve ticket: ${ticket_input} -> ${ticket_number}`);
             
             try {
-                const res = await fetch(`/api/station/ticket/${ticket_number}`, {
+                const url = `/api/station/ticket/${ticket_number}`;
+                console.log(`🌐 Fetching: ${url}`);
+                
+                const res = await fetch(url, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
+                
+                console.log(`📡 Response status: ${res.status}`);
                 const result = await res.json();
+                console.log(`📦 Response data:`, result);
                 
                 if (result.success && result.message && result.message.encrypted) {
                     retrieved = result.message.encrypted;
@@ -1414,6 +1424,7 @@
                     showFeedback('retrieve_api_error', 'error', `${result.error || 'Retrieve failed'}`);
                 }
             } catch (e) {
+                console.error('🚨 Retrieve error:', e);
                 showFeedback('retrieve_api_error', 'error', 'API error');
             }
         }
