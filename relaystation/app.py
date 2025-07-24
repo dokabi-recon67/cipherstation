@@ -25,6 +25,8 @@ from typing import List
 from functools import wraps
 from collections import deque
 import uuid
+import sqlite3
+from contextlib import contextmanager
 
 # Add the parent directory to the path to import our modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -35,8 +37,9 @@ from classical_ciphers import (
     add_tags_to_entry, find_similar_ciphers, search_knowledge_graph
 )
 
-# Global variables for station management
-station_messages = {}
+# Database configuration
+DATABASE_PATH = os.path.join(os.path.dirname(__file__), 'station_messages.db')
+DB_MAX_SIZE_MB = 100
 next_ticket_id = 1001
 
 # Import modern cryptography functions from cipherstationv0
@@ -52,6 +55,152 @@ except ImportError:
 
 app = Flask(__name__)
 app.secret_key = 'cipherstation_advanced_2024'
+
+# --- Database Management ---
+@contextmanager
+def get_db_connection():
+    """Get a database connection with proper error handling"""
+    conn = None
+    try:
+        conn = sqlite3.connect(DATABASE_PATH, timeout=30.0)
+        conn.row_factory = sqlite3.Row  # Enable dict-like access
+        yield conn
+    except sqlite3.Error as e:
+        if conn:
+            conn.rollback()
+        raise e
+    finally:
+        if conn:
+            conn.close()
+
+def init_database():
+    """Initialize the SQLite database with required schema"""
+    with get_db_connection() as conn:
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS station_messages (
+                ticket_id INTEGER PRIMARY KEY,
+                encrypted TEXT NOT NULL,
+                algorithm TEXT NOT NULL,
+                salt TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                status TEXT DEFAULT 'pending',
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        
+        # Create index for faster timestamp-based queries
+        conn.execute('''
+            CREATE INDEX IF NOT EXISTS idx_timestamp 
+            ON station_messages(timestamp)
+        ''')
+        
+        # Create index for faster ticket lookups
+        conn.execute('''
+            CREATE INDEX IF NOT EXISTS idx_ticket_id 
+            ON station_messages(ticket_id)
+        ''')
+        
+        conn.commit()
+
+def get_next_ticket_id():
+    """Get the next available ticket ID"""
+    global next_ticket_id
+    with get_db_connection() as conn:
+        cursor = conn.execute('SELECT MAX(ticket_id) FROM station_messages')
+        max_id = cursor.fetchone()[0]
+        if max_id is not None:
+            next_ticket_id = max_id + 1
+        else:
+            next_ticket_id = 1001
+    return next_ticket_id
+
+def store_message(encrypted, algorithm, salt, send_to_station=False):
+    """Store a message in the database and return ticket_id if sent to station"""
+    if not send_to_station:
+        return None
+    
+    ticket_id = get_next_ticket_id()
+    
+    with get_db_connection() as conn:
+        conn.execute('''
+            INSERT INTO station_messages 
+            (ticket_id, encrypted, algorithm, salt, timestamp, status)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (ticket_id, encrypted, algorithm, salt, 
+              datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"), 'pending'))
+        conn.commit()
+    
+    return ticket_id
+
+def get_all_messages():
+    """Get all messages from the database"""
+    with get_db_connection() as conn:
+        cursor = conn.execute('''
+            SELECT ticket_id, encrypted, algorithm, salt, timestamp, status
+            FROM station_messages
+            ORDER BY timestamp DESC
+        ''')
+        
+        messages = {}
+        for row in cursor.fetchall():
+            messages[str(row['ticket_id'])] = {
+                'encrypted': row['encrypted'],
+                'algorithm': row['algorithm'],
+                'salt': row['salt'],
+                'timestamp': row['timestamp'],
+                'status': row['status']
+            }
+        
+        return messages
+
+def get_message_by_ticket(ticket_id):
+    """Get a specific message by ticket ID"""
+    with get_db_connection() as conn:
+        cursor = conn.execute('''
+            SELECT ticket_id, encrypted, algorithm, salt, timestamp, status
+            FROM station_messages
+            WHERE ticket_id = ?
+        ''', (ticket_id,))
+        
+        row = cursor.fetchone()
+        if row:
+            return {
+                'encrypted': row['encrypted'],
+                'algorithm': row['algorithm'],
+                'salt': row['salt'],
+                'timestamp': row['timestamp'],
+                'status': row['status']
+            }
+        return None
+
+def cleanup_expired_messages():
+    """Remove messages older than 24 hours"""
+    with get_db_connection() as conn:
+        cursor = conn.execute('''
+            DELETE FROM station_messages 
+            WHERE datetime(timestamp) < datetime('now', '-24 hours')
+        ''')
+        deleted_count = cursor.rowcount
+        conn.commit()
+        return deleted_count
+
+def get_database_stats():
+    """Get database statistics"""
+    with get_db_connection() as conn:
+        # Get message count
+        cursor = conn.execute('SELECT COUNT(*) FROM station_messages')
+        message_count = cursor.fetchone()[0]
+        
+        # Get database size (approximate)
+        cursor = conn.execute("SELECT page_count * page_size as size FROM pragma_page_count(), pragma_page_size()")
+        db_size_bytes = cursor.fetchone()[0]
+        db_size_mb = db_size_bytes / (1024 * 1024)
+        
+        return {
+            'message_count': message_count,
+            'db_size_mb': round(db_size_mb, 2),
+            'max_size_mb': DB_MAX_SIZE_MB
+        }
 
 # --- CSRF Exemption for API Endpoints (dev/local only) ---
 @app.before_request
@@ -367,34 +516,38 @@ advanced_cracker = AdvancedCracker()
 
 # --- Background Cleanup Thread for 24hr Message Retention ---
 def cleanup_station_messages():
+    """Background thread to clean up expired messages every hour"""
     while True:
-        now = time.time()
-        cutoff = now - 24*3600  # 24 hours ago
-        removed = 0
-        to_delete = []
-        for ticket_id, message_data in list(station_messages.items()):
-            ts = message_data.get('timestamp')
-            if ts:
-                # Support both float and string timestamps
-                try:
-                    ts_val = float(ts)
-                except Exception:
-                    try:
-                        ts_val = time.mktime(datetime.strptime(ts, "%Y-%m-%d %H:%M:%S").timetuple())
-                    except Exception:
-                        continue
-                if ts_val < cutoff:
-                    to_delete.append(ticket_id)
-        for ticket_id in to_delete:
-            del station_messages[ticket_id]
-            removed += 1
-        if removed > 0:
-            print(f"[CLEANUP] Removed {removed} expired messages from station at {datetime.now().isoformat()}")
-        else:
-            print(f"[CLEANUP] No expired messages found at {datetime.now().isoformat()}")
+        try:
+            removed = cleanup_expired_messages()
+            if removed > 0:
+                print(f"[CLEANUP] Removed {removed} expired messages from database at {datetime.now().isoformat()}")
+            else:
+                print(f"[CLEANUP] No expired messages found at {datetime.now().isoformat()}")
+            
+            # Also log database stats periodically
+            stats = get_database_stats()
+            print(f"[STATS] Database: {stats['message_count']} messages, {stats['db_size_mb']}MB / {stats['max_size_mb']}MB")
+            
+        except Exception as e:
+            print(f"[CLEANUP ERROR] Failed to cleanup messages: {e}")
+        
         time.sleep(3600)  # Run every hour
 
-# Start the cleanup thread when the app starts
+# Initialize database and start cleanup thread when the app starts
+try:
+    init_database()
+    print(f"📊 Database initialized: {DATABASE_PATH}")
+    
+    # Get initial stats
+    stats = get_database_stats()
+    print(f"📈 Initial stats: {stats['message_count']} messages, {stats['db_size_mb']}MB / {stats['max_size_mb']}MB")
+    
+except Exception as e:
+    print(f"❌ Database initialization failed: {e}")
+    sys.exit(1)
+
+# Start the cleanup thread
 cleanup_thread = threading.Thread(target=cleanup_station_messages, daemon=True)
 cleanup_thread.start()
 
@@ -413,40 +566,74 @@ def station():
     """Cipher station with advanced analysis"""
     ticket = request.args.get('ticket')
     
-    # Convert station_messages dict to list format expected by template
-    messages_list = []
-    for ticket_id, message_data in station_messages.items():
-        message_obj = message_data.copy()
-        message_obj['ticket'] = ticket_id
-        messages_list.append(message_obj)
-    
-    # Sort by timestamp (newest first)
-    messages_list.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
-    
-    return render_template('station.html', station_messages=messages_list, current_ticket=ticket)
+    try:
+        # Get messages from database and convert to list format expected by template
+        messages_dict = get_all_messages()
+        messages_list = []
+        for ticket_id, message_data in messages_dict.items():
+            message_obj = message_data.copy()
+            message_obj['ticket'] = ticket_id
+            messages_list.append(message_obj)
+        
+        # Sort by timestamp (newest first)
+        messages_list.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
+        
+        return render_template('station.html', station_messages=messages_list, current_ticket=ticket)
+    except Exception as e:
+        # Fallback to empty list if database error
+        return render_template('station.html', station_messages=[], current_ticket=ticket)
 
 @app.route('/api/station/messages')
 def api_station_messages():
-    """Get all station messages"""
-    return jsonify({
-        'success': True,
-        'messages': station_messages
-    })
+    """Get all station messages from database"""
+    try:
+        messages = get_all_messages()
+        return jsonify({
+            'success': True,
+            'messages': messages
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Database error: {str(e)}'
+        }), 500
 
 @app.route('/api/station/ticket/<int:ticket_id>')
 def api_station_ticket(ticket_id):
-    """Get specific ticket details"""
-    if ticket_id in station_messages:
-        return jsonify({
-            'success': True,
-            'ticket': ticket_id,
-            'message': station_messages[ticket_id]
-        })
-    else:
+    """Get specific ticket details from database"""
+    try:
+        message = get_message_by_ticket(ticket_id)
+        if message:
+            return jsonify({
+                'success': True,
+                'ticket': ticket_id,
+                'message': message
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': 'Ticket not found'
+            }), 404
+    except Exception as e:
         return jsonify({
             'success': False,
-            'error': 'Ticket not found'
-        }), 404
+            'error': f'Database error: {str(e)}'
+        }), 500
+
+@app.route('/api/station/stats')
+def api_station_stats():
+    """Get database statistics"""
+    try:
+        stats = get_database_stats()
+        return jsonify({
+            'success': True,
+            'stats': stats
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Database error: {str(e)}'
+        }), 500
 
 @app.route('/documentation')
 def documentation():
@@ -823,20 +1010,16 @@ def encrypt_message():
             
             # Handle station functionality
             if send_to_station:
-                global next_ticket_id
-                ticket_id = next_ticket_id
-                next_ticket_id += 1
-                
-                # Store in station
-                station_messages[ticket_id] = {
-                    'encrypted': encrypted_json,
-                    'algorithm': algorithm,
-                    'salt': salt.hex() if salt else None,
-                    'timestamp': time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                    'status': 'pending'
-                }
-                
-                response_data['ticket_id'] = ticket_id
+                try:
+                    ticket_id = store_message(
+                        encrypted_json, 
+                        algorithm, 
+                        salt.hex() if salt else None, 
+                        send_to_station=True
+                    )
+                    response_data['ticket_id'] = ticket_id
+                except Exception as e:
+                    return jsonify({'success': False, 'error': f'Failed to store message: {str(e)}'}), 500
             
             return jsonify(response_data)
         
@@ -1001,6 +1184,15 @@ def cleanup_resources():
     """Cleanup function to prevent resource leaks"""
     try:
         import gc
+        
+        # Final database cleanup
+        try:
+            removed = cleanup_expired_messages()
+            if removed > 0:
+                print(f"🗑️  Final cleanup: Removed {removed} expired messages")
+        except Exception as e:
+            print(f"⚠️  Final database cleanup warning: {e}")
+        
         gc.collect()
         
         # Clear any remaining threads
