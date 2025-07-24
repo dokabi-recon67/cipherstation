@@ -1,4 +1,4 @@
-# CipherStation - Comprehensive Cryptography Toolkit V.0
+# CipherStation - Secure Deaddrop & Cryptography Toolkit V.0
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com/)
