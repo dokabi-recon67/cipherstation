@@ -245,62 +245,23 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
     iteration_count = 0
     iteration_cap = max_iterations if max_iterations is not None else 1000
     
+    # Import XOR cipher to use the correct implementation
+    from classical_ciphers import XORCipher
+    xor_cipher = XORCipher()
+    
     # Common XOR keys to try (single characters and common words)
     common_keys = [
-        # Single byte keys (most common ASCII characters)
+        # Single letter keys (most common)
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         
-        # Common multi-character keys
+        # Common multi-character keys (prioritize most common)
         'KEY', 'XOR', 'SECRET', 'PASSWORD', 'CIPHER', 'CODE', 'HELLO', 'WORLD', 'TEST', 'ADMIN',
-        'key', 'xor', 'secret', 'password', 'cipher', 'code', 'hello', 'world', 'test', 'admin',
+        'MESSAGE', 'ENCRYPT', 'DECRYPT', 'ATTACK', 'DEFEND', 'AGENT', 'SPY',
         'THE', 'AND', 'FOR', 'ARE', 'BUT', 'NOT', 'YOU', 'ALL', 'CAN', 'HER',
         'ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQR', 'STU', 'VWX', 'YZ'
     ]
     
-    # Also try some numeric keys as single bytes
-    for i in range(256):
-        if iteration_count >= iteration_cap:
-            break
-        
-        if progress_callback:
-            progress_callback(iteration_count / iteration_cap * 100, f"Testing byte key 0x{i:02X}...")
-        
-        try:
-            # Decode with current single-byte key
-            decoded = ""
-            for char in text:
-                decoded_char = chr(ord(char) ^ i)
-                decoded += decoded_char
-            
-            # Calculate confidence
-            confidence = analyzer._calculate_confidence(decoded)
-            
-            # Only keep results with reasonable confidence
-            if confidence > 0.15:
-                key_hex = f"0x{i:02X} ('{chr(i) if 32 <= i <= 126 else '?'}')"
-                results.append((key_hex, decoded, confidence))
-        except:
-            pass
-        
-        iteration_count += 1
-        if iteration_cap is not None and iteration_count >= iteration_cap:
-            if web_mode:
-                if progress_callback:
-                    progress_callback(100, f"Iteration cap reached ({iteration_cap}). Returning partial results.")
-                break
-            else:
-                print(f"Iteration cap reached. Continue searching? (y/n/ya=always): ", end='', flush=True)
-                ans = input().strip().lower()
-                if ans == 'y':
-                    iteration_cap += 1000
-                elif ans == 'ya':
-                    iteration_cap = None
-                else:
-                    break
-    
-    # Try multi-character keys
+    # Try all common keys
     for key_str in common_keys:
         if iteration_count >= iteration_cap:
             if web_mode:
@@ -321,13 +282,8 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
             progress_callback(iteration_count / iteration_cap * 100, f"Testing key '{key_str}'...")
         
         try:
-            # Decode with current multi-character key
-            decoded = ""
-            key_bytes = [ord(c) for c in key_str]
-            for i, char in enumerate(text):
-                key_byte = key_bytes[i % len(key_bytes)]
-                decoded_char = chr(ord(char) ^ key_byte)
-                decoded += decoded_char
+            # Use the actual XOR cipher implementation
+            decoded = xor_cipher.decode(text, key_str)
             
             # Calculate confidence
             confidence = analyzer._calculate_confidence(decoded)
@@ -339,6 +295,53 @@ def crack_xor_advanced(text: str, progress_callback=None, web_mode: bool = False
             pass
         
         iteration_count += 1
+    
+    # Also try ASCII byte-based XOR for compatibility with other implementations
+    if iteration_count < iteration_cap:
+        for i in range(32, 127):  # Printable ASCII characters
+            if iteration_count >= iteration_cap:
+                if web_mode:
+                    if progress_callback:
+                        progress_callback(100, f"Iteration cap reached ({iteration_cap}). Returning partial results.")
+                    break
+                else:
+                    print(f"Iteration cap reached. Continue searching? (y/n/ya=always): ", end='', flush=True)
+                    ans = input().strip().lower()
+                    if ans == 'y':
+                        iteration_cap += 1000
+                    elif ans == 'ya':
+                        iteration_cap = None
+                    else:
+                        break
+            
+            if progress_callback:
+                progress_callback(iteration_count / iteration_cap * 100, f"Testing ASCII key 0x{i:02X} ('{chr(i)}')")
+            
+            try:
+                # ASCII-based XOR (for compatibility with other XOR implementations)
+                decoded = ""
+                for char in text:
+                    if char.isalpha():
+                        decoded_char = chr(ord(char) ^ i)
+                        # Only keep if result is printable
+                        if 32 <= ord(decoded_char) <= 126:
+                            decoded += decoded_char
+                        else:
+                            decoded += char  # Keep original if not printable
+                    else:
+                        decoded += char
+                
+                # Calculate confidence
+                confidence = analyzer._calculate_confidence(decoded)
+                
+                # Only keep results with reasonable confidence
+                if confidence > 0.15:
+                    key_display = f"ASCII 0x{i:02X} ('{chr(i)}')"
+                    results.append((key_display, decoded, confidence))
+            except:
+                pass
+            
+            iteration_count += 1
     
     # Sort by confidence
     results.sort(key=lambda x: x[2], reverse=True)
