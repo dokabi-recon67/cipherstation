@@ -301,7 +301,7 @@ class AdvancedCracker:
         """Legacy method for backward compatibility"""
         self.crack_with_progress_full(text, task_id, custom_words, 300, False, 
                                      ['caesar', 'vigenere', 'xor', 'atbash', 'substitution'],
-                                     None, 100, 5000, web_mode=True)
+                                     None, None, 100, 5000, web_mode=True)
 
     def crack_with_progress_full(self, text: str, task_id: str, custom_words: List[str] = None, 
                                 max_time: int = 300, test_mode: bool = False, 
@@ -310,7 +310,7 @@ class AdvancedCracker:
                                 vigenere_max_key_length: int = None,
                                 substitution_max_restarts: int = 100,
                                 substitution_max_iterations: int = 5000,
-                                web_mode: bool = True):
+                                web_mode: bool = True, hex_converted_text: str = None):
         """Full-capability cracking with all CLI options and real-time progress"""
         try:
             start_time = time.time()
@@ -399,20 +399,32 @@ class AdvancedCracker:
             
             # Step 4: XOR Cracking (if enabled)
             if 'xor' in enabled_ciphers:
-                update_progress('cracking_xor', 55, 'Attempting XOR cipher cracking...')
-                
-                def xor_progress(progress, msg):
-                    cracking_progress[task_id].update({
-                        'status': 'cracking_xor',
-                        'progress': 55 + (progress * 0.1),  # Scale progress within XOR's range
-                        'message': f'XOR: {msg}'
-                    })
-                
-                xor_results = crack_xor_advanced(text, progress_callback=xor_progress, web_mode=web_mode)
-                # Add cipher type to each result
-                for key, decoded, confidence in xor_results:
-                    all_results.append(('xor', key, decoded, confidence))
-                total_attempts += 256
+                try:
+                    update_progress('cracking_xor', 55, 'Attempting XOR cipher cracking...')
+                    
+                    def xor_progress(progress, msg):
+                        cracking_progress[task_id].update({
+                            'status': 'cracking_xor',
+                            'progress': 55 + (progress * 0.1),  # Scale progress within XOR's range
+                            'message': f'XOR: {msg}'
+                        })
+                    
+                    # Use hex-converted text for XOR if available, otherwise use original
+                    xor_input = hex_converted_text if hex_converted_text is not None else text
+                    if hex_converted_text is not None:
+                        print(f"[XOR CRACKING] Using hex-converted input: {repr(xor_input)}")
+                    else:
+                        print(f"[XOR CRACKING] Using original input: {repr(xor_input)}")
+                    
+                    xor_results = crack_xor_advanced(xor_input, progress_callback=xor_progress, web_mode=web_mode)
+                    # Add cipher type to each result
+                    for key, decoded, confidence in xor_results:
+                        all_results.append(('xor', key, decoded, confidence))
+                    total_attempts += 256
+                except Exception as e:
+                    print(f"[XOR ERROR] XOR cracking failed: {e}")
+                    import traceback
+                    traceback.print_exc()
             
             # Step 5: Atbash Cracking (if enabled)
             if 'atbash' in enabled_ciphers:
@@ -791,6 +803,24 @@ def api_crack():
         if not text:
             return jsonify({'error': 'No text provided'}), 400
         
+        # **NEW: Detect and convert hex input for XOR cracking**
+        original_text = text
+        converted_from_hex = False
+        hex_converted_text = None
+        
+        # Check if text looks like hex (space-separated hex values)
+        if 'xor' in enabled_ciphers and _is_hex_string(text):
+            try:
+                hex_converted_text = _hex_string_to_chars(text)
+                converted_from_hex = True
+                print(f"[HEX CONVERSION] Detected hex input for XOR cracking")
+                print(f"[HEX CONVERSION] Original: {original_text}")
+                print(f"[HEX CONVERSION] Converted: {repr(hex_converted_text)}")
+            except Exception as e:
+                print(f"[HEX CONVERSION] Failed to convert hex: {e}")
+                # Continue with original text if conversion fails
+                hex_converted_text = None
+        
         # Generate unique task ID
         task_id = f"crack_{int(time.time() * 1000)}"
         
@@ -808,7 +838,7 @@ def api_crack():
         thread = threading.Thread(
             target=advanced_cracker.crack_with_progress_full,
             args=(text, task_id, custom_words, max_time, test_mode, enabled_ciphers, 
-                  vigenere_max_iterations, vigenere_max_key_length, substitution_max_restarts, substitution_max_iterations, True)
+                  vigenere_max_iterations, vigenere_max_key_length, substitution_max_restarts, substitution_max_iterations, True, hex_converted_text)
         )
         thread.daemon = True
         thread.start()
@@ -816,12 +846,53 @@ def api_crack():
         return jsonify({
             'success': True,
             'task_id': task_id,
-            'message': 'Cracking started',
-            'start_time': time.time()
+            'message': 'Cracking started' + (' (hex input detected and converted)' if converted_from_hex else ''),
+            'start_time': time.time(),
+            'hex_converted': converted_from_hex
         })
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+def _is_hex_string(text: str) -> bool:
+    """Check if text looks like a hex string (space-separated hex values)"""
+    text = text.strip()
+    
+    # Check for space-separated hex pattern like "03 0E 07 07"
+    if ' ' in text:
+        parts = text.split()
+        if len(parts) >= 2:  # At least 2 hex values
+            for part in parts:
+                if len(part) != 2 or not all(c in '0123456789ABCDEFabcdef' for c in part):
+                    return False
+            return True
+    
+    # Check for continuous hex string (even length)
+    if len(text) >= 4 and len(text) % 2 == 0:
+        return all(c in '0123456789ABCDEFabcdef' for c in text)
+    
+    return False
+
+
+def _hex_string_to_chars(hex_string: str) -> str:
+    """Convert hex string to actual characters"""
+    hex_string = hex_string.strip()
+    
+    # Handle space-separated hex like "03 0E 07 07"
+    if ' ' in hex_string:
+        hex_values = hex_string.split()
+        chars = []
+        for hex_val in hex_values:
+            chars.append(chr(int(hex_val, 16)))
+        return ''.join(chars)
+    
+    # Handle continuous hex string
+    chars = []
+    for i in range(0, len(hex_string), 2):
+        hex_val = hex_string[i:i+2]
+        chars.append(chr(int(hex_val, 16)))
+    return ''.join(chars)
 
 @app.route('/api/crack/progress/<task_id>')
 def api_crack_progress(task_id):
