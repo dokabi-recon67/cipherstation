@@ -1,0 +1,367 @@
+{
+  "test_start_time": "2025-07-24T12:03:33.699257",
+  "cli_tests": {
+    "basic_commands": [
+      {
+        "command": "python3 cli_cracker.py --help",
+        "description": "Help command",
+        "success": true,
+        "execution_time": 0.4067039489746094,
+        "stdout_length": 1761,
+        "stderr_length": 0
+      },
+      {
+        "command": "python3 cipherstationv0.py --help",
+        "description": "Main CLI help",
+        "success": false,
+        "execution_time": 0.029221057891845703,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "command": "python3 cipherstationv0.py keygen --help",
+        "description": "Keygen help",
+        "success": false,
+        "execution_time": 0.02819681167602539,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "command": "python3 cipherstationv0.py encrypt --help",
+        "description": "Encrypt help",
+        "success": false,
+        "execution_time": 0.027849912643432617,
+        "stdout_length": 0,
+        "stderr_length": 182
+      },
+      {
+        "command": "python3 cipherstationv0.py decrypt --help",
+        "description": "Decrypt help",
+        "success": false,
+        "execution_time": 0.029923200607299805,
+        "stdout_length": 0,
+        "stderr_length": 182
+      }
+    ],
+    "cipher_operations": [
+      {
+        "input": "KHOORZRUOG",
+        "description": "Caesar cipher test",
+        "success": true,
+        "execution_time": 2.3662269115448,
+        "stdout_length": 1864,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      },
+      {
+        "input": "RIJVSUYVJN",
+        "description": "Vigen\u00e8re cipher test",
+        "success": true,
+        "execution_time": 2.268867015838623,
+        "stdout_length": 1864,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      },
+      {
+        "input": "SVOOLDLIOW",
+        "description": "Atbash cipher test",
+        "success": true,
+        "execution_time": 2.274503231048584,
+        "stdout_length": 1864,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      },
+      {
+        "input": "HELLO WORLD",
+        "description": "Plain text test",
+        "success": true,
+        "execution_time": 2.306365966796875,
+        "stdout_length": 1857,
+        "stderr_length": 0,
+        "output_sample": "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551                    \ud83d\udd10 ADVANCED CIPHER CRACKER v0 \ud83d\udd10          \u2551\n\u2551                                                              \u2551\n\u2551  The"
+      }
+    ],
+    "error_handling": [
+      {
+        "command": "python3 cli_cracker.py --text ",
+        "description": "Empty text",
+        "expected_failure": true,
+        "actual_failure": true,
+        "execution_time": 0.3897569179534912,
+        "stderr_length": 0
+      },
+      {
+        "command": "python3 cli_cracker.py --text 123!@#",
+        "description": "Non-alphabetic text",
+        "expected_failure": true,
+        "actual_failure": false,
+        "execution_time": 0.40001678466796875,
+        "stderr_length": 0
+      },
+      {
+        "command": "python3 cli_cracker.py --invalid-flag",
+        "description": "Invalid flag",
+        "expected_failure": true,
+        "actual_failure": true,
+        "execution_time": 0.38401198387145996,
+        "stderr_length": 321
+      }
+    ],
+    "performance": {
+      "basic_command_success_rate": 0.2,
+      "cipher_operation_success_rate": 1.0,
+      "error_handling_success_rate": 0.6666666666666666,
+      "avg_basic_command_time": 0.10437898635864258,
+      "avg_cipher_operation_time": 2.3039907813072205
+    }
+  },
+  "web_tests": {
+    "server_startup": {
+      "success": true,
+      "status_code": 200,
+      "response_time": 0.028325
+    },
+    "api_endpoints": [
+      {
+        "endpoint": "/classical",
+        "method": "GET",
+        "description": "Classical ciphers page",
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.021473
+      },
+      {
+        "endpoint": "/api/encode",
+        "method": "POST",
+        "description": "Encode API",
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.003041
+      },
+      {
+        "endpoint": "/api/decode",
+        "method": "POST",
+        "description": "Decode API",
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.002517
+      },
+      {
+        "endpoint": "/api/crack",
+        "method": "POST",
+        "description": "Crack API",
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.002583
+      }
+    ],
+    "cipher_operations": [
+      {
+        "input": "KHOORZRUOG",
+        "description": "Caesar cipher",
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.064055,
+        "response_size": 127
+      },
+      {
+        "input": "RIJVSUYVJN",
+        "description": "Vigen\u00e8re cipher",
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.129135,
+        "response_size": 127
+      },
+      {
+        "input": "SVOOLDLIOW",
+        "description": "Atbash cipher",
+        "success": true,
+        "status_code": 200,
+        "response_time": 0.027886,
+        "response_size": 126
+      }
+    ],
+    "performance": {
+      "server_startup_success": true,
+      "api_endpoint_success_rate": 1.0,
+      "cipher_operation_success_rate": 1.0,
+      "avg_api_response_time": 0.0074034999999999995,
+      "avg_cipher_response_time": 0.073692
+    }
+  },
+  "stress_tests": {
+    "large_text_tests": [
+      {
+        "text_length": 1000,
+        "description": "1000 repeated characters",
+        "success": true,
+        "execution_time": 30.95694398880005,
+        "memory_usage": 3313
+      },
+      {
+        "text_length": 1000,
+        "description": "1000 character pangram",
+        "success": true,
+        "execution_time": 31.243309020996094,
+        "memory_usage": 3299
+      },
+      {
+        "text_length": 1000,
+        "description": "1000 random characters",
+        "success": true,
+        "execution_time": 35.22120213508606,
+        "memory_usage": 3313
+      },
+      {
+        "text_length": 996,
+        "description": "1000 character repeated phrase",
+        "success": true,
+        "execution_time": 34.262558937072754,
+        "memory_usage": 3301
+      }
+    ],
+    "concurrent_tests": [
+      {
+        "index": 1,
+        "text": "RIJVSUYVJN",
+        "success": true,
+        "execution_time": 14.951004028320312
+      },
+      {
+        "index": 2,
+        "text": "SVOOLDLIOW",
+        "success": true,
+        "execution_time": 15.013014078140259
+      },
+      {
+        "index": 3,
+        "text": "HELLO WORLD",
+        "success": true,
+        "execution_time": 15.02992582321167
+      },
+      {
+        "index": 0,
+        "text": "KHOORZRUOG",
+        "success": true,
+        "execution_time": 15.037237882614136
+      }
+    ],
+    "memory_tests": [],
+    "performance": {
+      "large_text_success_rate": 1.0,
+      "concurrent_success_rate": 1.0,
+      "avg_large_text_time": 32.92100352048874,
+      "avg_concurrent_time": 15.007795453071594,
+      "max_concurrent_time": 15.037237882614136
+    }
+  },
+  "performance_data": {},
+  "error_log": [],
+  "dictionary_tests": {
+    "dictionary_tests": [
+      {
+        "key": "KEY",
+        "ciphertext": "RIJVS UYVJN XFSW GC E ROWR WIQCEEO",
+        "success": true,
+        "execution_time": 8.171080827713013,
+        "stdout_length": 2034,
+        "found_key": true,
+        "found_plaintext": true
+      },
+      {
+        "key": "SECRET",
+        "ciphertext": "ZINCS PGVNU XAAW KJ E MWWV DILKEIV",
+        "success": false,
+        "execution_time": 7.458656072616577,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "PASSWORD",
+        "ciphertext": "WEDDK KFUAD LZEG ZV P TWKP AVVHAYW",
+        "success": false,
+        "execution_time": 7.361099004745483,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "LEMON",
+        "ciphertext": "SIXZB HSDZQ ELUG VD E FSFE QQGFLKQ",
+        "success": false,
+        "execution_time": 7.286202907562256,
+        "stdout_length": 2053,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "ATTACK",
+        "ciphertext": "HXELQ GOKED VRIL BS C DELM MGCSTZE",
+        "success": true,
+        "execution_time": 7.280383825302124,
+        "stdout_length": 2035,
+        "found_key": true,
+        "found_plaintext": false
+      },
+      {
+        "key": "DEFEND",
+        "ciphertext": "KIQPB ZRVQH GKLW NW N WHWY QRVVELI",
+        "success": false,
+        "execution_time": 7.277958154678345,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "MISSION",
+        "ciphertext": "TMDDW KBDTV LPWF UA S LMGG YMKKIUR",
+        "success": false,
+        "execution_time": 7.171553134918213,
+        "stdout_length": 2060,
+        "found_key": false,
+        "found_plaintext": false
+      },
+      {
+        "key": "TARGET",
+        "ciphertext": "AECRS PHRCJ XABS ZY E MXSK SILLAXK",
+        "success": false,
+        "execution_time": 7.428478002548218,
+        "stdout_length": 2053,
+        "found_key": false,
+        "found_plaintext": false
+      }
+    ],
+    "performance": {
+      "dictionary_success_rate": 0.25,
+      "avg_dictionary_time": 7.429426491260529,
+      "key_found_rate": 0.25,
+      "plaintext_found_rate": 0.125
+    }
+  },
+  "test_end_time": "2025-07-24T12:07:14.171798",
+  "overall_metrics": {
+    "total_tests": 0,
+    "successful_tests": 0,
+    "overall_success_rate": 0.0,
+    "avg_execution_time": 0.0,
+    "test_summary": {
+      "cli_tests": {
+        "success_rate": 0.2,
+        "avg_time": 0.10437898635864258
+      },
+      "web_tests": {
+        "success_rate": true,
+        "avg_time": 0.0074034999999999995
+      },
+      "stress_tests": {
+        "success_rate": 1.0,
+        "avg_time": 32.92100352048874
+      },
+      "dictionary_tests": {
+        "success_rate": 0.25,
+        "avg_time": 7.429426491260529
+      }
+    }
+  }
+}

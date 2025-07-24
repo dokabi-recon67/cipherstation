@@ -540,10 +540,24 @@ class VigenereCipher(ClassicalCipher):
                 progress_callback(f"[Vigenère Brute] {100*(idx+1)/len(brute_keys):.1f}% ({idx+1}/{len(brute_keys)}) | Trying key: {key}")
         # Dictionary attack
         dict_keys = dictionary_keys[:7] if test_mode else dictionary_keys
+        ask_again = True
         for idx, key in enumerate(dict_keys):
             if iteration_count >= iteration_cap:
                 print("[cryptanalyze] Iteration cap reached in dictionary attack.")
-                break
+                if not test_mode:
+                    if ask_again:
+                        user_input = input('Iteration cap reached. Continue searching? (y/n/ya=always): ').strip().lower()
+                        if user_input == 'y':
+                            iteration_cap += 10000
+                        elif user_input == 'ya':
+                            iteration_cap += 10000
+                            ask_again = False
+                        else:
+                            break
+                    else:
+                        iteration_cap += 10000
+                else:
+                    break
             decoded = self.decode(text, key)
             conf = analyzer._calculate_confidence(decoded)
             results.append((key, decoded, conf))

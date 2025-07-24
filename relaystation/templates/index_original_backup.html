@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CipherStation - Secure Encryption Platform</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='android-chrome-192x192.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-primary: #30363d;
+            --border-secondary: #21262d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --success: #238636;
+            --warning: #d29922;
+            --error: #f85149;
+            --green: #00623a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: #88fb8a;
+        }
+
+        #logo-text {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ensure encrypted text in animation is also green */
+        #logo-text.encrypted {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+
+
+        .github-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .github-btn:hover {
+            background: var(--border-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: #000000;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-feature {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Text Encryption Section */
+        .text-encryption-section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .text-box-container {
+            background: var(--bg-lighter);
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .text-box-container:focus-within {
+            border-color: var(--primary-blue);
+        }
+
+        .text-box-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .text-area {
+            width: 100%;
+            min-height: 120px;
+            border: none;
+            background: transparent;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .text-area::placeholder {
+            color: var(--text-muted);
+        }
+
+        .char-counter {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        /* Controls Section */
+        .controls-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Text Box Container */
+        .text-box-container {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control, .form-select {
+            border: 1px solid var(--border-medium);
+            border-radius: 6px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: var(--bg-tertiary);
+            border-color: var(--green);
+            color: var(--text-primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 98, 58, 0.25);
+        }
+
+        .form-text {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Buttons */
+        .btn {
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+
+        .btn-info {
+            background: var(--secondary-blue);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-success {
+            background: var(--green);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+
+        /* File Upload Section */
+        .file-upload-section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .file-upload-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .file-upload-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-medium);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--bg-lighter);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-blue);
+            background: var(--bg-light);
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Cards */
+        .card {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            background: var(--bg-lighter);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 1.5rem;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Feedback Messages */
+        .feedback-message {
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .feedback-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .feedback-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .feedback-message.info {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--secondary-blue);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-primary);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-primary);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        .message-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .copy-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .send-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Encryption Form */
+        .encryption-form {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* File Upload Section */
+        .file-upload-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Message Relay Section */
+        .message-relay-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Text Encryption Section */
+        .text-encryption-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Controls Section */
+        .controls-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .btn-secondary {
+            background: var(--green);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-eye"></i>
+                    <span id="logo-text">CipherStation</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/station" class="nav-link"><i class="fas fa-broadcast-tower"></i> Relay Station</a>
+                    <a href="/classical" class="nav-link"><i class="fas fa-unlock-alt"></i> Classical Ciphers</a>
+                    <a href="/documentation" class="nav-link">Documentation</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <h1 class="hero-title">Secure Encryption Platform</h1>
+            <p class="hero-subtitle">
+                Secure your messages and files with advanced encryption. 
+                Built for privacy and reliability.
+            </p>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-lock"></i>
+                    AES-256 & ChaCha20 Encryption
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-paper-plane"></i>
+                    Secure Message Relay
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-file-shield"></i>
+                    File Encryption
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-search"></i>
+                    Auto Cipher Cracker
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-terminal"></i>
+                    CLI Interface
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Text Encryption Section -->
+            <section class="text-encryption-section">
+                <h2 class="section-title">
+                    <i class="fas fa-lock"></i> Secure Message Encryption
+                </h2>
+                <p class="section-subtitle">
+                    Encrypt your messages with state-of-the-art algorithms. 
+                    Any password works - we'll convert it to the right key length automatically.
+                </p>
+
+                <!-- Text Boxes Side by Side -->
+                <div class="row">
+                    <!-- Input Text Box -->
+                    <div class="col-lg-6">
+                        <div class="text-box-container">
+                            <div class="text-box-label">
+                                <i class="fas fa-edit"></i> Message to Encrypt
+                            </div>
+                            <textarea id="inputText" class="text-area" 
+                                      placeholder="Enter your message here (max 1000 characters)..."
+                                      maxlength="1000"></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span>/1000 characters
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Text Box -->
+                    <div class="col-lg-6">
+                        <div class="text-box-container">
+                            <div class="text-box-label">
+                                <i class="fas fa-file-code"></i> Encrypted Message
+                                <button class="btn btn-sm btn-outline-secondary ms-auto" onclick="copyToClipboard('outputText')">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <textarea id="outputText" class="text-area" 
+                                      placeholder="Encrypted message will appear here..."
+                                      readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls Section -->
+                <div class="controls-section">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="control-group">
+                                <label for="encryptionPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="encryptionPassword" 
+                                       placeholder="Enter any password (will be converted to proper key)">
+                                <small class="form-text">Any password works - we'll convert it to the right key length</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="control-group">
+                                <label for="algorithmSelect" class="form-label">Algorithm</label>
+                                <select class="form-select" id="algorithmSelect">
+                                    <option value="aes256">AES-256-GCM (Recommended)</option>
+                                    <option value="aes192">AES-192-GCM</option>
+                                    <option value="aes128">AES-128-GCM</option>
+                                    <option value="chacha20">ChaCha20-Poly1305</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="control-group">
+                                <label class="form-label">Actions</label>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary" onclick="encryptMessage()" id="encryptBtn">
+                                        <i class="fas fa-lock"></i> Encrypt
+                                    </button>
+                                    <div id="encryptFeedback" class="feedback-message" style="display: none;"></div>
+                                    <button class="btn btn-secondary" onclick="encryptAndSendToStation()" id="stationBtn">
+                                        <i class="fas fa-paper-plane"></i> Send to Station
+                                    </button>
+                                    <div id="stationFeedback" class="feedback-message" style="display: none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decryption Section -->
+                <div class="controls-section">
+                    <h4 class="mb-3">
+                        <i class="fas fa-unlock"></i> Decrypt Message
+                    </h4>
+                    
+                    <!-- Decryption Text Boxes Side by Side -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <div class="text-box-container">
+                                <div class="text-box-label">
+                                    <i class="fas fa-file-code"></i> Encrypted Message to Decrypt
+                                </div>
+                                <textarea id="decryptInputText" class="text-area" 
+                                          placeholder="Paste encrypted message here..."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="text-box-container">
+                                <div class="text-box-label">
+                                    <i class="fas fa-edit"></i> Decrypted Message
+                                </div>
+                                <textarea id="decryptOutputText" class="text-area" 
+                                          placeholder="Decrypted message will appear here..."
+                                          readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="control-group">
+                                <label for="decryptPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="decryptPassword" 
+                                       placeholder="Enter the same password used for encryption">
+                                <small class="form-text">Use the same password you used to encrypt</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="control-group">
+                                <label for="decryptAlgorithm" class="form-label">Algorithm</label>
+                                <select class="form-select" id="decryptAlgorithm">
+                                    <option value="aes256">AES-256-GCM</option>
+                                    <option value="aes192">AES-192-GCM</option>
+                                    <option value="aes128">AES-128-GCM</option>
+                                    <option value="chacha20">ChaCha20-Poly1305</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="control-group">
+                                <label class="form-label">Action</label>
+                                <div class="d-grid">
+                                    <button class="btn btn-secondary" onclick="decryptMessage()" id="decryptBtn">
+                                        <i class="fas fa-unlock"></i> Decrypt
+                                    </button>
+                                    <div id="decryptFeedback" class="feedback-message" style="display: none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- File Upload/Download Section -->
+            <section class="file-upload-section">
+                <div class="file-upload-header">
+                    <h2 class="file-upload-title">
+                        <i class="fas fa-file-upload"></i> File Encryption & Decryption
+                    </h2>
+                    <p class="section-subtitle">
+                        Encrypt and decrypt files with the same high security standards. 
+                        Perfect for sensitive documents and data protection.
+                    </p>
+                </div>
+                <div class="row">
+                    <!-- File Encryption -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0" style="color: var(--primary-blue);">
+                                    <i class="fas fa-lock"></i> Encrypt File
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/encrypt" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label class="form-label">File to Encrypt</label>
+                                        <div class="upload-area" onclick="document.getElementById('encryptFile').click()">
+                                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                            <p class="upload-text">Click to select or drag & drop</p>
+                                            <small class="upload-hint">Max 20MB</small>
+                                        </div>
+                                        <input type="file" id="encryptFile" name="file" class="file-input" required accept=".txt,.json,.key,.bin,.enc,.dec">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Key File (Optional - will generate if not provided)</label>
+                                        <div class="upload-area" onclick="document.getElementById('encryptKeyFile').click()">
+                                            <i class="fas fa-key upload-icon"></i>
+                                            <p class="upload-text">Click to select key file</p>
+                                        </div>
+                                        <input type="file" id="encryptKeyFile" name="key" class="file-input" accept=".key,.bin">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="encryptAlgorithm" class="form-label">Algorithm</label>
+                                        <select class="form-select" id="encryptAlgorithm" name="algorithm">
+                                            <option value="aes256">AES-256-GCM (Recommended)</option>
+                                            <option value="aes192">AES-192-GCM</option>
+                                            <option value="aes128">AES-128-GCM</option>
+                                            <option value="chacha20">ChaCha20-Poly1305</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="encryptDescription" class="form-label">Description (Optional)</label>
+                                        <input type="text" class="form-control" id="encryptDescription" name="description" 
+                                               placeholder="Brief description of the encrypted file">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-lock"></i> Encrypt File
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Decryption -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0" style="color: var(--accent-green);">
+                                    <i class="fas fa-unlock"></i> Decrypt File
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/decrypt" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label class="form-label">Encrypted File (.enc.json)</label>
+                                        <div class="upload-area" onclick="document.getElementById('decryptFile').click()">
+                                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                            <p class="upload-text">Click to select or drag & drop</p>
+                                            <small class="upload-hint">Max 20MB</small>
+                                        </div>
+                                        <input type="file" id="decryptFile" name="file" class="file-input" required accept=".json,.enc">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Key File (Required)</label>
+                                        <div class="upload-area" onclick="document.getElementById('decryptKeyFile').click()">
+                                            <i class="fas fa-key upload-icon"></i>
+                                            <p class="upload-text">Click to select key file</p>
+                                        </div>
+                                        <input type="file" id="decryptKeyFile" name="key" class="file-input" required accept=".key,.bin">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success w-100">
+                                        <i class="fas fa-unlock"></i> Decrypt File
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CLI Section -->
+            <section class="text-encryption-section">
+                <h2 class="section-title">
+                    <i class="fas fa-terminal"></i> Command Line Interface
+                </h2>
+                <p class="section-subtitle">
+                    For power users and automation, download our CLI tool for command-line encryption operations.
+                </p>
+                <div class="text-center">
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="btn btn-primary btn-lg" target="_blank">
+                        <i class="fas fa-download"></i> Download CLI
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">CipherStation</h3>
+                <p class="footer-description">
+                    Secure platform for encrypted communication and file transfer.
+                </p>
+                <div class="footer-links">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/station" class="footer-link">Relay Station</a>
+                    <a href="/documentation" class="footer-link">Documentation</a>
+                    <a href="/selftest" class="footer-link">Test</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="footer-link" target="_blank">GitHub</a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CipherStation. A CS50x Final Project by Saadi Agha.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Character counter
+        document.getElementById('inputText').addEventListener('input', function() {
+            const count = this.value.length;
+            document.getElementById('charCount').textContent = count;
+        });
+
+        // Copy to clipboard function
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            element.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess(elementId);
+            } catch (err) {
+                console.error('Copy failed:', err);
+            }
+        }
+
+        function showCopySuccess(elementId) {
+            // Find the copy button and show success
+            const copyBtn = event.target.closest('.btn');
+            if (copyBtn) {
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('btn-success');
+                copyBtn.classList.remove('btn-outline-secondary');
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.classList.remove('btn-success');
+                    copyBtn.classList.add('btn-outline-secondary');
+                }, 2000);
+            }
+        }
+
+        // Message encryption
+        function encryptMessage() {
+            console.log('Encrypt function called');
+            const text = document.getElementById('inputText').value.trim();
+            const password = document.getElementById('encryptionPassword').value.trim();
+            const algorithm = document.getElementById('algorithmSelect').value;
+            
+            console.log('Text length:', text.length, 'Password length:', password.length, 'Algorithm:', algorithm);
+            
+            if (!text || !password) {
+                showInlineFeedback('encryptBtn', 'error', 'Please provide both message and password');
+                return;
+            }
+
+            // Show loading state
+            const btn = document.getElementById('encryptBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Encrypting...';
+            btn.disabled = true;
+
+            fetch('/encrypt-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text: text,
+                    password: password,
+                    algorithm: algorithm,
+                    send_to_station: false
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.success) {
+                    document.getElementById('outputText').value = data.encrypted;
+                    showInlineFeedback('encryptBtn', 'success', '✅ Message encrypted successfully!');
+                } else {
+                    showInlineFeedback('encryptBtn', 'error', '❌ Encryption failed: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Encryption error:', error);
+                showInlineFeedback('encryptBtn', 'error', '❌ Error: ' + error.message);
+            })
+            .finally(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            });
+        }
+
+        // Message decryption
+        function decryptMessage() {
+            const encryptedText = document.getElementById('decryptInputText').value.trim();
+            const password = document.getElementById('decryptPassword').value.trim();
+            const algorithm = document.getElementById('decryptAlgorithm').value;
+            
+            if (!encryptedText || !password) {
+                showInlineFeedback('decryptBtn', 'error', 'Please provide both encrypted text and password');
+                return;
+            }
+
+            // Show loading state
+            const btn = document.getElementById('decryptBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Decrypting...';
+            btn.disabled = true;
+
+            fetch('/decrypt-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    encrypted_text: encryptedText,
+                    password: password,
+                    algorithm: algorithm
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('decryptOutputText').value = data.decrypted;
+                    showInlineFeedback('decryptBtn', 'success', '✅ Message decrypted successfully!');
+                } else {
+                    showInlineFeedback('decryptBtn', 'error', '❌ Decryption failed: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showInlineFeedback('decryptBtn', 'error', '❌ Error: ' + error.message);
+            })
+            .finally(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            });
+        }
+
+        // Send to station
+        function encryptAndSendToStation() {
+            console.log('Send to station function called');
+            const text = document.getElementById('inputText').value.trim();
+            const password = document.getElementById('encryptionPassword').value.trim();
+            const algorithm = document.getElementById('algorithmSelect').value;
+            
+            console.log('Text length:', text.length, 'Password length:', password.length, 'Algorithm:', algorithm);
+            
+            if (!text || !password) {
+                showInlineFeedback('stationBtn', 'error', 'Please provide both message and password');
+                return;
+            }
+
+            // Show loading state
+            const btn = document.getElementById('stationBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            fetch('/encrypt-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text: text,
+                    password: password,
+                    algorithm: algorithm,
+                    send_to_station: true
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Station response data:', data);
+                if (data.success) {
+                    document.getElementById('outputText').value = data.encrypted;
+                    showInlineFeedback('stationBtn', 'info', `✅ Message sent to station with ticket #${data.ticket_id}! <a href="/station?ticket=${data.ticket_id}" class="alert-link">View in Station</a>`);
+                    
+                    // Clear the input
+                    document.getElementById('inputText').value = '';
+                    document.getElementById('encryptionPassword').value = '';
+                    document.getElementById('charCount').textContent = '0';
+                } else {
+                    showInlineFeedback('stationBtn', 'error', '❌ Failed to send to station: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Station error:', error);
+                showInlineFeedback('stationBtn', 'error', '❌ Error: ' + error.message);
+            })
+            .finally(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            });
+        }
+
+        // Show inline feedback near buttons
+        function showInlineFeedback(buttonId, type, message) {
+            const feedbackId = buttonId.replace('Btn', 'Feedback');
+            const feedback = document.getElementById(feedbackId);
+            if (feedback) {
+                feedback.className = `feedback-message ${type}`;
+                feedback.innerHTML = message;
+                feedback.style.display = 'block';
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // File upload handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup drag and drop for file uploads
+            const uploadAreas = document.querySelectorAll('.upload-area');
+            
+            uploadAreas.forEach(area => {
+                area.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = 'var(--primary-blue)';
+                    this.style.background = 'var(--bg-light)';
+                });
+                
+                area.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = 'var(--border-medium)';
+                    this.style.background = 'var(--bg-lighter)';
+                });
+                
+                area.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = 'var(--border-medium)';
+                    this.style.background = 'var(--bg-lighter)';
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const input = this.parentElement.querySelector('input[type="file"]');
+                        if (input) {
+                            input.files = files;
+                            // Trigger change event
+                            const event = new Event('change', { bubbles: true });
+                            input.dispatchEvent(event);
+                        }
+                    }
+                });
+            });
+
+            // Natural password cracking animation for logo
+            const logoTextElement = document.getElementById('logo-text');
+            if (logoTextElement) {
+                const originalText = logoTextElement.textContent;
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\';
+                let animationPhase = 'encrypted';
+                let shuffleInterval;
+                let currentShuffleText = '';
+                let attempts = 0;
+                let maxAttempts = 0;
+
+                // Start with fully encrypted text
+                function startFullyEncrypted() {
+                    currentShuffleText = '';
+                    for (let i = 0; i < originalText.length; i++) {
+                        currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                    logoTextElement.textContent = currentShuffleText;
+                    logoTextElement.classList.add('encrypted');
+                    
+                    // Start cracking after 0.5 seconds
+                    setTimeout(startCracking, 500);
+                }
+
+                // Simulate password cracking attempts
+                function startCracking() {
+                    attempts = 0;
+                    maxAttempts = 40; // Reduced attempts for faster animation
+                    
+                    shuffleInterval = setInterval(() => {
+                        attempts++;
+                        
+                        // Simulate different cracking strategies
+                        if (attempts < 10) {
+                            // Early attempts: mostly random
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                            }
+                        } else if (attempts < 20) {
+                            // Middle attempts: some patterns emerge
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.3) {
+                                    // 30% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else if (attempts < 30) {
+                            // Later attempts: more correct characters
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.6) {
+                                    // 60% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else {
+                            // Final attempts: mostly correct with some errors
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.8) {
+                                    // 80% chance to show correct character
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        }
+                        
+                        logoTextElement.textContent = currentShuffleText;
+                        logoTextElement.classList.add('encrypted');
+                        
+                        if (attempts >= maxAttempts) {
+                            clearInterval(shuffleInterval);
+                            startFinalDecryption();
+                        }
+                    }, 80); // Faster for quicker animation
+                }
+
+                // Final decryption with realistic timing
+                function startFinalDecryption() {
+                    let remainingPositions = [];
+                    for (let i = 0; i < originalText.length; i++) {
+                        remainingPositions.push(i);
+                    }
+                    
+                    const decryptInterval = setInterval(() => {
+                        if (remainingPositions.length > 0) {
+                            // Pick a random position to decrypt (like finding the right character)
+                            const randomIndex = Math.floor(Math.random() * remainingPositions.length);
+                            const position = remainingPositions[randomIndex];
+                            remainingPositions.splice(randomIndex, 1);
+                            
+                            // Show a few wrong attempts before correct character
+                            let wrongAttempts = 0;
+                            const maxWrongAttempts = Math.floor(Math.random() * 2) + 1; // 1-2 wrong attempts (reduced)
+                            
+                            function showWrongAttempt() {
+                                if (wrongAttempts < maxWrongAttempts) {
+                                    const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + randomChar + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    wrongAttempts++;
+                                    setTimeout(showWrongAttempt, 40); // Faster wrong attempts
+                                } else {
+                                    // Show correct character
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + originalText[position] + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    
+                                    // Remove encrypted class when fully decrypted
+                                    if (remainingPositions.length === 0) {
+                                        logoTextElement.classList.remove('encrypted');
+                                    }
+                                }
+                            }
+                            
+                            showWrongAttempt();
+                        } else {
+                            clearInterval(decryptInterval);
+                            // Stay decrypted for 1.5 seconds, then start encrypting (reduced)
+                            setTimeout(startEncrypting, 1500);
+                        }
+                    }, 120); // Faster decryption
+                }
+
+                // Encrypt the text back (faster, like security kicking in)
+                function startEncrypting() {
+                    let currentIndex = 0;
+                    const encryptInterval = setInterval(() => {
+                        if (currentIndex < originalText.length) {
+                            const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                            const tempText = originalText.substring(0, currentIndex) + randomChar + originalText.substring(currentIndex + 1);
+                            logoTextElement.textContent = tempText;
+                            logoTextElement.classList.add('encrypted');
+                            currentIndex++;
+                        } else {
+                            clearInterval(encryptInterval);
+                            // Start the cycle again
+                            setTimeout(startFullyEncrypted, 600); // Reduced delay
+                        }
+                    }, 40); // Even faster encryption (security response)
+                }
+
+                // Start the animation cycle
+                startFullyEncrypted();
+            }
+        });
+    </script>
+</body>
+</html> 

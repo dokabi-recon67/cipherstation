@@ -55,7 +55,7 @@ For a full-speed experience, especially for cracking and analysis, it's strongly
 
 ### Message Relay Station: Secure Encrypted Dead Drop
 
-The CipherStation Message Relay Station acts as a secure, privacy-first "dead drop" for encrypted messages. Users can anonymously drop encrypted messages into the station, each assigned a unique ticket number. Recipients can later retrieve the message using the ticket, without any user accounts, metadata, or plaintext ever being stored. Only encrypted previews are visible to others, ensuring that the content remains confidential and tamper-resistant. This system is ideal for secure, one-way communication, time-delayed message delivery, or sharing sensitive information without exposing sender or recipient identities. The relay station is designed for privacy, simplicity, and security—making it a practical tool for journalists, researchers, or anyone needing a digital dead drop for encrypted data. 
+The CipherStation Message Relay Station features a comprehensive 6-step workflow for secure message relay. Users encode messages with classical ciphers, encrypt with modern algorithms, and upload to the station for ticket-based retrieval. The system includes a rotating public message board showing available messages (without content leaks), automatic 24-hour message deletion, and 100,000 message capacity. Recipients can browse the public board or enter specific ticket numbers to retrieve encrypted messages. This creates a realistic "dead drop" experience where messages are visible on a public board, but only those with the ticket number and decryption details can access the content. The system is designed for privacy, education, and security—perfect for learning cryptography concepts while maintaining practical security standards. 
 
 ### 🎯 Classical Cipher Analysis
 - **Caesar Cipher**: Shift-based encryption with brute force analysis
@@ -215,9 +215,10 @@ python cipherstationv0.py classical-selftest
 ### Features
 - **Modern Dark Theme**: Professional UI with animated header logo
 - **Responsive Design**: Optimized for desktop and mobile devices
-- **Relay Station**: Secure encrypted message dead drop system
-- **File Encryption/Decryption**: Upload and encrypt any file type directly on homepage
+- **6-Step Relay Station Workflow**: Complete secure message relay system
+- **Rotating Public Message Board**: Real-time message updates with 24hr auto-deletion
 - **Classical Cipher Analysis**: Advanced cryptanalysis with real-time progress
+- **100k Message Capacity**: High-volume message handling with automatic cleanup
 - **Copy-to-Clipboard**: One-click result copying functionality
 - **Comprehensive Results**: Detailed analysis with confidence scoring
 
@@ -225,10 +226,11 @@ python cipherstationv0.py classical-selftest
 1. Start the web server: `cd relaystation && python app.py`
 2. Open browser to: `http://localhost:5001`
 3. **Homepage (Relay Station)**: 
-   - Use the relay station for encrypted message drops
-   - Upload and encrypt/decrypt files directly
-4. **Classical Ciphers**: Navigate to analyze classical ciphers
-5. **Documentation**: Access comprehensive guides and examples
+   - 6-step workflow: Encode → Encrypt → Send → Retrieve → Decrypt → Decode
+   - Public message board with rotating tickets
+   - Classical cipher encoding + modern encryption
+4. **Classical Ciphers**: Advanced cryptanalysis and cipher tools
+5. **Documentation**: Comprehensive guides and API reference
 
 ## 💻 Command Line Interface (CLI)
 
@@ -332,7 +334,7 @@ cipherstation/
 └── relaystation/            # Web interface
     ├── app.py              # Flask web application
     ├── templates/          # HTML templates
-    │   ├── index.html      # Relay Station + File Encryption
+    │   ├── index.html      # 6-Step Relay Station Workflow
     │   ├── classical.html  # Classical ciphers page
     │   ├── documentation.html # Documentation page
     │   ├── selftest.html   # Self-test page
@@ -467,7 +469,8 @@ python cipherstationv0.py menu
 - **Memory Usage**: <50MB for typical operations
 - **CPU Usage**: Optimized for single-threaded performance
 - **Response Time**: Real-time feedback for most operations
-- **Scalability**: Handles files up to 1GB efficiently
+- **Message Capacity**: 100,000 active messages with 24hr auto-cleanup
+- **Scalability**: Handles high-volume message relay efficiently
 
 ## 🔒 Security Considerations
 
