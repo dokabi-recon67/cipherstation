@@ -10,6 +10,7 @@ A comprehensive cryptography toolkit featuring both modern encryption systems an
 ## Table of Contents
 
 - Key Features
+- Secure Deaddrop
 - Modern Cryptography
 - Message Relay Station - Dead Drop
 - Classical Cipher Analysis
@@ -68,6 +69,45 @@ CipherStation's Message Relay Station features a comprehensive 6-step workflow f
 - Persistent Storage: JSON-backed database for storing cracked ciphers, pipelines, and tags
 - Community Integration: Integrated with both CLI and web UI for submitting and browsing cracked samples
 - Research Tool: Facilitates community sharing and research of cipher cracking pipelines and results
+
+## Secure Dead Drop
+
+CipherStation features a secure dead drop system for encrypted message exchange. This system allows users to upload encrypted messages to a public message board, where they are visible only as ciphertext. Each message is associated with a unique ticket number. Only users with the correct ticket and decryption credentials can retrieve and decrypt the message. Messages are automatically deleted after 24 hours, ensuring privacy and minimizing data retention. The dead drop is implemented using a persistent SQLite database, providing durability and resilience across server restarts. This approach enables real-world secure communication and is suitable for privacy-focused, time-limited message exchange scenarios.
+
+**Key properties:**
+- Public message board displays only encrypted content (no plaintext exposure)
+- Ticket-based retrieval: only those with the ticket and decryption details can access the message
+- Automatic 24-hour message expiration and cleanup
+- High message capacity and efficient retrieval
+- No user registration or persistent identity required
+
+## Summary of Innovations
+
+CipherStation is not merely an implementation of existing algorithms, but a sophisticated cryptographic research platform with significant novel contributions. For a full technical and academic analysis, see the file `CRYPTOGRAPHIC_ANALYSIS.md` in this repository.
+
+**Major Custom Algorithms and Innovations:**
+
+- **Hybrid XOR Cipher:** Alphabet-constrained modular arithmetic variant combining XOR and Vigenère principles for perfect reversibility and readable output.
+- **Multi-dimensional Cryptanalysis Engine:** Advanced statistical analysis using multiple metrics for higher accuracy cipher detection and confidence scoring.
+- **Automatic Hex Input Processing:** Multi-format hex detection and seamless conversion, enabling direct analysis of hex dumps for XOR ciphers.
+- **Real-time Web Cryptanalysis:** Progressive analysis with live updates, resource management, and enterprise-grade concurrency control in the web interface.
+- **Dead Drop Message System:** Secure, time-limited encrypted message exchange using SQLite storage, providing a real-world secure communication tool.
+
+**Enhanced Standard Algorithms:**
+- Advanced Vigenère analysis (Kasiski, Index of Coincidence, dictionary attacks)
+- Statistical cipher detection (multi-cipher probabilistic identification)
+- Confidence scoring system (mathematical confidence rating for all results)
+- Multi-threaded processing (parallel cipher cracking)
+- Dictionary attack engine (hierarchical word prioritization)
+
+**Research and Academic Value:**
+- Novel hybrid cipher design bridging classical and modern approaches
+- Multi-modal input processing for binary and text-based ciphers
+- Real-time cryptanalysis architecture for web-based progressive analysis
+- Comprehensive statistical framework outperforming traditional single-metric approaches
+- Secure communication innovation with cryptographic dead drop
+
+For a detailed breakdown of these innovations, including mathematical proofs, implementation details, and academic context, please read `CRYPTOGRAPHIC_ANALYSIS.md`.
 
 ## Modern Cryptography
 
@@ -506,42 +546,3 @@ This project is made by Saadi Agha as a CS50x final project with the help of Cur
 ---
 
 Built by Saadi Agha as a CS50x final project for the cryptography community.
-
-## Secure Dead Drop
-
-CipherStation features a secure dead drop system for encrypted message exchange. This system allows users to upload encrypted messages to a public message board, where they are visible only as ciphertext. Each message is associated with a unique ticket number. Only users with the correct ticket and decryption credentials can retrieve and decrypt the message. Messages are automatically deleted after 24 hours, ensuring privacy and minimizing data retention. The dead drop is implemented using a persistent SQLite database, providing durability and resilience across server restarts. This approach enables real-world secure communication and is suitable for privacy-focused, time-limited message exchange scenarios.
-
-**Key properties:**
-- Public message board displays only encrypted content (no plaintext exposure)
-- Ticket-based retrieval: only those with the ticket and decryption details can access the message
-- Automatic 24-hour message expiration and cleanup
-- High message capacity and efficient retrieval
-- No user registration or persistent identity required
-
-## Summary of Innovations
-
-CipherStation is not merely an implementation of existing algorithms, but a sophisticated cryptographic research platform with significant novel contributions. For a full technical and academic analysis, see the file `CRYPTOGRAPHIC_ANALYSIS.md` in this repository.
-
-**Major Custom Algorithms and Innovations:**
-
-- **Hybrid XOR Cipher:** Alphabet-constrained modular arithmetic variant combining XOR and Vigenère principles for perfect reversibility and readable output.
-- **Multi-dimensional Cryptanalysis Engine:** Advanced statistical analysis using multiple metrics for higher accuracy cipher detection and confidence scoring.
-- **Automatic Hex Input Processing:** Multi-format hex detection and seamless conversion, enabling direct analysis of hex dumps for XOR ciphers.
-- **Real-time Web Cryptanalysis:** Progressive analysis with live updates, resource management, and enterprise-grade concurrency control in the web interface.
-- **Dead Drop Message System:** Secure, time-limited encrypted message exchange using SQLite storage, providing a real-world secure communication tool.
-
-**Enhanced Standard Algorithms:**
-- Advanced Vigenère analysis (Kasiski, Index of Coincidence, dictionary attacks)
-- Statistical cipher detection (multi-cipher probabilistic identification)
-- Confidence scoring system (mathematical confidence rating for all results)
-- Multi-threaded processing (parallel cipher cracking)
-- Dictionary attack engine (hierarchical word prioritization)
-
-**Research and Academic Value:**
-- Novel hybrid cipher design bridging classical and modern approaches
-- Multi-modal input processing for binary and text-based ciphers
-- Real-time cryptanalysis architecture for web-based progressive analysis
-- Comprehensive statistical framework outperforming traditional single-metric approaches
-- Secure communication innovation with cryptographic dead drop
-
-For a detailed breakdown of these innovations, including mathematical proofs, implementation details, and academic context, please read `CRYPTOGRAPHIC_ANALYSIS.md`.
