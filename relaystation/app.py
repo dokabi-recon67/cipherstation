@@ -13,7 +13,7 @@ Features:
 
 import signal
 import atexit
-from flask import Flask, render_template, request, jsonify, send_file, url_for, flash, redirect, abort
+from flask import Flask, render_template, request, jsonify, send_file, url_for, flash, redirect, abort, make_response
 import os
 import time
 import json
@@ -399,6 +399,7 @@ class AdvancedCracker:
             
             # Step 4: XOR Cracking (if enabled)
             if 'xor' in enabled_ciphers:
+                print(f"[DEBUG] XOR cracking enabled, starting...")
                 try:
                     update_progress('cracking_xor', 55, 'Attempting XOR cipher cracking...')
                     
@@ -417,12 +418,16 @@ class AdvancedCracker:
                         print(f"[XOR CRACKING] Using original input: {repr(xor_input)}")
                     
                     xor_results = crack_xor_advanced(xor_input, progress_callback=xor_progress, web_mode=web_mode)
+                    print(f"[DEBUG] XOR results returned: {len(xor_results)} items")
                     # Add cipher type to each result
                     for key, decoded, confidence in xor_results:
+                        print(f"[DEBUG] Adding XOR result: {key} - {decoded} - {confidence}")
                         all_results.append(('xor', key, decoded, confidence))
                     total_attempts += 256
                 except Exception as e:
                     print(f"[XOR ERROR] XOR cracking failed: {e}")
+                    print(f"[XOR ERROR] Input text: {repr(text)}")
+                    print(f"[XOR ERROR] Hex converted text: {repr(hex_converted_text)}")
                     import traceback
                     traceback.print_exc()
             
@@ -471,6 +476,11 @@ class AdvancedCracker:
             # Sort by confidence
             all_results.sort(key=lambda x: x[3], reverse=True)
             
+            # Debug: Print what we're about to store
+            print(f"[DEBUG] All results before web conversion: {len(all_results)} items")
+            for i, (cipher_type, key, decoded_text, confidence) in enumerate(all_results[:5]):
+                print(f"[DEBUG] Result {i}: {cipher_type} - {key} - {decoded_text} - {confidence}")
+            
             # Convert to web format
             web_results = []
             for cipher_type, key, decoded_text, confidence in all_results[:10]:
@@ -481,6 +491,10 @@ class AdvancedCracker:
                     'confidence': confidence,
                     'algorithm': 'Advanced CLI Algorithm'
                 })
+            
+            print(f"[DEBUG] Web results after conversion: {len(web_results)} items")
+            for i, result in enumerate(web_results[:3]):
+                print(f"[DEBUG] Web result {i}: {result['cipher_type']} - {result['confidence']}")
             
             total_time = time.time() - start_time
             
@@ -576,7 +590,12 @@ def index():
 @app.route('/classical')
 def classical():
     """Classical cipher page with advanced cracking"""
-    return render_template('classical.html')
+    from flask import make_response
+    response = make_response(render_template('classical.html'))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 @app.route('/station')
 def station():
@@ -808,6 +827,10 @@ def api_crack():
         converted_from_hex = False
         hex_converted_text = None
         
+        print(f"[DEBUG] Enabled ciphers: {enabled_ciphers}")
+        print(f"[DEBUG] XOR in enabled_ciphers: {'xor' in enabled_ciphers}")
+        print(f"[DEBUG] Is hex string: {_is_hex_string(text)}")
+        
         # Check if text looks like hex (space-separated hex values)
         if 'xor' in enabled_ciphers and _is_hex_string(text):
             try:
@@ -820,6 +843,8 @@ def api_crack():
                 print(f"[HEX CONVERSION] Failed to convert hex: {e}")
                 # Continue with original text if conversion fails
                 hex_converted_text = None
+        else:
+            print(f"[DEBUG] XOR not triggered - XOR enabled: {'xor' in enabled_ciphers}, Is hex: {_is_hex_string(text)}")
         
         # Generate unique task ID
         task_id = f"crack_{int(time.time() * 1000)}"
@@ -859,6 +884,9 @@ def _is_hex_string(text: str) -> bool:
     """Check if text looks like a hex string (space-separated hex values)"""
     text = text.strip()
     
+    # Normalize all types of whitespace to regular spaces
+    text = ' '.join(text.split())
+    
     # Check for space-separated hex pattern like "03 0E 07 07"
     if ' ' in text:
         parts = text.split()
@@ -878,6 +906,9 @@ def _is_hex_string(text: str) -> bool:
 def _hex_string_to_chars(hex_string: str) -> str:
     """Convert hex string to actual characters"""
     hex_string = hex_string.strip()
+    
+    # Normalize all types of whitespace to regular spaces
+    hex_string = ' '.join(hex_string.split())
     
     # Handle space-separated hex like "03 0E 07 07"
     if ' ' in hex_string:
@@ -920,10 +951,21 @@ def api_crack_results(task_id):
         
         results = cracking_results[task_id]
         
-        return jsonify({
+        # Debug: Print what we're returning
+        print(f"[DEBUG] API returning results for task {task_id}")
+        if 'analysis' in results and 'best_results' in results['analysis']:
+            print(f"[DEBUG] best_results length: {len(results['analysis']['best_results'])}")
+            for i, result in enumerate(results['analysis']['best_results'][:3]):
+                print(f"[DEBUG] API best_result {i}: {result.get('cipher_type', 'N/A')} - {result.get('confidence', 'N/A')}")
+        
+        response = make_response(jsonify({
             'success': True,
             'results': results
-        })
+        }))
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        return response
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
