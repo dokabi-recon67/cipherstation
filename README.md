@@ -511,7 +511,7 @@ Warning: Classical ciphers module not found
 ### v0.1.0 (Current)
 - ✨ Initial release with comprehensive cryptography toolkit
 - 🔐 Modern cryptography: AES-256-GCM, ChaCha20-Poly1305, Ed25519, X25519
-- 🎯 Classical cipher analysis with AI-powered cryptanalysis
+- 🎯 Classical cipher analysis with advanced cryptanalysis
 - 📚 Enhanced dictionary attack with 500+ words
 - 🌐 Modern web interface with real-time progress tracking
 - 💻 Full-featured CLI with interactive menu
