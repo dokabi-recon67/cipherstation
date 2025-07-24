@@ -469,7 +469,7 @@ python cipherstationv0.py menu
 - **Memory Usage**: <50MB for typical operations
 - **CPU Usage**: Optimized for single-threaded performance
 - **Response Time**: Real-time feedback for most operations
-- **Message Capacity**: In-memory storage limited by available system memory with 24hr auto-cleanup
+- **Message Capacity**: 100MB SQLite database supporting 15,000+ messages with 24hr auto-cleanup
 - **Scalability**: Handles high-volume message relay efficiently
 
 ## 🔒 Security Considerations
