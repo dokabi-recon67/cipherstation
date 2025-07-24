@@ -79,7 +79,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Ensure encrypted text in animation is also green */
         #logo-text.encrypted {
             color: #88fb8a !important;
             font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
@@ -109,15 +108,11 @@
             padding: 1rem 0;
         }
 
-
-
         .nav-links {
             display: flex;
             gap: 2rem;
             align-items: center;
         }
-
-
 
         .github-btn {
             background: var(--bg-tertiary);
@@ -158,13 +153,6 @@
 
         .hero-subtitle {
             font-family: 'Poppins', sans-serif;
-        }
-
-        .hero-feature {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .hero-subtitle {
             font-size: 1.25rem;
             font-weight: 400;
             margin-bottom: 2rem;
@@ -187,19 +175,12 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 500;
+            font-family: 'Poppins', sans-serif;
         }
 
         /* Main Content */
         .main-content {
             padding: 3rem 0;
-        }
-
-        .page-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.5rem;
         }
 
         .section-title {
@@ -225,56 +206,11 @@
 
         /* Text Encryption Section */
         .text-encryption-section {
-            background: var(--bg-white);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
             border-radius: 12px;
-            box-shadow: var(--shadow-md);
             padding: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .text-box-container {
-            background: var(--bg-lighter);
-            border: 2px solid var(--border-light);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: border-color 0.2s ease;
-        }
-
-        .text-box-container:focus-within {
-            border-color: var(--primary-blue);
-        }
-
-        .text-box-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .text-area {
-            width: 100%;
-            min-height: 120px;
-            border: none;
-            background: transparent;
-            resize: vertical;
-            font-family: inherit;
-            font-size: 1rem;
-            color: var(--text-primary);
-            outline: none;
-        }
-
-        .text-area::placeholder {
-            color: var(--text-muted);
-        }
-
-        .char-counter {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            text-align: right;
-            margin-top: 0.5rem;
+            margin-bottom: 2rem;
         }
 
         /* Controls Section */
@@ -286,15 +222,6 @@
             margin-bottom: 2rem;
         }
 
-        /* Text Box Container */
-        .text-box-container {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-primary);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
         .form-label {
             font-weight: 600;
             color: var(--text-primary);
@@ -302,7 +229,9 @@
         }
 
         .form-control, .form-select {
-            border: 1px solid var(--border-medium);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
             border-radius: 6px;
             padding: 0.75rem;
             font-size: 1rem;
@@ -316,13 +245,6 @@
             box-shadow: 0 0 0 0.2rem rgba(0, 98, 58, 0.25);
         }
 
-        .form-text {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-
-        /* Buttons */
         .btn {
             font-weight: 600;
             padding: 0.75rem 1.5rem;
@@ -351,18 +273,6 @@
             box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
         }
 
-        .btn-info {
-            background: var(--secondary-blue);
-            color: white;
-        }
-
-        .btn-info:hover {
-            background: var(--primary-blue);
-            color: white;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
         .btn-success {
             background: var(--green);
             border: none;
@@ -380,11 +290,96 @@
             box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
         }
 
+        /* Feedback Messages */
+        .feedback-message {
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .feedback-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .feedback-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .feedback-message.info {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-primary);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Station Preview Styles */
+        .station-preview {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .message-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .message-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-item.active {
+            border-color: var(--green);
+            background: rgba(0, 98, 58, 0.1);
+        }
+
+        .ticket-number {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            background: var(--green);
+            color: white;
+        }
+
+        .status-badge {
+            background: var(--success);
+        }
+
+        .search-section {
+            border-top: 1px solid var(--border-primary);
+            padding-top: 1rem;
+        }
+
         /* File Upload Section */
         .file-upload-section {
-            background: var(--bg-white);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
             border-radius: 12px;
-            box-shadow: var(--shadow-md);
             padding: 2rem;
             margin-bottom: 3rem;
         }
@@ -402,23 +397,23 @@
         }
 
         .upload-area {
-            border: 2px dashed var(--border-medium);
+            border: 2px dashed var(--border-primary);
             border-radius: 8px;
             padding: 2rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            background: var(--bg-lighter);
+            background: var(--bg-tertiary);
         }
 
         .upload-area:hover {
-            border-color: var(--primary-blue);
-            background: var(--bg-light);
+            border-color: var(--green);
+            background: var(--bg-primary);
         }
 
         .upload-icon {
             font-size: 2rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-bottom: 1rem;
         }
 
@@ -430,7 +425,7 @@
 
         .upload-hint {
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            footer-size: 0.875rem;
         }
 
         .file-input {
@@ -439,52 +434,25 @@
 
         /* Cards */
         .card {
-            border: 1px solid var(--border-light);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
             border-radius: 8px;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .card:hover {
-            box-shadow: var(--shadow-md);
+            border-color: var(--green);
         }
 
         .card-header {
-            background: var(--bg-lighter);
-            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-primary);
             padding: 1rem 1.5rem;
             border-radius: 8px 8px 0 0;
         }
 
         .card-body {
             padding: 1.5rem;
-        }
-
-        /* Feedback Messages */
-        .feedback-message {
-            padding: 0.75rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            text-align: center;
-        }
-
-        .feedback-message.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .feedback-message.error {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--accent-red);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .feedback-message.info {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--secondary-blue);
-            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         /* Footer */
@@ -541,156 +509,9 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-features {
-                flex-direction: column;
-                align-items: center;
-            }
-            
             .nav-links {
                 gap: 1rem;
             }
-        }
-
-        .message-box {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-primary);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .copy-btn {
-            background: var(--green);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .copy-btn:hover {
-            background: #5e9179;
-            color: white;
-            transform: translateY(-1px);
-        }
-
-        .send-btn {
-            background: var(--green);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .send-btn:hover {
-            background: #5e9179;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
-        }
-
-        /* Feature Cards */
-        .feature-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--green);
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .feature-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Encryption Form */
-        .encryption-form {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* File Upload Section */
-        .file-upload-section {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Message Relay Section */
-        .message-relay-section {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Text Encryption Section */
-        .text-encryption-section {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Controls Section */
-        .controls-section {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .btn-secondary {
-            background: var(--green);
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: #5e9179;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
         }
     </style>
 </head>
@@ -704,9 +525,9 @@
                     <span id="logo-text">CipherStation</span>
                 </a>
                 <nav class="nav-links">
-                    <a href="/" class="nav-link">Home</a>
-                    <a href="/station" class="nav-link"><i class="fas fa-broadcast-tower"></i> Relay Station</a>
+                    <a href="/" class="nav-link active"><i class="fas fa-satellite-dish"></i> Relay Station</a>
                     <a href="/classical" class="nav-link"><i class="fas fa-unlock-alt"></i> Classical Ciphers</a>
+                    <a href="/tools" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
                     <a href="/documentation" class="nav-link">Documentation</a>
                     <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">
                         <i class="fab fa-github"></i>
@@ -753,254 +574,192 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Text Encryption Section -->
+            <!-- Relay Station Section -->
             <section class="text-encryption-section">
                 <h2 class="section-title">
-                    <i class="fas fa-lock"></i> Secure Message Encryption
+                    <i class="fas fa-broadcast-tower"></i> Relay Station
                 </h2>
                 <p class="section-subtitle">
-                    Encrypt your messages with state-of-the-art algorithms. 
-                    Any password works - we'll convert it to the right key length automatically.
+                    Complete message relay workflow: cipher, encrypt, send, retrieve, decrypt, and decode
                 </p>
 
-                <!-- Text Boxes Side by Side -->
-                <div class="row">
-                    <!-- Input Text Box -->
-                    <div class="col-lg-6">
-                        <div class="text-box-container">
-                            <div class="text-box-label">
-                                <i class="fas fa-edit"></i> Message to Encrypt
-                            </div>
-                            <textarea id="inputText" class="text-area" 
-                                      placeholder="Enter your message here (max 1000 characters)..."
-                                      maxlength="1000"></textarea>
-                            <div class="char-counter">
-                                <span id="charCount">0</span>/1000 characters
-                            </div>
+                <!-- Step 1: Cipher -->
+                <div class="controls-section">
+                    <h4 class="mb-3">
+                        <i class="fas fa-lock"></i> Step 1: Apply Cipher
+                    </h4>
+                    <p class="text-white mb-3">Transform your plaintext message using classical cryptography methods.</p>
+                    <div class="mb-3">
+                        <label for="plaintext" class="form-label">Plaintext Message</label>
+                        <textarea id="plaintext" class="form-control" rows="2" placeholder="Enter your message..."></textarea>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="cipher_type" class="form-label">Cipher Type</label>
+                            <select id="cipher_type" class="form-select" onchange="updateKeyHint()">
+                                <option value="caesar">Caesar</option>
+                                <option value="vigenere">Vigenère</option>
+                                <option value="xor">XOR</option>
+                                <option value="atbash">Atbash</option>
+                                <option value="substitution">Substitution</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cipher_key" class="form-label">Cipher Key</label>
+                            <input id="cipher_key" class="form-control" placeholder="Enter key">
+                            <small id="key_hint" class="form-text text-white">Enter a number between 1-25 for Caesar cipher</small>
                         </div>
                     </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="doCipher()">
+                        <i class="fas fa-lock"></i> Apply Cipher
+                    </button>
+                    <div id="ciphertext_output" class="feedback-message success hidden"></div>
+                    <div id="cipher_api_error" class="feedback-message error hidden"></div>
+                </div>
 
-                    <!-- Output Text Box -->
-                    <div class="col-lg-6">
-                        <div class="text-box-container">
-                            <div class="text-box-label">
-                                <i class="fas fa-file-code"></i> Encrypted Message
-                                <button class="btn btn-sm btn-outline-secondary ms-auto" onclick="copyToClipboard('outputText')">
+                <!-- Step 2: Encrypt -->
+                <div class="controls-section">
+                    <h4 class="mb-3">
+                        <i class="fas fa-shield-alt"></i> Step 2: Modern Encryption
+                    </h4>
+                    <p class="text-white mb-3">Secure your ciphered message using AES-256-GCM encryption with password-based key derivation.</p>
+                    <div class="mb-3">
+                        <label for="enc_password" class="form-label">Encryption Password</label>
+                        <input id="enc_password" type="password" class="form-control" placeholder="Enter a strong password">
+                        <small class="form-text text-white">This password will be needed to decrypt the message later</small>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="doEncrypt()">
+                        <i class="fas fa-shield-alt"></i> Encrypt Message
+                    </button>
+                    <div id="encrypted_output" class="feedback-message success hidden"></div>
+                    <div id="encrypt_api_error" class="feedback-message error hidden"></div>
+                </div>
+
+                <!-- Step 3: Send to Station -->
+                <div class="controls-section">
+                    <h4 class="mb-3">
+                        <i class="fas fa-paper-plane"></i> Step 3: Send to Relay Station
+                    </h4>
+                    <p class="text-white mb-3">Upload your encrypted message to the relay station and receive a ticket number for retrieval.</p>
+                    <button type="button" class="btn btn-success w-100" onclick="doSendToStation()">
+                        <i class="fas fa-paper-plane"></i> Send to Station
+                    </button>
+                    <div id="ticket_output" class="feedback-message info hidden"></div>
+                    <div id="send_api_error" class="feedback-message error hidden"></div>
+                </div>
+
+                <!-- Relay Station Preview -->
+                <div id="station_preview" class="controls-section hidden">
+                    <h4 class="mb-3">
+                        <i class="fas fa-broadcast-tower"></i> Relay Station Status
+                    </h4>
+                    <p class="text-white mb-3">Your message is now stored in the relay station. Use the ticket number below to retrieve it.</p>
+                    
+                    <div class="station-preview">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="mb-0">Recent Messages</h6>
+                            <small class="text-white">Last 3 messages</small>
+                        </div>
+                        
+                        <div class="message-list mb-3">
+                            <div class="message-item active">
+                                <div class="d-flex justify-content-between">
+                                    <span class="ticket-number">Ticket #<span id="current_ticket">-</span></span>
+                                    <span class="status-badge">pending</span>
+                                </div>
+                                <small class="text-white">Just now</small>
+                            </div>
+                            <div class="message-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="ticket-number">Ticket #1000</span>
+                                    <span class="status-badge">delivered</span>
+                                </div>
+                                <small class="text-white">2 minutes ago</small>
+                            </div>
+                            <div class="message-item">
+                                <div class="d-flex justify-content-between">
+                                    <span class="ticket-number">Ticket #999</span>
+                                    <span class="status-badge">delivered</span>
+                                </div>
+                                <small class="text-white">5 minutes ago</small>
+                            </div>
+                        </div>
+                        
+                        <div class="search-section">
+                            <div class="input-group">
+                                <input type="text" id="ticket_search" class="form-control" placeholder="Search by ticket number..." readonly>
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyTicketNumber()">
                                     <i class="fas fa-copy"></i> Copy
                                 </button>
                             </div>
-                            <textarea id="outputText" class="text-area" 
-                                      placeholder="Encrypted message will appear here..."
-                                      readonly></textarea>
                         </div>
                     </div>
                 </div>
 
-                <!-- Controls Section -->
-                <div class="controls-section">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="control-group">
-                                <label for="encryptionPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="encryptionPassword" 
-                                       placeholder="Enter any password (will be converted to proper key)">
-                                <small class="form-text">Any password works - we'll convert it to the right key length</small>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="control-group">
-                                <label for="algorithmSelect" class="form-label">Algorithm</label>
-                                <select class="form-select" id="algorithmSelect">
-                                    <option value="aes256">AES-256-GCM (Recommended)</option>
-                                    <option value="aes192">AES-192-GCM</option>
-                                    <option value="aes128">AES-128-GCM</option>
-                                    <option value="chacha20">ChaCha20-Poly1305</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="control-group">
-                                <label class="form-label">Actions</label>
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-primary" onclick="encryptMessage()" id="encryptBtn">
-                                        <i class="fas fa-lock"></i> Encrypt
-                                    </button>
-                                    <div id="encryptFeedback" class="feedback-message" style="display: none;"></div>
-                                    <button class="btn btn-secondary" onclick="encryptAndSendToStation()" id="stationBtn">
-                                        <i class="fas fa-paper-plane"></i> Send to Station
-                                    </button>
-                                    <div id="stationFeedback" class="feedback-message" style="display: none;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Decryption Section -->
+                <!-- Step 4: Retrieve -->
                 <div class="controls-section">
                     <h4 class="mb-3">
-                        <i class="fas fa-unlock"></i> Decrypt Message
+                        <i class="fas fa-download"></i> Step 4: Retrieve from Station
                     </h4>
-                    
-                    <!-- Decryption Text Boxes Side by Side -->
+                    <p class="text-white mb-3">Use your ticket number to retrieve the encrypted message from the relay station.</p>
+                    <div class="mb-3">
+                        <label for="ticket_number" class="form-label">Ticket Number</label>
+                        <input id="ticket_number" class="form-control" placeholder="Enter ticket number">
+                        <small class="form-text text-white">This should be automatically filled from Step 3</small>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="doRetrieve()">
+                        <i class="fas fa-download"></i> Retrieve Message
+                    </button>
+                    <div id="retrieved_output" class="feedback-message success hidden"></div>
+                    <div id="retrieve_api_error" class="feedback-message error hidden"></div>
+                </div>
+
+                <!-- Step 5: Decrypt -->
+                <div class="controls-section">
+                    <h4 class="mb-3">
+                        <i class="fas fa-unlock"></i> Step 5: Decrypt Message
+                    </h4>
+                    <p class="text-white mb-3">Decrypt the retrieved message using the same password from Step 2.</p>
+                    <div class="mb-3">
+                        <label for="dec_password" class="form-label">Decryption Password</label>
+                        <input id="dec_password" type="password" class="form-control" placeholder="Enter the same password from Step 2">
+                        <small class="form-text text-white">Must match the encryption password exactly</small>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="doDecrypt()">
+                        <i class="fas fa-unlock"></i> Decrypt Message
+                    </button>
+                    <div id="decrypted_output" class="feedback-message success hidden"></div>
+                    <div id="decrypt_api_error" class="feedback-message error hidden"></div>
+                </div>
+
+                <!-- Step 6: Decode -->
+                <div class="controls-section">
+                    <h4 class="mb-3">
+                        <i class="fas fa-key"></i> Step 6: Decode Cipher
+                    </h4>
+                    <p class="text-white mb-3">Reverse the cipher from Step 1 to reveal your original plaintext message.</p>
                     <div class="row mb-3">
-                        <div class="col-lg-6">
-                            <div class="text-box-container">
-                                <div class="text-box-label">
-                                    <i class="fas fa-file-code"></i> Encrypted Message to Decrypt
-                                </div>
-                                <textarea id="decryptInputText" class="text-area" 
-                                          placeholder="Paste encrypted message here..."></textarea>
-                            </div>
+                        <div class="col-md-6">
+                            <label for="decode_cipher_type" class="form-label">Cipher Type</label>
+                            <select id="decode_cipher_type" class="form-select" onchange="updateDecodeKeyHint()">
+                                <option value="caesar">Caesar</option>
+                                <option value="vigenere">Vigenère</option>
+                                <option value="xor">XOR</option>
+                                <option value="atbash">Atbash</option>
+                                <option value="substitution">Substitution</option>
+                            </select>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="text-box-container">
-                                <div class="text-box-label">
-                                    <i class="fas fa-edit"></i> Decrypted Message
-                                </div>
-                                <textarea id="decryptOutputText" class="text-area" 
-                                          placeholder="Decrypted message will appear here..."
-                                          readonly></textarea>
-                            </div>
+                        <div class="col-md-6">
+                            <label for="decode_key" class="form-label">Cipher Key</label>
+                            <input id="decode_key" class="form-control" placeholder="Enter key">
+                            <small id="decode_key_hint" class="form-text text-white">Use the same key from Step 1</small>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="control-group">
-                                <label for="decryptPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="decryptPassword" 
-                                       placeholder="Enter the same password used for encryption">
-                                <small class="form-text">Use the same password you used to encrypt</small>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="control-group">
-                                <label for="decryptAlgorithm" class="form-label">Algorithm</label>
-                                <select class="form-select" id="decryptAlgorithm">
-                                    <option value="aes256">AES-256-GCM</option>
-                                    <option value="aes192">AES-192-GCM</option>
-                                    <option value="aes128">AES-128-GCM</option>
-                                    <option value="chacha20">ChaCha20-Poly1305</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="control-group">
-                                <label class="form-label">Action</label>
-                                <div class="d-grid">
-                                    <button class="btn btn-secondary" onclick="decryptMessage()" id="decryptBtn">
-                                        <i class="fas fa-unlock"></i> Decrypt
-                                    </button>
-                                    <div id="decryptFeedback" class="feedback-message" style="display: none;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- File Upload/Download Section -->
-            <section class="file-upload-section">
-                <div class="file-upload-header">
-                    <h2 class="file-upload-title">
-                        <i class="fas fa-file-upload"></i> File Encryption & Decryption
-                    </h2>
-                    <p class="section-subtitle">
-                        Encrypt and decrypt files with the same high security standards. 
-                        Perfect for sensitive documents and data protection.
-                    </p>
-                </div>
-                <div class="row">
-                    <!-- File Encryption -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0" style="color: var(--primary-blue);">
-                                    <i class="fas fa-lock"></i> Encrypt File
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="/encrypt" method="post" enctype="multipart/form-data">
-                                    <div class="mb-3">
-                                        <label class="form-label">File to Encrypt</label>
-                                        <div class="upload-area" onclick="document.getElementById('encryptFile').click()">
-                                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                                            <p class="upload-text">Click to select or drag & drop</p>
-                                            <small class="upload-hint">Max 20MB</small>
-                                        </div>
-                                        <input type="file" id="encryptFile" name="file" class="file-input" required accept=".txt,.json,.key,.bin,.enc,.dec">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Key File (Optional - will generate if not provided)</label>
-                                        <div class="upload-area" onclick="document.getElementById('encryptKeyFile').click()">
-                                            <i class="fas fa-key upload-icon"></i>
-                                            <p class="upload-text">Click to select key file</p>
-                                        </div>
-                                        <input type="file" id="encryptKeyFile" name="key" class="file-input" accept=".key,.bin">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="encryptAlgorithm" class="form-label">Algorithm</label>
-                                        <select class="form-select" id="encryptAlgorithm" name="algorithm">
-                                            <option value="aes256">AES-256-GCM (Recommended)</option>
-                                            <option value="aes192">AES-192-GCM</option>
-                                            <option value="aes128">AES-128-GCM</option>
-                                            <option value="chacha20">ChaCha20-Poly1305</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="encryptDescription" class="form-label">Description (Optional)</label>
-                                        <input type="text" class="form-control" id="encryptDescription" name="description" 
-                                               placeholder="Brief description of the encrypted file">
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary w-100">
-                                        <i class="fas fa-lock"></i> Encrypt File
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- File Decryption -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0" style="color: var(--accent-green);">
-                                    <i class="fas fa-unlock"></i> Decrypt File
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="/decrypt" method="post" enctype="multipart/form-data">
-                                    <div class="mb-3">
-                                        <label class="form-label">Encrypted File (.enc.json)</label>
-                                        <div class="upload-area" onclick="document.getElementById('decryptFile').click()">
-                                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                                            <p class="upload-text">Click to select or drag & drop</p>
-                                            <small class="upload-hint">Max 20MB</small>
-                                        </div>
-                                        <input type="file" id="decryptFile" name="file" class="file-input" required accept=".json,.enc">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Key File (Required)</label>
-                                        <div class="upload-area" onclick="document.getElementById('decryptKeyFile').click()">
-                                            <i class="fas fa-key upload-icon"></i>
-                                            <p class="upload-text">Click to select key file</p>
-                                        </div>
-                                        <input type="file" id="decryptKeyFile" name="key" class="file-input" required accept=".key,.bin">
-                                    </div>
-
-                                    <button type="submit" class="btn btn-success w-100">
-                                        <i class="fas fa-unlock"></i> Decrypt File
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="button" class="btn btn-primary w-100" onclick="doDecode()">
+                        <i class="fas fa-key"></i> Decode Cipher
+                    </button>
+                    <div id="decoded_output" class="feedback-message success hidden"></div>
+                    <div id="decode_api_error" class="feedback-message error hidden"></div>
                 </div>
             </section>
 
@@ -1018,6 +777,8 @@
                     </a>
                 </div>
             </section>
+
+
         </div>
     </main>
 
@@ -1031,10 +792,11 @@
                 </p>
                 <div class="footer-links">
                     <a href="/" class="footer-link">Home</a>
-                    <a href="/station" class="footer-link">Relay Station</a>
+                    <a href="/tools" class="footer-link">Tools</a>
+                    <a href="/classical" class="footer-link">Classical Ciphers</a>
                     <a href="/documentation" class="footer-link">Documentation</a>
                     <a href="/selftest" class="footer-link">Test</a>
-                    <a href="https://github.com/dokabi-recon67/cipherstation" class="footer-link" target="_blank">GitHub</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">GitHub</a>
                 </div>
                 <div class="footer-bottom">
                     <p>&copy; 2025 CipherStation. A CS50x Final Project by Saadi Agha.</p>
@@ -1045,249 +807,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Character counter
-        document.getElementById('inputText').addEventListener('input', function() {
-            const count = this.value.length;
-            document.getElementById('charCount').textContent = count;
-        });
-
-        // Copy to clipboard function
-        function copyToClipboard(elementId) {
-            const element = document.getElementById(elementId);
-            element.select();
-            element.setSelectionRange(0, 99999); // For mobile devices
-            
-            try {
-                document.execCommand('copy');
-                showCopySuccess(elementId);
-            } catch (err) {
-                console.error('Copy failed:', err);
-            }
-        }
-
-        function showCopySuccess(elementId) {
-            // Find the copy button and show success
-            const copyBtn = event.target.closest('.btn');
-            if (copyBtn) {
-                const originalHTML = copyBtn.innerHTML;
-                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                copyBtn.classList.add('btn-success');
-                copyBtn.classList.remove('btn-outline-secondary');
-                setTimeout(() => {
-                    copyBtn.innerHTML = originalHTML;
-                    copyBtn.classList.remove('btn-success');
-                    copyBtn.classList.add('btn-outline-secondary');
-                }, 2000);
-            }
-        }
-
-        // Message encryption
-        function encryptMessage() {
-            console.log('Encrypt function called');
-            const text = document.getElementById('inputText').value.trim();
-            const password = document.getElementById('encryptionPassword').value.trim();
-            const algorithm = document.getElementById('algorithmSelect').value;
-            
-            console.log('Text length:', text.length, 'Password length:', password.length, 'Algorithm:', algorithm);
-            
-            if (!text || !password) {
-                showInlineFeedback('encryptBtn', 'error', 'Please provide both message and password');
-                return;
-            }
-
-            // Show loading state
-            const btn = document.getElementById('encryptBtn');
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Encrypting...';
-            btn.disabled = true;
-
-            fetch('/encrypt-message', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    text: text,
-                    password: password,
-                    algorithm: algorithm,
-                    send_to_station: false
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Response data:', data);
-                if (data.success) {
-                    document.getElementById('outputText').value = data.encrypted;
-                    showInlineFeedback('encryptBtn', 'success', '✅ Message encrypted successfully!');
-                } else {
-                    showInlineFeedback('encryptBtn', 'error', '❌ Encryption failed: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Encryption error:', error);
-                showInlineFeedback('encryptBtn', 'error', '❌ Error: ' + error.message);
-            })
-            .finally(() => {
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-            });
-        }
-
-        // Message decryption
-        function decryptMessage() {
-            const encryptedText = document.getElementById('decryptInputText').value.trim();
-            const password = document.getElementById('decryptPassword').value.trim();
-            const algorithm = document.getElementById('decryptAlgorithm').value;
-            
-            if (!encryptedText || !password) {
-                showInlineFeedback('decryptBtn', 'error', 'Please provide both encrypted text and password');
-                return;
-            }
-
-            // Show loading state
-            const btn = document.getElementById('decryptBtn');
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Decrypting...';
-            btn.disabled = true;
-
-            fetch('/decrypt-message', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    encrypted_text: encryptedText,
-                    password: password,
-                    algorithm: algorithm
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('decryptOutputText').value = data.decrypted;
-                    showInlineFeedback('decryptBtn', 'success', '✅ Message decrypted successfully!');
-                } else {
-                    showInlineFeedback('decryptBtn', 'error', '❌ Decryption failed: ' + data.error);
-                }
-            })
-            .catch(error => {
-                showInlineFeedback('decryptBtn', 'error', '❌ Error: ' + error.message);
-            })
-            .finally(() => {
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-            });
-        }
-
-        // Send to station
-        function encryptAndSendToStation() {
-            console.log('Send to station function called');
-            const text = document.getElementById('inputText').value.trim();
-            const password = document.getElementById('encryptionPassword').value.trim();
-            const algorithm = document.getElementById('algorithmSelect').value;
-            
-            console.log('Text length:', text.length, 'Password length:', password.length, 'Algorithm:', algorithm);
-            
-            if (!text || !password) {
-                showInlineFeedback('stationBtn', 'error', 'Please provide both message and password');
-                return;
-            }
-
-            // Show loading state
-            const btn = document.getElementById('stationBtn');
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            btn.disabled = true;
-
-            fetch('/encrypt-message', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    text: text,
-                    password: password,
-                    algorithm: algorithm,
-                    send_to_station: true
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Station response data:', data);
-                if (data.success) {
-                    document.getElementById('outputText').value = data.encrypted;
-                    showInlineFeedback('stationBtn', 'info', `✅ Message sent to station with ticket #${data.ticket_id}! <a href="/station?ticket=${data.ticket_id}" class="alert-link">View in Station</a>`);
-                    
-                    // Clear the input
-                    document.getElementById('inputText').value = '';
-                    document.getElementById('encryptionPassword').value = '';
-                    document.getElementById('charCount').textContent = '0';
-                } else {
-                    showInlineFeedback('stationBtn', 'error', '❌ Failed to send to station: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Station error:', error);
-                showInlineFeedback('stationBtn', 'error', '❌ Error: ' + error.message);
-            })
-            .finally(() => {
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-            });
-        }
-
-        // Show inline feedback near buttons
-        function showInlineFeedback(buttonId, type, message) {
-            const feedbackId = buttonId.replace('Btn', 'Feedback');
-            const feedback = document.getElementById(feedbackId);
-            if (feedback) {
-                feedback.className = `feedback-message ${type}`;
-                feedback.innerHTML = message;
-                feedback.style.display = 'block';
-                
-                // Auto-hide after 5 seconds
-                setTimeout(() => {
-                    feedback.style.display = 'none';
-                }, 5000);
-            }
-        }
-
-        // File upload handling
+        // Logo Animation (copied from original index.html)
         document.addEventListener('DOMContentLoaded', function() {
-            // Setup drag and drop for file uploads
-            const uploadAreas = document.querySelectorAll('.upload-area');
-            
-            uploadAreas.forEach(area => {
-                area.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    this.style.borderColor = 'var(--primary-blue)';
-                    this.style.background = 'var(--bg-light)';
-                });
-                
-                area.addEventListener('dragleave', function(e) {
-                    e.preventDefault();
-                    this.style.borderColor = 'var(--border-medium)';
-                    this.style.background = 'var(--bg-lighter)';
-                });
-                
-                area.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    this.style.borderColor = 'var(--border-medium)';
-                    this.style.background = 'var(--bg-lighter)';
-                    
-                    const files = e.dataTransfer.files;
-                    if (files.length > 0) {
-                        const input = this.parentElement.querySelector('input[type="file"]');
-                        if (input) {
-                            input.files = files;
-                            // Trigger change event
-                            const event = new Event('change', { bubbles: true });
-                            input.dispatchEvent(event);
-                        }
-                    }
-                });
-            });
-
             // Natural password cracking animation for logo
             const logoTextElement = document.getElementById('logo-text');
             if (logoTextElement) {
@@ -1441,7 +962,306 @@
                 // Start the animation cycle
                 startFullyEncrypted();
             }
+
+            // Initialize key hints
+            updateKeyHint();
+            updateDecodeKeyHint();
         });
+
+        // Store intermediate results
+        let ciphertext = '';
+        let encrypted = '';
+        let ticket = '';
+        let retrieved = '';
+        let retrieved_salt = '';
+        let decrypted = '';
+
+        // Helper function to show feedback
+        function showFeedback(elementId, type, message, show = true) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.className = `feedback-message ${type}`;
+                element.innerHTML = message;
+                if (show) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
+            }
+        }
+
+        // Key hint functions
+        function updateKeyHint() {
+            const cipherType = document.getElementById('cipher_type').value;
+            const keyHint = document.getElementById('key_hint');
+            
+            switch(cipherType) {
+                case 'caesar':
+                    keyHint.textContent = 'Enter a number between 1-25 for Caesar cipher';
+                    break;
+                case 'vigenere':
+                    keyHint.textContent = 'Enter a word or phrase as the key (e.g., "LOVE", "SECRET")';
+                    break;
+                case 'xor':
+                    keyHint.textContent = 'Enter a single character or number for XOR key';
+                    break;
+                case 'atbash':
+                    keyHint.textContent = 'Atbash cipher requires no key (leave empty)';
+                    break;
+                case 'substitution':
+                    keyHint.textContent = 'Enter a 26-letter substitution alphabet';
+                    break;
+                default:
+                    keyHint.textContent = 'Enter the appropriate key for your cipher';
+            }
+        }
+
+        function updateDecodeKeyHint() {
+            const cipherType = document.getElementById('decode_cipher_type').value;
+            const keyHint = document.getElementById('decode_key_hint');
+            
+            switch(cipherType) {
+                case 'caesar':
+                    keyHint.textContent = 'Use the same number from Step 1 (1-25)';
+                    break;
+                case 'vigenere':
+                    keyHint.textContent = 'Use the same word/phrase from Step 1';
+                    break;
+                case 'xor':
+                    keyHint.textContent = 'Use the same character/number from Step 1';
+                    break;
+                case 'atbash':
+                    keyHint.textContent = 'Atbash requires no key (leave empty)';
+                    break;
+                case 'substitution':
+                    keyHint.textContent = 'Use the same substitution alphabet from Step 1';
+                    break;
+                default:
+                    keyHint.textContent = 'Use the same key from Step 1';
+            }
+        }
+
+        // Station preview functions
+        function showStationPreview(ticketNumber) {
+            const preview = document.getElementById('station_preview');
+            const currentTicket = document.getElementById('current_ticket');
+            const ticketSearch = document.getElementById('ticket_search');
+            
+            currentTicket.textContent = ticketNumber;
+            ticketSearch.value = ticketNumber;
+            preview.classList.remove('hidden');
+        }
+
+        function copyTicketNumber() {
+            const ticketSearch = document.getElementById('ticket_search');
+            ticketSearch.select();
+            ticketSearch.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(ticketSearch.value);
+            
+            // Show feedback
+            const copyBtn = event.target.closest('button');
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        }
+
+        // Step 1: Cipher
+        async function doCipher() {
+            showFeedback('cipher_api_error', 'error', '', false);
+            const plaintext = document.getElementById('plaintext').value;
+            const cipher_type = document.getElementById('cipher_type').value;
+            const cipher_key = document.getElementById('cipher_key').value;
+            
+            if (!plaintext || !cipher_type) {
+                showFeedback('cipher_api_error', 'error', 'Please provide both message and cipher type');
+                return;
+            }
+            
+            let data = { text: plaintext, cipher: cipher_type };
+            if (cipher_key) data.key = cipher_key;
+            
+            try {
+                const res = await fetch('/api/encode', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (result.success && result.result) {
+                    ciphertext = result.result;
+                    showFeedback('ciphertext_output', 'success', `Ciphertext: ${ciphertext}`);
+                } else {
+                    showFeedback('cipher_api_error', 'error', `${result.error || 'Encoding failed'}`);
+                }
+            } catch (e) {
+                showFeedback('cipher_api_error', 'error', 'API error');
+            }
+        }
+
+        // Step 2: Encrypt
+        async function doEncrypt() {
+            showFeedback('encrypt_api_error', 'error', '', false);
+            const password = document.getElementById('enc_password').value;
+            
+            if (!ciphertext || !password) {
+                showFeedback('encrypt_api_error', 'error', 'Please complete Step 1 first and provide a password');
+                return;
+            }
+            
+            let data = { text: ciphertext, password: password };
+            
+            try {
+                const res = await fetch('/encrypt-message', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (result.success && result.encrypted) {
+                    encrypted = result.encrypted;
+                    showFeedback('encrypted_output', 'success', `Message encrypted successfully`);
+                } else {
+                    showFeedback('encrypt_api_error', 'error', `${result.error || 'Encryption failed'}`);
+                }
+            } catch (e) {
+                showFeedback('encrypt_api_error', 'error', 'API error');
+            }
+        }
+
+        // Step 3: Send to Station
+        async function doSendToStation() {
+            showFeedback('send_api_error', 'error', '', false);
+            const password = document.getElementById('enc_password').value;
+            
+            if (!ciphertext || !password) {
+                showFeedback('send_api_error', 'error', 'Please complete Steps 1 and 2 first');
+                return;
+            }
+            
+            let data = { text: ciphertext, password: password, send_to_station: true };
+            
+            try {
+                const res = await fetch('/encrypt-message', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (result.success && result.ticket_id) {
+                    ticket = result.ticket_id;
+                    encrypted = result.encrypted; // Update encrypted with the result
+                    showFeedback('ticket_output', 'info', `Message sent successfully! Ticket #: ${ticket}`);
+                    // Auto-fill ticket number for step 4
+                    document.getElementById('ticket_number').value = ticket;
+                    // Show station preview
+                    showStationPreview(ticket);
+                } else {
+                    showFeedback('send_api_error', 'error', `${result.error || 'Send failed'}`);
+                }
+            } catch (e) {
+                showFeedback('send_api_error', 'error', 'API error');
+            }
+        }
+
+        // Step 4: Retrieve
+        async function doRetrieve() {
+            showFeedback('retrieve_api_error', 'error', '', false);
+            const ticket_number = document.getElementById('ticket_number').value;
+            
+            if (!ticket_number) {
+                showFeedback('retrieve_api_error', 'error', 'Please enter a ticket number');
+                return;
+            }
+            
+            try {
+                const res = await fetch(`/api/station/ticket/${ticket_number}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const result = await res.json();
+                
+                if (result.success && result.message && result.message.encrypted) {
+                    retrieved = result.message.encrypted;
+                    retrieved_salt = result.message.salt || '';
+                    showFeedback('retrieved_output', 'success', `Message retrieved: ${retrieved.substring(0, 50)}...`);
+                } else {
+                    showFeedback('retrieve_api_error', 'error', `${result.error || 'Retrieve failed'}`);
+                }
+            } catch (e) {
+                showFeedback('retrieve_api_error', 'error', 'API error');
+            }
+        }
+
+        // Step 5: Decrypt
+        async function doDecrypt() {
+            showFeedback('decrypt_api_error', 'error', '', false);
+            const password = document.getElementById('dec_password').value;
+            
+            if (!retrieved || !password) {
+                showFeedback('decrypt_api_error', 'error', 'Please complete Step 4 first and provide the password');
+                return;
+            }
+            
+            let data = { encrypted_text: retrieved, password: password };
+            if (retrieved_salt) {
+                data.salt = retrieved_salt;
+            }
+            
+            try {
+                const res = await fetch('/decrypt-message', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (result.success && result.decrypted) {
+                    decrypted = result.decrypted;
+                    showFeedback('decrypted_output', 'success', `Decrypted: ${decrypted}`);
+                } else {
+                    showFeedback('decrypt_api_error', 'error', `${result.error || 'Decryption failed'}`);
+                }
+            } catch (e) {
+                showFeedback('decrypt_api_error', 'error', 'API error');
+            }
+        }
+
+        // Step 6: Decode
+        async function doDecode() {
+            showFeedback('decode_api_error', 'error', '', false);
+            const cipher_type = document.getElementById('decode_cipher_type').value;
+            const key = document.getElementById('decode_key').value;
+            
+            if (!decrypted || !cipher_type) {
+                showFeedback('decode_api_error', 'error', 'Please complete Step 5 first and select cipher type');
+                return;
+            }
+            
+            let data = { text: decrypted, cipher: cipher_type };
+            if (key) data.key = key;
+            
+            try {
+                const res = await fetch('/api/decode', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (result.success && result.result) {
+                    showFeedback('decoded_output', 'success', `Final Message: ${result.result}`);
+                } else {
+                    showFeedback('decode_api_error', 'error', `${result.error || 'Decoding failed'}`);
+                }
+            } catch (e) {
+                showFeedback('decode_api_error', 'error', 'API error');
+            }
+        }
     </script>
 </body>
 </html> 

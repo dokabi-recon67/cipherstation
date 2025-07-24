@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools - CipherStation</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='android-chrome-192x192.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-primary: #30363d;
+            --border-secondary: #21262d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --success: #238636;
+            --warning: #d29922;
+            --error: #f85149;
+            --green: #00623a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #88fb8a;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: #88fb8a;
+        }
+
+        #logo-text {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        #logo-text.encrypted {
+            color: #88fb8a !important;
+            font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .github-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .github-btn:hover {
+            background: var(--border-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control, .form-select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+            border-radius: 6px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: var(--bg-tertiary);
+            border-color: var(--green);
+            color: var(--text-primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 98, 58, 0.25);
+        }
+
+        .btn {
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+
+        .btn-success {
+            background: var(--green);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background: #5e9179;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 98, 58, 0.3);
+        }
+
+        /* File Upload Section */
+        .file-upload-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .file-upload-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .file-upload-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-primary);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--bg-tertiary);
+        }
+
+        .upload-area:hover {
+            border-color: var(--green);
+            background: var(--bg-primary);
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--green);
+        }
+
+        .card-header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-primary);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-primary);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-eye"></i>
+                    <span id="logo-text">CipherStation</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="/" class="nav-link"><i class="fas fa-satellite-dish"></i> Relay Station</a>
+                    <a href="/classical" class="nav-link"><i class="fas fa-unlock-alt"></i> Classical Ciphers</a>
+                    <a href="/tools" class="nav-link active"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="/documentation" class="nav-link">Documentation</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">
+                <i class="fas fa-tools"></i> Encryption Tools
+            </h1>
+            <p class="page-subtitle">
+                Professional-grade encryption and decryption tools for files and documents
+            </p>
+
+            <!-- File Upload/Download Section -->
+            <section class="file-upload-section">
+                <div class="file-upload-header">
+                    <h2 class="file-upload-title">
+                        <i class="fas fa-file-upload"></i> File Encryption & Decryption
+                    </h2>
+                    <p class="section-subtitle">
+                        Encrypt and decrypt files with the same high security standards. 
+                        Perfect for sensitive documents and data protection.
+                    </p>
+                </div>
+                <div class="row">
+                    <!-- File Encryption -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0" style="color: var(--green);">
+                                    <i class="fas fa-lock"></i> Encrypt File
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/encrypt" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label class="form-label">File to Encrypt</label>
+                                        <div class="upload-area" onclick="document.getElementById('encryptFile').click()">
+                                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                            <p class="upload-text">Click to select or drag & drop</p>
+                                            <small class="upload-hint">Any file type • Max 20MB</small>
+                                        </div>
+                                        <input type="file" id="encryptFile" name="file" class="file-input" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Key File (Optional - will generate if not provided)</label>
+                                        <div class="upload-area" onclick="document.getElementById('encryptKeyFile').click()">
+                                            <i class="fas fa-key upload-icon"></i>
+                                            <p class="upload-text">Click to select key file</p>
+                                        </div>
+                                        <input type="file" id="encryptKeyFile" name="key" class="file-input" accept=".key,.bin">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="encryptAlgorithm" class="form-label">Algorithm</label>
+                                        <select class="form-select" id="encryptAlgorithm" name="algorithm">
+                                            <option value="aes256">AES-256-GCM (Recommended)</option>
+                                            <option value="aes192">AES-192-GCM</option>
+                                            <option value="aes128">AES-128-GCM</option>
+                                            <option value="chacha20">ChaCha20-Poly1305</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="encryptDescription" class="form-label">Description (Optional)</label>
+                                        <input type="text" class="form-control" id="encryptDescription" name="description" 
+                                               placeholder="Brief description of the encrypted file">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-lock"></i> Encrypt File
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Decryption -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0" style="color: var(--green);">
+                                    <i class="fas fa-unlock"></i> Decrypt File
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/decrypt" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label class="form-label">Encrypted File (.enc.json)</label>
+                                        <div class="upload-area" onclick="document.getElementById('decryptFile').click()">
+                                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                            <p class="upload-text">Click to select or drag & drop</p>
+                                            <small class="upload-hint">Encrypted files (.enc.json) • Max 20MB</small>
+                                        </div>
+                                        <input type="file" id="decryptFile" name="file" class="file-input" required accept=".json,.enc">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Key File (Required)</label>
+                                        <div class="upload-area" onclick="document.getElementById('decryptKeyFile').click()">
+                                            <i class="fas fa-key upload-icon"></i>
+                                            <p class="upload-text">Click to select key file</p>
+                                        </div>
+                                        <input type="file" id="decryptKeyFile" name="key" class="file-input" required accept=".key,.bin">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success w-100">
+                                        <i class="fas fa-unlock"></i> Decrypt File
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">CipherStation</h3>
+                <p class="footer-description">
+                    Secure platform for encrypted communication and file transfer.
+                </p>
+                <div class="footer-links">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/tools" class="footer-link">Tools</a>
+                    <a href="/classical" class="footer-link">Classical Ciphers</a>
+                    <a href="/documentation" class="footer-link">Documentation</a>
+                    <a href="/selftest" class="footer-link">Test</a>
+                    <a href="https://github.com/dokabi-recon67/cipherstation" class="github-btn" target="_blank">GitHub</a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CipherStation. A CS50x Final Project by Saadi Agha.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Logo Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoTextElement = document.getElementById('logo-text');
+            if (logoTextElement) {
+                const originalText = logoTextElement.textContent;
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/\\';
+                let animationPhase = 'encrypted';
+                let shuffleInterval;
+                let currentShuffleText = '';
+                let attempts = 0;
+                let maxAttempts = 0;
+
+                function startFullyEncrypted() {
+                    currentShuffleText = '';
+                    for (let i = 0; i < originalText.length; i++) {
+                        currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                    logoTextElement.textContent = currentShuffleText;
+                    logoTextElement.classList.add('encrypted');
+                    
+                    setTimeout(startCracking, 500);
+                }
+
+                function startCracking() {
+                    attempts = 0;
+                    maxAttempts = 40;
+                    
+                    shuffleInterval = setInterval(() => {
+                        attempts++;
+                        
+                        if (attempts < 10) {
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                            }
+                        } else if (attempts < 20) {
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.3) {
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else if (attempts < 30) {
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.6) {
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        } else {
+                            currentShuffleText = '';
+                            for (let i = 0; i < originalText.length; i++) {
+                                if (Math.random() < 0.8) {
+                                    currentShuffleText += originalText[i];
+                                } else {
+                                    currentShuffleText += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                            }
+                        }
+                        
+                        logoTextElement.textContent = currentShuffleText;
+                        logoTextElement.classList.add('encrypted');
+                        
+                        if (attempts >= maxAttempts) {
+                            clearInterval(shuffleInterval);
+                            startFinalDecryption();
+                        }
+                    }, 80);
+                }
+
+                function startFinalDecryption() {
+                    let remainingPositions = [];
+                    for (let i = 0; i < originalText.length; i++) {
+                        remainingPositions.push(i);
+                    }
+                    
+                    const decryptInterval = setInterval(() => {
+                        if (remainingPositions.length > 0) {
+                            const randomIndex = Math.floor(Math.random() * remainingPositions.length);
+                            const position = remainingPositions[randomIndex];
+                            remainingPositions.splice(randomIndex, 1);
+                            
+                            let wrongAttempts = 0;
+                            const maxWrongAttempts = Math.floor(Math.random() * 2) + 1;
+                            
+                            function showWrongAttempt() {
+                                if (wrongAttempts < maxWrongAttempts) {
+                                    const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + randomChar + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    wrongAttempts++;
+                                    setTimeout(showWrongAttempt, 40);
+                                } else {
+                                    let currentText = logoTextElement.textContent;
+                                    currentText = currentText.substring(0, position) + originalText[position] + currentText.substring(position + 1);
+                                    logoTextElement.textContent = currentText;
+                                    
+                                    if (remainingPositions.length === 0) {
+                                        logoTextElement.classList.remove('encrypted');
+                                    }
+                                }
+                            }
+                            
+                            showWrongAttempt();
+                        } else {
+                            clearInterval(decryptInterval);
+                            setTimeout(startEncrypting, 1500);
+                        }
+                    }, 120);
+                }
+
+                function startEncrypting() {
+                    let currentIndex = 0;
+                    const encryptInterval = setInterval(() => {
+                        if (currentIndex < originalText.length) {
+                            const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                            const tempText = originalText.substring(0, currentIndex) + randomChar + originalText.substring(currentIndex + 1);
+                            logoTextElement.textContent = tempText;
+                            logoTextElement.classList.add('encrypted');
+                            currentIndex++;
+                        } else {
+                            clearInterval(encryptInterval);
+                            setTimeout(startFullyEncrypted, 600);
+                        }
+                    }, 40);
+                }
+
+                startFullyEncrypted();
+            }
+
+            // Setup drag and drop for file uploads
+            const uploadAreas = document.querySelectorAll('.upload-area');
+            
+            uploadAreas.forEach(area => {
+                area.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = 'var(--green)';
+                    this.style.background = 'var(--bg-primary)';
+                });
+                
+                area.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = 'var(--border-primary)';
+                    this.style.background = 'var(--bg-tertiary)';
+                });
+                
+                area.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = 'var(--border-primary)';
+                    this.style.background = 'var(--bg-tertiary)';
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const input = this.parentElement.querySelector('input[type="file"]');
+                        if (input) {
+                            input.files = files;
+                            const event = new Event('change', { bubbles: true });
+                            input.dispatchEvent(event);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
