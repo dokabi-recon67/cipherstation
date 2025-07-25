@@ -4,7 +4,10 @@
 [![Flask](https://img.shields.io/badge/Flask-2.3+-green.svg)](https://flask.palletsprojects.com/)
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg)](https://github.com/dokabi-recon67/cipherstation)
 
-Site Link: https://cipherstation.onrender.com/
+#### Video Demo: https://youtu.be/QIm7K8CXtMA
+#### GitHub Repo: https://github.com/dokabi-recon67/cipherstation/
+#### Site Link: https://cipherstation.onrender.com/
+
 A comprehensive cryptography toolkit featuring both modern encryption systems and classical cipher analysis. Built as a single-file CLI tool with web interface support.
 
 ## Table of Contents
