@@ -10,6 +10,7 @@
 
 A comprehensive cryptography toolkit featuring both modern encryption systems and classical cipher analysis. Built as a single-file CLI tool with web interface support.
 
+
 ## Table of Contents
 
 - Key Features
@@ -27,15 +28,13 @@ A comprehensive cryptography toolkit featuring both modern encryption systems an
 - Support
 
 ## Key Features
+- 🔒 **Secure Dead Drop** – ticket‑based relay with 24 h auto‑destruct, no logs.
+- 🧩 **Dual Interface** – Flask web UI **and** single‑file CLI.
+- 🔑 **Modern Crypto** – AES‑256‑GCM, ChaCha20‑Poly1305, X25519, Ed25519.
+- 🛠️ **Auto‑Cracking Engine** – detects & solves Caesar, Vigenère, ROT13, XOR, Atbash, Substitution.
+- 🚀 **Optimised for M1 & x86** – multi‑threaded classical cryptanalysis with live progress bars.
+- 📈 **Confidence Scoring & Benchmarks** – quantitative accuracy metrics out of the box.
 
-### Modern Cryptography
-- AES-256-GCM: Authenticated encryption with Galois/Counter Mode
-- ChaCha20-Poly1305: High-performance authenticated encryption
-- Ed25519: Digital signatures with elliptic curve cryptography
-- X25519: Elliptic curve Diffie-Hellman key exchange
-- Argon2id: Memory-hard password-based key derivation
-- Hybrid Encryption: X25519 + HKDF + AEAD for secure key exchange
-- Audit Logging: Hash-chained audit trail for security compliance
 
 ### Message Relay Station: Secure Encrypted Dead Drop
 
