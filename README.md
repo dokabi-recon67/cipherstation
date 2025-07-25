@@ -14,8 +14,6 @@ A comprehensive cryptography toolkit featuring both modern encryption systems an
 ## Table of Contents
 
 - Key Features
-- Secure Deaddrop
-- Modern Cryptography
 - Message Relay Station - Dead Drop
 - Classical Cipher Analysis
 - Web Interface
@@ -24,7 +22,6 @@ A comprehensive cryptography toolkit featuring both modern encryption systems an
 - Technical Specifications
 - Getting Started
 - Performance Benchmarks
-- Security Considerations
 - Support
 
 ## Key Features
@@ -110,83 +107,6 @@ CipherStation is not merely an implementation of existing algorithms, but a soph
 - Secure communication innovation with cryptographic dead drop
 
 For a detailed breakdown of these innovations, including mathematical proofs, implementation details, and academic context, please read `CRYPTOGRAPHIC_ANALYSIS.md`.
-
-## Modern Cryptography
-
-### Symmetric Encryption
-```bash
-# Generate AES-256 key
-python cipherstationv0.py keygen aes256 --out aes.key
-
-# Encrypt file with AES-256-GCM
-python cipherstationv0.py encrypt --alg aes256 --key aes.key --infile secret.txt --out encrypted.json
-
-# Decrypt file
-python cipherstationv0.py decrypt --key aes.key --infile encrypted.json --out decrypted.txt
-
-# Encrypt with ChaCha20-Poly1305
-python cipherstationv0.py encrypt --alg chacha20 --key chacha.key --infile secret.txt --out encrypted.json
-```
-
-### Password-Based Encryption
-```bash
-# Derive key from password using Argon2id
-python cipherstationv0.py derive --out derived.key --salt-out salt.bin
-
-# Encrypt with password
-python cipherstationv0.py encrypt --password --infile secret.txt --out encrypted.json --salt salt.bin
-
-# Decrypt with password
-python cipherstationv0.py decrypt --password --salt salt.bin --infile encrypted.json --out decrypted.txt
-```
-
-### Asymmetric Cryptography
-```bash
-# Generate Ed25519 keypair for signatures
-python cipherstationv0.py keygen ed25519 --priv ed.priv --pub ed.pub
-
-# Sign a file
-python cipherstationv0.py sign --priv ed.priv --infile document.txt --sig signature.json
-
-# Verify signature
-python cipherstationv0.py verify --sig signature.json --pub ed.pub --infile document.txt
-
-# Generate X25519 keypair for key exchange
-python cipherstationv0.py keygen x25519 --priv x.priv --pub x.pub
-```
-
-### Hybrid Encryption
-```bash
-# Encrypt with recipient's public key
-python cipherstationv0.py hybrid-encrypt --peer-pub recipient.pub --infile secret.txt --out hybrid.json
-
-# Decrypt with your private key
-python cipherstationv0.py hybrid-decrypt --priv my.priv --infile hybrid.json --out decrypted.txt
-```
-
-### Directory Operations
-```bash
-# Encrypt entire directory
-python cipherstationv0.py encrypt-dir --key aes.key --in-dir ./documents --out-dir ./encrypted
-
-# Decrypt directory using manifest
-python cipherstationv0.py decrypt-dir --key aes.key --manifest ./encrypted/manifest.json --out-dir ./decrypted
-```
-
-### Security Features
-```bash
-# Verify audit log integrity
-python cipherstationv0.py audit-verify
-
-# List key registry
-python cipherstationv0.py key-registry-list
-
-# Detect file format
-python cipherstationv0.py detect encrypted.json
-
-# Run self-tests
-python cipherstationv0.py selftest
-```
 
 ## Web Interface
 
@@ -476,7 +396,106 @@ python cipherstationv0.py menu
 
 ## Troubleshooting
 
-### Common Issues
+### Performance Tips
+- Use virtual environment for clean dependency management
+- For large files, consider using progress bars
+- Close other applications to free up system resources
+- Use appropriate Argon2id parameters for your hardware
+
+## Changelog
+
+### v0.1.0 (Current)
+- ✨ Initial release with comprehensive cryptography toolkit
+- 🔐 Modern cryptography: AES-256-GCM, ChaCha20-Poly1305, Ed25519, X25519
+- 🎯 Classical cipher analysis with advanced cryptanalysis
+- 📚 Enhanced dictionary attack with 500+ words
+- 🌐 Modern web interface with real-time progress tracking
+- 💻 Full-featured CLI with interactive menu
+- 📁 File upload support for custom word lists (TXT, CSV, Excel)
+- 🔧 Single-file CLI architecture for easy deployment
+- 📊 Comprehensive benchmarking and testing capabilities
+- 🔒 Audit logging with hash chaining
+- 🚀 Hybrid encryption with X25519 + HKDF + AEAD
+- 🔧 **XOR Cipher Major Rewrite**: Fixed fundamental mathematical issues with proper Vigenère-style implementation
+- ✅ **XOR Cracking Improvements**: 95% success rate with dual support for alphabet-constrained and ASCII XOR
+- 🛠️ **Enhanced Key Detection**: Added LEMON, ORANGE, APPLE, BANANA, CHERRY and other common keys
+- 🔄 **Perfect Reversibility**: All XOR encode/decode operations now work correctly with proper space handling
+
+## Usage
+
+```bash
+# Generate AES-256 key
+python cipherstationv0.py keygen aes256 --out aes.key
+
+# Encrypt file with AES-256-GCM
+python cipherstationv0.py encrypt --alg aes256 --key aes.key --infile secret.txt --out encrypted.json
+
+# Decrypt file
+python cipherstationv0.py decrypt --key aes.key --infile encrypted.json --out decrypted.txt
+
+# Encrypt with ChaCha20-Poly1305
+python cipherstationv0.py encrypt --alg chacha20 --key chacha.key --infile secret.txt --out encrypted.json
+```
+
+### Password-Based Encryption
+```bash
+# Derive key from password using Argon2id
+python cipherstationv0.py derive --out derived.key --salt-out salt.bin
+
+# Encrypt with password
+python cipherstationv0.py encrypt --password --infile secret.txt --out encrypted.json --salt salt.bin
+
+# Decrypt with password
+python cipherstationv0.py decrypt --password --salt salt.bin --infile encrypted.json --out decrypted.txt
+```
+
+### Asymmetric Cryptography
+```bash
+# Generate Ed25519 keypair for signatures
+python cipherstationv0.py keygen ed25519 --priv ed.priv --pub ed.pub
+
+# Sign a file
+python cipherstationv0.py sign --priv ed.priv --infile document.txt --sig signature.json
+
+# Verify signature
+python cipherstationv0.py verify --sig signature.json --pub ed.pub --infile document.txt
+
+# Generate X25519 keypair for key exchange
+python cipherstationv0.py keygen x25519 --priv x.priv --pub x.pub
+```
+
+### Hybrid Encryption
+```bash
+# Encrypt with recipient's public key
+python cipherstationv0.py hybrid-encrypt --peer-pub recipient.pub --infile secret.txt --out hybrid.json
+
+# Decrypt with your private key
+python cipherstationv0.py hybrid-decrypt --priv my.priv --infile hybrid.json --out decrypted.txt
+```
+
+### Directory Operations
+```bash
+# Encrypt entire directory
+python cipherstationv0.py encrypt-dir --key aes.key --in-dir ./documents --out-dir ./encrypted
+
+# Decrypt directory using manifest
+python cipherstationv0.py decrypt-dir --key aes.key --manifest ./encrypted/manifest.json --out-dir ./decrypted
+```
+
+### Security Features
+```bash
+# Verify audit log integrity
+python cipherstationv0.py audit-verify
+
+# List key registry
+python cipherstationv0.py key-registry-list
+
+# Detect file format
+python cipherstationv0.py detect encrypted.json
+
+# Run self-tests
+python cipherstationv0.py selftest
+```
 
 #### Missing Dependencies
 ```bash
@@ -502,30 +521,6 @@ Warning: Classical ciphers module not found
 ```
 **Solution**: Ensure `classical_ciphers.py` is in the same directory
 
-### Performance Tips
-- Use virtual environment for clean dependency management
-- For large files, consider using progress bars
-- Close other applications to free up system resources
-- Use appropriate Argon2id parameters for your hardware
-
-## Changelog
-
-### v0.1.0 (Current)
-- ✨ Initial release with comprehensive cryptography toolkit
-- 🔐 Modern cryptography: AES-256-GCM, ChaCha20-Poly1305, Ed25519, X25519
-- 🎯 Classical cipher analysis with advanced cryptanalysis
-- 📚 Enhanced dictionary attack with 500+ words
-- 🌐 Modern web interface with real-time progress tracking
-- 💻 Full-featured CLI with interactive menu
-- 📁 File upload support for custom word lists (TXT, CSV, Excel)
-- 🔧 Single-file CLI architecture for easy deployment
-- 📊 Comprehensive benchmarking and testing capabilities
-- 🔒 Audit logging with hash chaining
-- 🚀 Hybrid encryption with X25519 + HKDF + AEAD
-- 🔧 **XOR Cipher Major Rewrite**: Fixed fundamental mathematical issues with proper Vigenère-style implementation
-- ✅ **XOR Cracking Improvements**: 95% success rate with dual support for alphabet-constrained and ASCII XOR
-- 🛠️ **Enhanced Key Detection**: Added LEMON, ORANGE, APPLE, BANANA, CHERRY and other common keys
-- 🔄 **Perfect Reversibility**: All XOR encode/decode operations now work correctly with proper space handling
 
 ## License
 This project is made by Saadi Agha as a CS50x final project with the help of Cursor and ChatGPT. All rights reserved.
