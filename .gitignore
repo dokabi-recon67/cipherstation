@@ -150,4 +150,6 @@ Thumbs.db
 
 # Temporary files
 *.tmp
-*.temp 
+*.temp *.dec
+large.enc2.json
+hybrid.json
